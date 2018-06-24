@@ -1,0 +1,13 @@
+--library ieee;
+--library work;
+--use ieee.std_logic_1164.all;
+--use work.pkg.all;
+--
+--entity ALU is
+--port(
+--	A: in std_logic_vector(7 downto 0);
+--	B: in std_logic_vector(7 downto 0);
+--	F: out std_logic_vector(7 downto 0);
+--	S: in std_logic_vector(3 downto 0);
+--	M: in std_logic;
+	
