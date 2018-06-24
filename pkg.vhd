@@ -31,22 +31,22 @@ component register16 is port(
 	);
 end component;
 
-function func4(
+function equ(
 	a: std_logic_vector;
 	b: std_logic_vector
 ) return std_logic;
 end pkg;
 
 package body pkg is 
-	function func4(
+	function equ(
 		a: std_logic_vector;
 		b: std_logic_vector
 	) return std_logic is 
 	begin
-		if (a nor b) = (a'range=>'1') then
+		if (a = b) then
 			return '1';
 		else
 			return '0';
 		end if;
-	end func4;
+	end equ;
 end pkg;

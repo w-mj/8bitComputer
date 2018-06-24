@@ -7,7 +7,7 @@ entity REGISTER_ARRAY is port(
 	data: inout std_logic_vector(7 downto 0);
 	address: out std_logic_vector(15 downto 0);
 	register_select: in std_logic_vector(3 downto 0);
-	load, put: in std_logic;
+	load, put: in std_logic
 	);
 end REGISTER_ARRAY;
 
@@ -44,11 +44,11 @@ data_buffer <=
 	L_out when "10101",
 	"ZZZZZZZZ" when others;
 
-B_CLK <= load and func4("0000", register_select);
-C_CLK <= load and func4("0001", register_select);
-D_CLK <= load and func4("0010", register_select);
-E_CLK <= load and func4("0011", register_select);
-H_CLK <= load and func4("0100", register_select);
-L_CLK <= load and func4("0101", register_select);
+B_CLK <= load and equ("0000", register_select);
+C_CLK <= load and equ("0001", register_select);
+D_CLK <= load and equ("0010", register_select);
+E_CLK <= load and equ("0011", register_select);
+H_CLK <= load and equ("0100", register_select);
+L_CLK <= load and equ("0101", register_select);
 
 end REGISTER_ARRAY_arch;
