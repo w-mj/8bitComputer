@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE6E22C8
-set_global_assignment -name TOP_LEVEL_ENTITY REGISTER_ARRAY
+set_global_assignment -name TOP_LEVEL_ENTITY inc_dec_latch
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.0.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:01:17  JUNE 23, 2018"
 set_global_assignment -name LAST_QUARTUS_VERSION "18.0.0 Lite Edition"
@@ -55,14 +55,6 @@ set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
 
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_location_assignment PIN_88 -to input[3]
-set_location_assignment PIN_89 -to input[2]
-set_location_assignment PIN_90 -to input[1]
-set_location_assignment PIN_91 -to input[0]
-set_location_assignment PIN_11 -to output[0]
-set_location_assignment PIN_10 -to output[1]
-set_location_assignment PIN_7 -to output[2]
-set_location_assignment PIN_3 -to output[3]
 set_global_assignment -name VECTOR_WAVEFORM_FILE register8_wave.vwf
 set_global_assignment -name BDF_FILE alu_chip.bdf
 set_global_assignment -name VHDL_FILE add8.vhd
@@ -73,7 +65,11 @@ set_global_assignment -name VHDL_FILE CPU.vhd
 set_global_assignment -name VHDL_FILE register16.vhd
 set_global_assignment -name VHDL_FILE REGISTER_ARRAY.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE register_array_wave.vwf
+set_global_assignment -name VHDL_FILE add16.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE add16.vwf
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VECTOR_WAVEFORM_FILE inc_dec_latch.vwf
+set_global_assignment -name BDF_FILE inc_dec_latch.bdf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -33,22 +33,23 @@ component register16 is port(
 	);
 end component;
 
-function equ(
-	a: std_logic_vector;
-	b: std_logic_vector
-) return std_logic;
-end pkg;
+component add8 is
+port (
+	A, B: in std_logic_vector(7 downto 0);
+	S :out std_logic_vector(7 downto 0);
+	C_in: in std_logic;
+	C_out: out std_logic;
+	P_out, G_out: out std_logic
+);
+end component;
 
-package body pkg is 
-	function equ(
-		a: std_logic_vector;
-		b: std_logic_vector
-	) return std_logic is 
-	begin
-		if (a = b) then
-			return '1';
-		else
-			return '0';
-		end if;
-	end equ;
+component add16 is
+port (
+	A, B: in std_logic_vector(15 downto 0);
+	S :out std_logic_vector(15 downto 0);
+	C_in: in std_logic;
+	C_out: out std_logic;
+	P_out, G_out: out std_logic
+);
+end component;
 end pkg;

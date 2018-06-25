@@ -7,7 +7,8 @@ entity REGISTER_ARRAY is port(
 	CLK: in std_logic;
 	data: inout std_logic_vector(7 downto 0);
 	address: out std_logic_vector(15 downto 0);
-	register_select: in std_logic_vector(5 downto 0) := "000000" -- 4 for cs and 2 for function, 01: load, 10: put
+	register_select: in std_logic_vector(2 downto 0) := "000" ;
+	load_from_bus, put_to_bus, load_sp, load_pc, put_sp, put_pc: in std_logic
 	);
 end REGISTER_ARRAY;
 
@@ -25,25 +26,26 @@ REG_D: register8 port map(data_in=>data, data_out=>D_out, CLK=>CLK, EN=>D_EN);
 REG_E: register8 port map(data_in=>data, data_out=>E_out, CLK=>CLK, EN=>E_EN);
 REG_H: register8 port map(data_in=>data, data_out=>H_out, CLK=>CLK, EN=>H_EN);
 REG_L: register8 port map(data_in=>data, data_out=>L_out, CLK=>CLK, EN=>L_EN);
-REG_SP: register16 port map(data_in=>H_out&L_out, data_out=>SP_out, CLK=>CLK, EN=>SP_EN);
-REG_PC: register16 port map(data_in=>H_out&L_out, data_out=>PC_out, CLK=>CLK, EN=>PC_EN);
+REG_SP: register16 port map(data_in=>H_out&L_out, data_out=>SP_out, CLK=>CLK, EN=>load_sp);
+REG_PC: register16 port map(data_in=>H_out&L_out, data_out=>PC_out, CLK=>CLK, EN=>load_pc);
 
 process(register_select) begin
 	data <= (others=>'Z');
+	address <= (others=>'Z');
 	B_EN<='0'; C_EN<='0'; D_EN<='0'; E_EN<='0'; H_EN<='0'; L_EN<='0';
-	case register_select is
-		when "000010"=> data <= B_out;
-		when "000110"=> data <= C_out;
-		when "001010"=> data <= D_out;
-		when "001110"=> data <= E_out;
-		when "010010"=> data <= H_out;
-		when "010110"=> data <= L_out;
-		when "000001"=> B_EN <= '1';
-		when "000101"=> C_EN <= '1';
-		when "001001"=> D_EN <= '1';
-		when "001101"=> E_EN <= '1';
-		when "010001"=> H_EN <= '1';
-		when "010101"=> L_EN <= '1';
+	case register_select & put_to_bus & load_from_bus is
+		when "00010"=> data <= B_out;
+		when "00110"=> data <= C_out;
+		when "01010"=> data <= D_out;
+		when "01110"=> data <= E_out;
+		when "10010"=> data <= H_out;
+		when "10110"=> data <= L_out;
+		when "00001"=> B_EN <= '1';
+		when "00101"=> C_EN <= '1';
+		when "01001"=> D_EN <= '1';
+		when "01101"=> E_EN <= '1';
+		when "10001"=> H_EN <= '1';
+		when "10101"=> L_EN <= '1';
 		when others=>null;
 	end case;
 end process;
