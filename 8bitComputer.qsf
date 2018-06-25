@@ -55,12 +55,6 @@ set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
 
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name BDF_FILE alu_chip.bdf
-set_global_assignment -name VHDL_FILE add8.vhd
-set_global_assignment -name VHDL_FILE register8.vhd
-set_global_assignment -name VHDL_FILE pkg.vhd
-set_global_assignment -name VHDL_FILE ALU.vhd
-set_global_assignment -name VHDL_FILE CPU.vhd
 set_location_assignment PIN_88 -to input[3]
 set_location_assignment PIN_89 -to input[2]
 set_location_assignment PIN_90 -to input[1]
@@ -69,8 +63,16 @@ set_location_assignment PIN_11 -to output[0]
 set_location_assignment PIN_10 -to output[1]
 set_location_assignment PIN_7 -to output[2]
 set_location_assignment PIN_3 -to output[3]
+set_global_assignment -name VECTOR_WAVEFORM_FILE register8_wave.vwf
+set_global_assignment -name BDF_FILE alu_chip.bdf
+set_global_assignment -name VHDL_FILE add8.vhd
+set_global_assignment -name VHDL_FILE register8.vhd
+set_global_assignment -name VHDL_FILE pkg.vhd
+set_global_assignment -name VHDL_FILE ALU.vhd
+set_global_assignment -name VHDL_FILE CPU.vhd
 set_global_assignment -name VHDL_FILE register16.vhd
 set_global_assignment -name VHDL_FILE REGISTER_ARRAY.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE register_array_wave.vwf
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
