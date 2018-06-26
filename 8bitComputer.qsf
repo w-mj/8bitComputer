@@ -67,8 +67,8 @@ set_global_assignment -name VHDL_FILE REGISTER_ARRAY.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE register_array_wave.vwf
 set_global_assignment -name VHDL_FILE add16.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE add16.vwf
+set_global_assignment -name VHDL_FILE inc_dec_latch.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE inc_dec_latch.vwf
-set_global_assignment -name BDF_FILE inc_dec_latch.bdf
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
