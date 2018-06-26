@@ -8,7 +8,10 @@ entity REGISTER_ARRAY is port(
 	data: inout std_logic_vector(7 downto 0);
 	address: out std_logic_vector(15 downto 0);
 	register_select: in std_logic_vector(2 downto 0) := "000" ;
-	load_from_bus, put_to_bus, load_sp, load_pc, put_sp, put_pc: in std_logic
+	-- load_8 and put_8 means load and put on data bus,
+	-- load_16 and put_16 means load from hl and put to address.
+	load_8, put_8, load_16, put_16, inc_dec_pc, inc_dec_rp: in std_logic := '0';
+	LDN_G, DN_UP: in std_logic
 	);
 end REGISTER_ARRAY;
 
@@ -17,6 +20,8 @@ signal W_out, Z_out, B_out, C_out, D_out, E_out, H_out, L_out: std_logic_vector(
 signal SP_out, PC_out: std_logic_vector(15 downto 0);
 signal W_EN, Z_EN, B_EN, C_EN, D_EN, E_EN, H_EN, L_EN, SP_EN, PC_EN: std_logic := '0';
 signal data_buffer: std_logic_vector(7 downto 0);
+signal latch_input, latch_output: std_logic_vector(15 downto 0);
+signal reg_16_input_buffer: std_logic_vector(15 downto 0);
 begin
 REG_W: register8 port map(data_in=>data, data_out=>W_out, CLK=>CLK, EN=>W_EN);
 REG_Z: register8 port map(data_in=>data, data_out=>Z_out, CLK=>CLK, EN=>Z_EN);
@@ -26,14 +31,20 @@ REG_D: register8 port map(data_in=>data, data_out=>D_out, CLK=>CLK, EN=>D_EN);
 REG_E: register8 port map(data_in=>data, data_out=>E_out, CLK=>CLK, EN=>E_EN);
 REG_H: register8 port map(data_in=>data, data_out=>H_out, CLK=>CLK, EN=>H_EN);
 REG_L: register8 port map(data_in=>data, data_out=>L_out, CLK=>CLK, EN=>L_EN);
-REG_SP: register16 port map(data_in=>H_out&L_out, data_out=>SP_out, CLK=>CLK, EN=>load_sp);
-REG_PC: register16 port map(data_in=>H_out&L_out, data_out=>PC_out, CLK=>CLK, EN=>load_pc);
+REG_SP: register16 port map(data_in=>reg_16_input_buffer, data_out=>SP_out, CLK=>CLK, EN=>SP_EN);
+REG_PC: register16 port map(data_in=>reg_16_input_buffer, data_out=>PC_out, CLK=>CLK, EN=>PC_EN);
 
+LATCH: inc_dec_latch port map(LDN=>LDN_G, GN=>not LDN_G, DNUP=>DN_UP, 
+										CLK=>CLK, input=>latch_input, output=>latch_output);
+												
+reg_16_input_buffer <= H_out & L_out when LDN_G = '0' else latch_output;
+address <= latch_output;
 process(register_select) begin
 	data <= (others=>'Z');
 	address <= (others=>'Z');
-	B_EN<='0'; C_EN<='0'; D_EN<='0'; E_EN<='0'; H_EN<='0'; L_EN<='0';
-	case register_select & put_to_bus & load_from_bus is
+	B_EN<='0'; C_EN<='0'; D_EN<='0'; E_EN<='0'; H_EN<='0'; L_EN<='0'; SP_EN<='0'; PC_EN<='0';
+	latch_input <= PC_out;
+	case register_select & put_8 & load_8 is
 		when "00010"=> data <= B_out;
 		when "00110"=> data <= C_out;
 		when "01010"=> data <= D_out;
@@ -46,7 +57,19 @@ process(register_select) begin
 		when "01101"=> E_EN <= '1';
 		when "10001"=> H_EN <= '1';
 		when "10101"=> L_EN <= '1';
+		
+		when "11010"=> latch_input <= H_out & L_out;  -- memeory
 		when others=>null;
 	end case;
+	case register_select & put_16 & load_16 is
+		when "11010"=> latch_input <= H_out & L_out;
+		when "01110"=> latch_input <= SP_out;
+		when "11110"=> latch_input <= PC_out;
+		
+		when "01101"=> SP_EN <= '1';
+		when "11101"=> PC_EN <= '1';
+		when others=>null;
+	end case;
+		
 end process;
 end REGISTER_ARRAY_arch;

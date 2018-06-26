@@ -52,4 +52,16 @@ port (
 	P_out, G_out: out std_logic
 );
 end component;
+COMPONENT inc_dec_latch
+	PORT
+	(
+		LDN		:	 IN STD_LOGIC;
+		GN		:	 IN STD_LOGIC;
+		DNUP		:	 IN STD_LOGIC;
+		CLK		:	 IN STD_LOGIC;
+		input		:	 IN STD_LOGIC_VECTOR(0 TO 15);
+		output		:	 OUT STD_LOGIC_VECTOR(0 TO 15)
+	);
+END COMPONENT;
+
 end pkg;
