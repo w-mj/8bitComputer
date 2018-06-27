@@ -38,7 +38,7 @@ port (
 	A, B: in std_logic_vector(7 downto 0);
 	S :out std_logic_vector(7 downto 0);
 	C_in: in std_logic;
-	C_out: out std_logic;
+	C_out, A_out: out std_logic;
 	P_out, G_out: out std_logic
 );
 end component;

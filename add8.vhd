@@ -5,7 +5,7 @@ entity add8 is
 		A, B: in std_logic_vector(7 downto 0);
 		S :out std_logic_vector(7 downto 0);
 		C_in: in std_logic;
-		C_out: out std_logic;
+		C_out, A_out: out std_logic;
 		P_out, G_out: out std_logic
 	);
 end add8;
@@ -28,5 +28,6 @@ begin
 		S <= A xor B xor CO;
 		P_out <= P(7);
 		G_out <= G(7);
+		A_out <= CO(3);
 	end process;
 end add8_arch;
