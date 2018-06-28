@@ -1,11 +1,16 @@
 library ieee;
+library work;
 use ieee.std_logic_1164.all;
+use work.pkg.all;
+
 
 entity timing_control is port(
 	IR_input: in std_logic_vector(7 downto 0);
-	beats_input: in std_logic_vector(5 downto 0);
-	RST, next_M, next_T: out std_logic;
+	bM, bT: in std_logic_vector(7 downto 0);
 	
+	ready: in std_logic;
+	
+	RST, nextM, nextT: out std_logic;
 	regarr_cs: out std_logic_vector(3 downto 0);
 	regarr_load, regarr_put, regarr_inc, regarr_dec: out std_logic;
 	addrbuff_load: out std_logic;
@@ -23,7 +28,7 @@ architecture timing_control_arch of timing_control is
 signal IR: std_logic_vector(7 downto 0);
 begin
 IR(7 downto 6) <= IR_input(7 downto 6);
-process(IR, beats_input) begin
+process(IR, bM, bT) begin
 	case IR_input(7 downto 6) is
 		when "01"=>
 			if(IR_input(5 downto 3) /= "110") then IR(5 downto 3) <= "000";
@@ -56,11 +61,22 @@ process(IR, beats_input) begin
 			end if;
 			IR(2 downto 0) <= IR_input(2 downto 0);
 		end case;
-	RST<='0'; next_M<='0'; next_T<='0'; regarr_cs<="0000"; regarr_load<='0'; regarr_put<='0';
+	RST<='0'; nextM<='0'; nextT<='0'; regarr_cs<="0000"; regarr_load<='0'; regarr_put<='0';
 	regarr_inc<='0'; regarr_dec<='0'; addrbuff_load<='0'; ireg_load<='0'; databuff_load_bus<='0';
 	databuff_load_inner<='0'; databuff_put_bus<='0'; databuff_put_bus<='0';
 	flag_load_bus<='0'; flag_put_bus<='0'; flag_load_alu<='0'; flag_STC<='0';
 	alu_s<="0000"; alu_put<='0'; tmp_load<='0'; tmp_put<='0'; acc_load<='0'; acc_put<='0';
+	
+	regarr_cs <= onn("1111", bM(0) and bT(0));
+	regarr_put <= bM(0) and bT(0);
+	nextT <= bM(0) and bT(0);
+	regarr_cs <= "1111" and (regarr_cs'range=>(bM(0) and bT(1)));
+	regarr_inc <= bM(0) and bT(1);
+	databuff_load_bus <= bM(0) and bT(1);
+	nextT <= bM(0) and bT(1) and ready;
+	ireg_load <= bM(0) and bT(2);
+	nextT <= bM(0) and bT(2);
+	
 	
 	case IR is
 		when "01000000"=> null; -- 1 MOV r, r

@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone IV E"
 set_global_assignment -name DEVICE EP4CE6E22C8
-set_global_assignment -name TOP_LEVEL_ENTITY timing_control
+set_global_assignment -name TOP_LEVEL_ENTITY machine_cycle_encoding
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.0.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:01:17  JUNE 23, 2018"
 set_global_assignment -name LAST_QUARTUS_VERSION "18.0.0 Lite Edition"
@@ -60,7 +60,6 @@ set_global_assignment -name VHDL_FILE add8.vhd
 set_global_assignment -name VHDL_FILE register8.vhd
 set_global_assignment -name VHDL_FILE pkg.vhd
 set_global_assignment -name VHDL_FILE ALU.vhd
-set_global_assignment -name VHDL_FILE CPU.vhd
 set_global_assignment -name VHDL_FILE register16.vhd
 set_global_assignment -name VHDL_FILE REGISTER_ARRAY.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE register_array_wave.vwf
@@ -85,6 +84,8 @@ set_global_assignment -name VECTOR_WAVEFORM_FILE test.vwf
 set_global_assignment -name VHDL_FILE timing_control.vhd
 set_global_assignment -name VHDL_FILE machine_cycle_encoding.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE machine_cycle_encoding_wave.vwf
+set_global_assignment -name BDF_FILE CPU.bdf
+set_global_assignment -name VECTOR_WAVEFORM_FILE CPU_wave.vwf
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top

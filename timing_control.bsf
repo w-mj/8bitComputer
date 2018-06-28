@@ -1,0 +1,225 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 296 496)
+	(text "timing_control" (rect 56 296 142 310)(font "Arial" ))
+	(text "inst" (rect 8 416 32 430)(font "Arial" ))
+	(port
+		(pt 0 224)
+		(input)
+		(text "IR_input[7..0]" (rect 0 0 83 14)(font "Arial" ))
+		(text "IR_input[7..0]" (rect 21 219 104 233)(font "Arial" ))
+		(line (pt 0 224)(pt 16 224)(line_width 3))
+	)
+	(port
+		(pt 0 320)
+		(input)
+		(text "bM[7..0]" (rect 0 0 51 14)(font "Arial" ))
+		(text "bM[7..0]" (rect 21 315 72 329)(font "Arial" ))
+		(line (pt 0 320)(pt 16 320)(line_width 3))
+	)
+	(port
+		(pt 0 336)
+		(input)
+		(text "bT[7..0]" (rect 0 0 48 14)(font "Arial" ))
+		(text "bT[7..0]" (rect 21 331 69 345)(font "Arial" ))
+		(line (pt 0 336)(pt 16 336)(line_width 3))
+	)
+	(port
+		(pt 232 240)
+		(input)
+		(text "ready" (rect 0 0 36 14)(font "Arial" ))
+		(text "ready" (rect 171 232 207 246)(font "Arial" ))
+		(line (pt 216 240)(pt 232 240))
+	)
+	(port
+		(pt 32 0)
+		(output)
+		(text "RST" (rect 0 0 29 14)(font "Arial" ))
+		(text "RST" (rect 24 23 38 52)(font "Arial" )(vertical))
+		(line (pt 32 0)(pt 32 16))
+	)
+	(port
+		(pt 48 0)
+		(output)
+		(text "nextM" (rect 0 0 37 14)(font "Arial" ))
+		(text "nextM" (rect 40 23 54 60)(font "Arial" )(vertical))
+		(line (pt 48 0)(pt 48 16))
+	)
+	(port
+		(pt 64 0)
+		(output)
+		(text "nextT" (rect 0 0 36 14)(font "Arial" ))
+		(text "nextT" (rect 56 23 70 59)(font "Arial" )(vertical))
+		(line (pt 64 0)(pt 64 16))
+	)
+	(port
+		(pt 80 0)
+		(output)
+		(text "regarr_cs[3..0]" (rect 0 0 90 14)(font "Arial" ))
+		(text "regarr_cs[3..0]" (rect 72 23 86 113)(font "Arial" )(vertical))
+		(line (pt 80 0)(pt 80 16)(line_width 3))
+	)
+	(port
+		(pt 96 0)
+		(output)
+		(text "regarr_load" (rect 0 0 71 14)(font "Arial" ))
+		(text "regarr_load" (rect 88 23 102 94)(font "Arial" )(vertical))
+		(line (pt 96 0)(pt 96 16))
+	)
+	(port
+		(pt 112 0)
+		(output)
+		(text "regarr_put" (rect 0 0 66 14)(font "Arial" ))
+		(text "regarr_put" (rect 104 23 118 89)(font "Arial" )(vertical))
+		(line (pt 112 0)(pt 112 16))
+	)
+	(port
+		(pt 128 0)
+		(output)
+		(text "regarr_inc" (rect 0 0 63 14)(font "Arial" ))
+		(text "regarr_inc" (rect 120 23 134 86)(font "Arial" )(vertical))
+		(line (pt 128 0)(pt 128 16))
+	)
+	(port
+		(pt 144 0)
+		(output)
+		(text "regarr_dec" (rect 0 0 68 14)(font "Arial" ))
+		(text "regarr_dec" (rect 136 23 150 91)(font "Arial" )(vertical))
+		(line (pt 144 0)(pt 144 16))
+	)
+	(port
+		(pt 208 0)
+		(output)
+		(text "addrbuff_load" (rect 0 0 86 14)(font "Arial" ))
+		(text "addrbuff_load" (rect 200 23 214 109)(font "Arial" )(vertical))
+		(line (pt 208 0)(pt 208 16))
+	)
+	(port
+		(pt 0 200)
+		(output)
+		(text "ireg_load" (rect 0 0 57 14)(font "Arial" ))
+		(text "ireg_load" (rect 24 192 81 206)(font "Arial" ))
+		(line (pt 16 200)(pt 0 200))
+	)
+	(port
+		(pt 0 88)
+		(output)
+		(text "databuff_load_bus" (rect 0 0 114 14)(font "Arial" ))
+		(text "databuff_load_bus" (rect 24 80 138 94)(font "Arial" ))
+		(line (pt 16 88)(pt 0 88))
+	)
+	(port
+		(pt 0 72)
+		(output)
+		(text "databuff_load_inner" (rect 0 0 123 14)(font "Arial" ))
+		(text "databuff_load_inner" (rect 24 64 147 78)(font "Arial" ))
+		(line (pt 16 72)(pt 0 72))
+	)
+	(port
+		(pt 0 104)
+		(output)
+		(text "databuff_put_inner" (rect 0 0 116 14)(font "Arial" ))
+		(text "databuff_put_inner" (rect 24 96 140 110)(font "Arial" ))
+		(line (pt 16 104)(pt 0 104))
+	)
+	(port
+		(pt 0 120)
+		(output)
+		(text "databuff_put_bus" (rect 0 0 108 14)(font "Arial" ))
+		(text "databuff_put_bus" (rect 24 112 132 126)(font "Arial" ))
+		(line (pt 16 120)(pt 0 120))
+	)
+	(port
+		(pt 40 432)
+		(output)
+		(text "flag_load_bus" (rect 0 0 87 14)(font "Arial" ))
+		(text "flag_load_bus" (rect 32 321 46 408)(font "Arial" )(vertical))
+		(line (pt 40 432)(pt 40 416))
+	)
+	(port
+		(pt 56 432)
+		(output)
+		(text "flag_put_bus" (rect 0 0 80 14)(font "Arial" ))
+		(text "flag_put_bus" (rect 48 328 62 408)(font "Arial" )(vertical))
+		(line (pt 56 432)(pt 56 417))
+	)
+	(port
+		(pt 72 432)
+		(output)
+		(text "flag_load_alu" (rect 0 0 83 14)(font "Arial" ))
+		(text "flag_load_alu" (rect 64 325 78 408)(font "Arial" )(vertical))
+		(line (pt 72 432)(pt 72 416))
+	)
+	(port
+		(pt 88 432)
+		(output)
+		(text "flag_STC" (rect 0 0 59 14)(font "Arial" ))
+		(text "flag_STC" (rect 80 349 94 408)(font "Arial" )(vertical))
+		(line (pt 88 432)(pt 88 416))
+	)
+	(port
+		(pt 104 432)
+		(output)
+		(text "alu_s[3..0]" (rect 0 0 64 14)(font "Arial" ))
+		(text "alu_s[3..0]" (rect 96 344 110 408)(font "Arial" )(vertical))
+		(line (pt 104 432)(pt 104 416)(line_width 3))
+	)
+	(port
+		(pt 120 432)
+		(output)
+		(text "alu_put" (rect 0 0 48 14)(font "Arial" ))
+		(text "alu_put" (rect 112 360 126 408)(font "Arial" )(vertical))
+		(line (pt 120 432)(pt 120 416))
+	)
+	(port
+		(pt 136 432)
+		(output)
+		(text "tmp_load" (rect 0 0 57 14)(font "Arial" ))
+		(text "tmp_load" (rect 128 351 142 408)(font "Arial" )(vertical))
+		(line (pt 136 432)(pt 136 416))
+	)
+	(port
+		(pt 152 432)
+		(output)
+		(text "tmp_put" (rect 0 0 53 14)(font "Arial" ))
+		(text "tmp_put" (rect 144 355 158 408)(font "Arial" )(vertical))
+		(line (pt 152 432)(pt 152 416))
+	)
+	(port
+		(pt 168 432)
+		(output)
+		(text "acc_load" (rect 0 0 56 14)(font "Arial" ))
+		(text "acc_load" (rect 160 352 174 408)(font "Arial" )(vertical))
+		(line (pt 168 432)(pt 168 416))
+	)
+	(port
+		(pt 184 432)
+		(output)
+		(text "acc_put" (rect 0 0 50 14)(font "Arial" ))
+		(text "acc_put" (rect 176 358 190 408)(font "Arial" )(vertical))
+		(line (pt 184 432)(pt 184 416))
+	)
+	(drawing
+		(rectangle (rect 16 16 216 416))
+	)
+)

@@ -1,0 +1,78 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 264 208)
+	(text "data_bus_buffer" (rect 5 0 106 14)(font "Arial" ))
+	(text "inst" (rect 8 128 32 142)(font "Arial" ))
+	(port
+		(pt 0 64)
+		(input)
+		(text "CLK" (rect 0 0 28 14)(font "Arial" ))
+		(text "CLK" (rect 21 59 49 73)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 88 144)
+		(input)
+		(text "load_data" (rect 0 0 63 14)(font "Arial" ))
+		(text "load_data" (rect 80 55 94 118)(font "Arial" )(vertical))
+		(line (pt 88 144)(pt 88 128))
+	)
+	(port
+		(pt 104 144)
+		(input)
+		(text "load_inner" (rect 0 0 66 14)(font "Arial" ))
+		(text "load_inner" (rect 96 52 110 118)(font "Arial" )(vertical))
+		(line (pt 104 144)(pt 104 128))
+	)
+	(port
+		(pt 56 144)
+		(input)
+		(text "put_data" (rect 0 0 56 14)(font "Arial" ))
+		(text "put_data" (rect 48 62 62 118)(font "Arial" )(vertical))
+		(line (pt 56 144)(pt 56 128))
+	)
+	(port
+		(pt 72 144)
+		(input)
+		(text "put_inner" (rect 0 0 59 14)(font "Arial" ))
+		(text "put_inner" (rect 64 59 78 118)(font "Arial" )(vertical))
+		(line (pt 72 144)(pt 72 128))
+	)
+	(port
+		(pt 128 0)
+		(bidir)
+		(text "data_bus[7..0]" (rect 0 0 88 14)(font "Arial" ))
+		(text "data_bus[7..0]" (rect 120 23 134 111)(font "Arial" )(vertical))
+		(line (pt 128 0)(pt 128 16)(line_width 3))
+	)
+	(port
+		(pt 136 144)
+		(bidir)
+		(text "inner_bus[7..0]" (rect 0 0 93 14)(font "Arial" ))
+		(text "inner_bus[7..0]" (rect 128 27 142 120)(font "Arial" )(vertical))
+		(line (pt 136 144)(pt 136 129)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 184 128))
+	)
+)

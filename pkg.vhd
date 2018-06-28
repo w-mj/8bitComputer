@@ -60,4 +60,20 @@ component inc_dec_latch is port(
 	);
 end component;
 
+component beats is port(
+	output: out std_logic_vector(7 downto 0);
+	CLK: in std_logic;
+	EN: in std_logic;
+	RST: in std_logic
+	);
+end component;
+
+function onn(a: std_logic_vector(3 downto 0); b: std_logic) return std_logic_vector;
+end pkg;
+
+package body pkg is
+function onn(a: std_logic_vector(3 downto 0); b: std_logic) return std_logic_vector is
+begin
+	return a and (a'range=> b);
+end onn;
 end pkg;

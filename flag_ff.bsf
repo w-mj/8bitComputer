@@ -1,0 +1,85 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+*/
+(header "symbol" (version "1.2"))
+(symbol
+	(rect 64 64 272 208)
+	(text "flag_ff" (rect 5 0 45 14)(font "Arial" ))
+	(text "inst" (rect 8 128 32 142)(font "Arial" ))
+	(port
+		(pt 80 144)
+		(input)
+		(text "from_alu[7..0]" (rect 0 0 86 14)(font "Arial" ))
+		(text "from_alu[7..0]" (rect 72 32 86 118)(font "Arial" )(vertical))
+		(line (pt 80 144)(pt 80 128)(line_width 3))
+	)
+	(port
+		(pt 208 112)
+		(input)
+		(text "load_bus" (rect 0 0 57 14)(font "Arial" ))
+		(text "load_bus" (rect 126 104 183 118)(font "Arial" ))
+		(line (pt 192 112)(pt 208 112))
+	)
+	(port
+		(pt 208 80)
+		(input)
+		(text "load_alu" (rect 0 0 54 14)(font "Arial" ))
+		(text "load_alu" (rect 129 72 183 86)(font "Arial" ))
+		(line (pt 192 80)(pt 208 80))
+	)
+	(port
+		(pt 208 24)
+		(input)
+		(text "CLK" (rect 0 0 28 14)(font "Arial" ))
+		(text "CLK" (rect 155 16 183 30)(font "Arial" ))
+		(line (pt 192 24)(pt 208 24))
+	)
+	(port
+		(pt 208 96)
+		(input)
+		(text "put" (rect 0 0 22 14)(font "Arial" ))
+		(text "put" (rect 160 88 182 102)(font "Arial" ))
+		(line (pt 192 96)(pt 208 96))
+	)
+	(port
+		(pt 208 64)
+		(input)
+		(text "STC" (rect 0 0 29 14)(font "Arial" ))
+		(text "STC" (rect 152 56 181 70)(font "Arial" ))
+		(line (pt 192 64)(pt 208 64))
+	)
+	(port
+		(pt 48 144)
+		(output)
+		(text "to_alu[7..0]" (rect 0 0 69 14)(font "Arial" ))
+		(text "to_alu[7..0]" (rect 40 51 54 120)(font "Arial" )(vertical))
+		(line (pt 48 144)(pt 48 129)(line_width 3))
+	)
+	(port
+		(pt 64 0)
+		(bidir)
+		(text "to_bus[7..0]" (rect 0 0 73 14)(font "Arial" ))
+		(text "to_bus[7..0]" (rect 56 23 70 96)(font "Arial" )(vertical))
+		(line (pt 64 0)(pt 64 16)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 192 128))
+	)
+)
