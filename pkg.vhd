@@ -64,8 +64,7 @@ component beats is port(
 	output: out std_logic_vector(7 downto 0);
 	CLK: in std_logic;
 	EN: in std_logic;
-	RST: in std_logic;
-	CLR: in std_logic
+	RST: in std_logic
 	);
 end component;
 

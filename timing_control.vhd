@@ -75,7 +75,7 @@ process(IR, bM, bT) begin
 	addrbuff_load <= bM(0) and bT(0);
 	regarr_inc <= bM(0) and bT(1);
 	databuff_load_bus <= bM(0) and bT(1);
-	databuff_put_inner <= bM(0) and bT(2);
+	databuff_put_inner <= bM(0) and (bT(1) or bT(2));
 	ireg_load <= bM(0) and bT(2);
 	
 	case IR is
