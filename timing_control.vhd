@@ -69,14 +69,16 @@ process(IR, bM, bT) begin
 	flag_load_bus<='0'; flag_put_bus<='0'; flag_load_alu<='0'; flag_STC<='0';
 	alu_s<="0000"; alu_put<='0'; tmp_load<='0'; tmp_put<='0'; acc_load<='0'; acc_put<='0';
 	
-	regarr_cs <= onn("1111", bM(0) and (bT(0) or BT(1)));
-	regarr_put <= bM(0) and bT(0);
+	regarr_cs <= onn("1111", bM(0) and (bT(0) or bT(1) or bT(3)));
+	regarr_put <= bM(0) and (bT(0) or bT(3));
 	nextT <= bM(0) and (bT(0) or (bT(1) and ready) or bT(2));
-	addrbuff_load <= bM(0) and bT(0);
+	addrbuff_load <= bM(0) and (bT(0) or bT(3));
 	regarr_inc <= bM(0) and bT(1);
 	databuff_load_bus <= bM(0) and bT(1);
 	databuff_put_inner <= bM(0) and (bT(1) or bT(2));
 	ireg_load <= bM(0) and bT(2);
+	
+	
 	
 	case IR is
 		when "01000000"=> null; -- 1 MOV r, r
