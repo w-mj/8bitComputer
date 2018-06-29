@@ -8,7 +8,8 @@ entity REGISTER_ARRAY is port(
 	data: inout std_logic_vector(7 downto 0);
 	address: out std_logic_vector(15 downto 0);
 	register_select: in std_logic_vector(3 downto 0);
-	load, put, inc, dec: in std_logic := '0'
+	load, put, inc, dec: in std_logic := '0';
+	clr_pc: in std_logic
 	);
 end REGISTER_ARRAY;
 
@@ -30,7 +31,7 @@ REG_E: register8 port map(data_in=>reg_in_buff_low, data_out=>E_out, CLK=>CLK, E
 REG_H: register8 port map(data_in=>reg_in_buff_high, data_out=>H_out, CLK=>CLK, EN=>H_EN);
 REG_L: register8 port map(data_in=>reg_in_buff_low, data_out=>L_out, CLK=>CLK, EN=>L_EN);
 REG_SP: register16 port map(data_in=>reg_in_buff_high&reg_in_buff_low, data_out=>SP_out, CLK=>CLK, EN=>SP_EN);
-REG_PC: register16 port map(data_in=>reg_in_buff_high&reg_in_buff_low, data_out=>PC_out, CLK=>CLK, EN=>PC_EN);
+REG_PC: register16 port map(data_in=>reg_in_buff_high&reg_in_buff_low, data_out=>PC_out, CLK=>CLK, EN=>PC_EN, CLR=>clr_pc);
 
 LATCH: inc_dec_latch port map(A=>latch_input, S=>latch_output, inc_decN=>inc);
 sign(2) <= put;

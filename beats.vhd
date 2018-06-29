@@ -5,7 +5,8 @@ entity beats is port(
 	output: out std_logic_vector(7 downto 0);
 	CLK: in std_logic;
 	EN: in std_logic;
-	RST: in std_logic
+	RST: in std_logic;
+	CLR: in std_logic
 	);
 end beats;
 
@@ -26,6 +27,9 @@ process(CLK, RST) begin
 		elsif (RST = '1') then
 			data <= "00000001";
 		end if; 
+	end if;
+	if (CLR = '1') then
+		data <= "00000001";
 	end if;
 end process;
 end beats_arch;
