@@ -82,7 +82,12 @@ process(IR, bM, bT, IR_input) begin
 		nextT <= m1 and (t1 or t2 or t3);
 	else
 	case IR is
-		when "01000000"=> null; -- 1 MOV r, r
+		when "01000000"=>  -- 1 MOV r, r
+			regarr_cs <= onn("0"&sss, m1 and t4) or onn("0"&ddd, m1 and t5);
+			regarr_put <= m1 and t4;
+			nextT <= m1 and t4;
+			regarr_load <= m1 and t5;
+			RST <= m1 and t5;
 		when "01000110"=> null; -- 2 MOV r, M
 		when "01110000"=> null; -- 3 MOV M, r
 		when "11111001"=> null; -- 4 SPHL;
