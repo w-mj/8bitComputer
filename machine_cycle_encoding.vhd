@@ -18,9 +18,4 @@ signal half_CLK: std_logic;
 begin
 MC: beats port map(output=>M_out, CLK=>CLK, EN=>next_M, RST=>RST);
 TC: beats port map(output=>T_out, CLK=>CLK, EN=>next_T, RST=>RST or next_M);
-process(CLK) begin
-	if (falling_edge(CLK)) then 
-		half_CLK <= not half_CLK;
-	end if;
-end process;
 end machine_cycle_encoding_arch;

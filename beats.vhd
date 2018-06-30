@@ -10,23 +10,22 @@ entity beats is port(
 end beats;
 
 architecture beats_arch of beats is
-signal data: std_logic_vector(7 downto 0) := "00000001";
+signal data: std_logic_vector(7 downto 0) := "00000000";
+signal c: std_logic;
 begin
 output <= data;
 process(CLK, RST) begin
+	c <= 'X';
 	if (falling_edge(CLK)) then
-		if (EN = '1' or data(7) = '1') then 
-			if (data(7) = '1') then 
-				data(7 downto 1) <= data(6 downto 0);
-				data(0) <= '1';
-			else
-				data(7 downto 1) <= data(6 downto 0);
-				data(0) <= '0';
-			end if;
+		if (data = "00000000") then
+			data <= "00000001";
+		elsif (EN = '1' and RST='0') then 
+			c <= data(7);
+			data(7 downto 1) <= data(6 downto 0);
+			data(0) <= c;
+		elsif (RST = '1') then
+			data <= "00000000";
 		end if; 
-	end if;
-	if (RST = '1') then
-		data <= "10000000";
 	end if;
 end process;
 end beats_arch;

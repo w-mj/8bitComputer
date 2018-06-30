@@ -87,7 +87,7 @@ process(IR, bM, bT, IR_input) begin
 		when "01110000"=> null; -- 3 MOV M, r
 		when "11111001"=> null; -- 4 SPHL;
 		when "00000110"=> -- 5 MVI r, data
-			nextM <= m1;
+			nextM <= m1 and t4;
 			regarr_cs <= onn("1111", m2 and (t1 or t2)) or onn("0"&ddd, m2 and t3);
 			regarr_put <= m2 and (t1 or t5);
 			addrbuff_load <= m2 and t1;
