@@ -26,32 +26,35 @@ end timing_control;
 
 architecture timing_control_arch of timing_control is
 signal IR: std_logic_vector(7 downto 0);
+signal t1, t2, t3, t4, t5, t6, t7: std_logic;
+signal m1, m2, m3, m4, m5, m6, m7: std_logic;
+signal sss, ddd: std_logic_vector(2 downto 0);
+signal rp: std_logic_vector(1 downto 0);
 begin
-IR(7 downto 6) <= IR_input(7 downto 6);
+t1 <= bT(0); t2 <= bT(1); t3 <= bT(2); t4 <= bT(3); t5 <= bT(4); t6 <= bT(5); t7 <= bT(6);
+m1 <= bM(0); m2 <= bM(1); m3 <= bM(2); m4 <= bM(3); m5 <= bM(4); m6 <= bM(5); m7 <= bM(6);
+ddd <= IR_input(5 downto 3);
+sss <= IR_input(2 downto 0);
+rp <= IR_input(5 downto 4);
 databuffclr_pc <= reset;
 CLR <= reset;
-process(IR, bM, bT) begin
+process(IR, bM, bT, IR_input) begin
+	IR <= IR_input;
 	case IR_input(7 downto 6) is
 		when "01"=>
-			if(IR_input(5 downto 3) /= "110") then IR(5 downto 3) <= "000";
-			else IR(5 downto 3) <= "110"; end if;
-			if(IR_input(2 downto 0) /= "110") then  IR(2 downto 0) <= "000";
-			else IR(2 downto 0) <= "110"; end if;
+			if(ddd /= "110") then IR(5 downto 3) <= "000"; end if;
+			if(sss /= "110") then IR(2 downto 0) <= "000"; end if;
 		when "11"=>
-			if (IR_input(2 downto 0) = "010" or IR_input(2 downto 0) = "100" or
-				 IR_input(2 downto 0) = "000" or IR_input(2 downto 0) = "111" or 
+			if (sss = "010" or sss = "100" or sss = "000" or sss = "111" or 
 				 IR_input(3 downto 0) = "0101" or IR_input(3 downto 0) = "0001" ) then 
 				IR(5 downto 3) <= "000";
-			else IR(5 downto 3) <= IR_input(5 downto 3);
 			end if;
-			IR(2 downto 0) <= IR_input(2 downto 0);
 		when "10"=>
-			IR(5 downto 3) <= IR_input(5 downto 3);
-			if (IR_input(2 downto 0) /= "110") then IR(2 downto 0) <= "000"; 
-			else IR(2 downto 0) <= "110"; end if;
+			if ((ddd = "000" or ddd = "001" or ddd = "100" or ddd = "101" or
+				 ddd = "110" or ddd = "111") and sss /= "110") then 
+				 IR(2 downto 0) <= "000"; end if;
 		when "00"=>
-			if ((IR_input(2 downto 0) = "100" or IR_input(2 downto 0) = "101") 
-					and IR_input(5 downto 3) /= "110") then 
+			if ((sss = "100" or sss = "101" or sss = "110") and ddd /= "110") then 
 						IR(5 downto 3) <= "000";
 			elsif (IR_input(3 downto 0) = "0001" or
 					 IR_input(3 downto 0) = "1010" or
@@ -59,9 +62,8 @@ process(IR, bM, bT) begin
 					 IR_input(3 downto 0) = "0011" or
 					 IR_input(3 downto 0) = "1011" or
 					 IR_input(3 downto 0) = "1001") then
-						IR(5 downto 3) <= "00" & IR_input(3);
+						IR(5 downto 4) <= "00";
 			end if;
-			IR(2 downto 0) <= IR_input(2 downto 0);
 		end case;
 	RST<='0'; nextM<='0'; nextT<='0'; regarr_cs<="0000"; regarr_load<='0'; regarr_put<='0';
 	regarr_inc<='0'; regarr_dec<='0'; addrbuff_load<='0'; ireg_load<='0'; databuff_load_bus<='0';
@@ -69,23 +71,32 @@ process(IR, bM, bT) begin
 	flag_load_bus<='0'; flag_put_bus<='0'; flag_load_alu<='0'; flag_STC<='0';
 	alu_s<="0000"; alu_put<='0'; tmp_load<='0'; tmp_put<='0'; acc_load<='0'; acc_put<='0';
 	
-	regarr_cs <= onn("1111", bM(0) and (bT(0) or bT(1) or bT(3)));
-	regarr_put <= bM(0) and (bT(0) or bT(3));
-	nextT <= bM(0) and (bT(0) or (bT(1) and ready) or bT(2));
-	addrbuff_load <= bM(0) and (bT(0) or bT(3));
-	regarr_inc <= bM(0) and bT(1);
-	databuff_load_bus <= bM(0) and bT(1);
-	databuff_put_inner <= bM(0) and (bT(1) or bT(2));
-	ireg_load <= bM(0) and bT(2);
-	
-	
-	
+	if ((m1 and (t1 or t2 or t3)) = '1') then 
+		regarr_cs <= onn("1111", m1 and (t1 or t2));
+		regarr_put <= m1 and t1;
+		addrbuff_load <= m1 and t1;
+		regarr_inc <= m1 and t2;
+		databuff_load_bus <= m1 and t2;
+		databuff_put_inner <= m1 and t3;
+		ireg_load <= m1 and t3;
+		nextT <= m1 and (t1 or t2 or t3);
+	else
 	case IR is
 		when "01000000"=> null; -- 1 MOV r, r
 		when "01000110"=> null; -- 2 MOV r, M
 		when "01110000"=> null; -- 3 MOV M, r
 		when "11111001"=> null; -- 4 SPHL;
-		when "00000110"=> null; -- 5 MVI r, data
+		when "00000110"=> -- 5 MVI r, data
+			nextM <= m1;
+			regarr_cs <= onn("1111", m2 and (t1 or t2)) or onn("0"&ddd, m2 and t3);
+			regarr_put <= m2 and (t1 or t5);
+			addrbuff_load <= m2 and t1;
+			regarr_load <= m2 and t3;
+			regarr_inc <= m2 and t2;
+			databuff_load_bus <= m2 and t2;
+			databuff_put_inner <= m2 and (t2 or t3);
+			nextT <= m2 and (t1 or t2);
+			RST <= m2 and t3;
 		when "00110110"=> null; -- 6 MVI M, data;
 		when "00000001"=> null; -- 7 LXI rp, data
 		when "00111010"=> null; -- 8 LDA addr;
@@ -155,5 +166,6 @@ process(IR, bM, bT) begin
 		when "00000000"=> null; -- 72 NOP
 		when others=> null;
 	end case;
+	end if;
 end process;
 end timing_control_arch;

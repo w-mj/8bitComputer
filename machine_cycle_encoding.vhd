@@ -16,8 +16,8 @@ end machine_cycle_encoding;
 architecture machine_cycle_encoding_arch of machine_cycle_encoding is 
 signal half_CLK: std_logic;
 begin
-MC: beats port map(output=>M_out, CLK=>half_CLK, EN=>next_M, RST=>RST);
-TC: beats port map(output=>T_out, CLK=>half_CLK, EN=>next_T, RST=>RST or next_M);
+MC: beats port map(output=>M_out, CLK=>CLK, EN=>next_M, RST=>RST);
+TC: beats port map(output=>T_out, CLK=>CLK, EN=>next_T, RST=>RST or next_M);
 process(CLK) begin
 	if (falling_edge(CLK)) then 
 		half_CLK <= not half_CLK;

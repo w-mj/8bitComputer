@@ -132,6 +132,23 @@ refer to the applicable agreement for further details.
 	)
 )
 (pin
+	(output)
+	(rect 912 192 1088 208)
+	(text "OUTPUT" (rect 125 0 175 13)(font "Arial" (font_size 6)))
+	(text "IR[7..0]" (rect 5 0 52 14)(font "Arial" ))
+	(pt 176 8)
+	(drawing
+		(line (pt 176 8)(pt 124 8))
+		(line (pt 124 4)(pt 98 4))
+		(line (pt 124 12)(pt 98 12))
+		(line (pt 124 12)(pt 124 4))
+		(line (pt 98 4)(pt 94 8))
+		(line (pt 94 8)(pt 98 12))
+		(line (pt 98 12)(pt 94 8))
+	)
+	(flipy)
+)
+(pin
 	(bidir)
 	(rect 792 -168 976 -152)
 	(text "BIDIR" (rect 150 0 183 13)(font "Arial" (font_size 6)))
