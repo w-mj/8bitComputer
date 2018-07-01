@@ -57,6 +57,63 @@ set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name VHDL_INPUT_VERSION VHDL_1993
 set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
+set_global_assignment -name TIMING_ANALYZER_MULTICORNER_ANALYSIS ON
+set_location_assignment PIN_23 -to CLK
+set_location_assignment PIN_3 -to digit_h
+set_location_assignment PIN_32 -to digit_cs[2]
+set_location_assignment PIN_31 -to digit_cs[3]
+set_location_assignment PIN_33 -to digit_cs[1]
+set_location_assignment PIN_34 -to digit_cs[0]
+set_location_assignment PIN_58 -to key_column[0]
+set_location_assignment PIN_59 -to key_column[1]
+set_location_assignment PIN_54 -to key_column[2]
+set_location_assignment PIN_55 -to key_column[3]
+set_location_assignment PIN_64 -to key_row[0]
+set_location_assignment PIN_52 -to key_row[1]
+set_location_assignment PIN_53 -to key_row[2]
+set_location_assignment PIN_51 -to key_row[3]
+set_location_assignment PIN_110 -to ram_address[14]
+set_location_assignment PIN_125 -to ram_address[13]
+set_location_assignment PIN_111 -to ram_address[12]
+set_location_assignment PIN_120 -to ram_address[11]
+set_location_assignment PIN_115 -to ram_address[10]
+set_location_assignment PIN_121 -to ram_address[9]
+set_location_assignment PIN_124 -to ram_address[8]
+set_location_assignment PIN_127 -to ram_address[7]
+set_location_assignment PIN_113 -to ram_address[6]
+set_location_assignment PIN_100 -to ram_address[5]
+set_location_assignment PIN_99 -to ram_address[4]
+set_location_assignment PIN_98 -to ram_address[3]
+set_location_assignment PIN_87 -to ram_address[2]
+set_location_assignment PIN_86 -to ram_address[1]
+set_location_assignment PIN_85 -to ram_address[0]
+set_location_assignment PIN_77 -to ram_data[7]
+set_location_assignment PIN_76 -to ram_data[6]
+set_location_assignment PIN_75 -to ram_data[5]
+set_location_assignment PIN_74 -to ram_data[4]
+set_location_assignment PIN_73 -to ram_data[3]
+set_location_assignment PIN_80 -to ram_data[2]
+set_location_assignment PIN_83 -to ram_data[1]
+set_location_assignment PIN_84 -to ram_data[0]
+set_location_assignment PIN_126 -to ram_weN
+set_location_assignment PIN_119 -to ram_oeN
+set_location_assignment PIN_114 -to ram_csN
+set_location_assignment PIN_91 -to switch[3]
+set_location_assignment PIN_90 -to switch[2]
+set_location_assignment PIN_89 -to switch[1]
+set_location_assignment PIN_88 -to switch[0]
+set_location_assignment PIN_30 -to led_data[6]
+set_location_assignment PIN_11 -to led_data[5]
+set_location_assignment PIN_7 -to led_data[4]
+set_location_assignment PIN_2 -to led_data[3]
+set_location_assignment PIN_1 -to led_data[2]
+set_location_assignment PIN_28 -to led_data[1]
+set_location_assignment PIN_10 -to led_data[0]
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VHDL_FILE digit_led.vhd
+set_global_assignment -name VHDL_FILE matrix_keyboard.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE register8_wave.vwf
 set_global_assignment -name VHDL_FILE add8.vhd
 set_global_assignment -name VHDL_FILE register8.vhd
@@ -86,8 +143,7 @@ set_global_assignment -name VHDL_FILE machine_cycle_encoding.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE machine_cycle_encoding_wave.vwf
 set_global_assignment -name VECTOR_WAVEFORM_FILE CPU_wave.vwf
 set_global_assignment -name BDF_FILE CPU.bdf
-set_global_assignment -name TIMING_ANALYZER_MULTICORNER_ANALYSIS ON
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name VHDL_FILE bridge.vhd
+set_global_assignment -name VHDL_FILE frequence_divider.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE frequence_divider_wave.vwf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
