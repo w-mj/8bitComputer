@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pinplan
+ variation_name="character_lcd_0"
+ megafunction_name="ALTERA_UP_AVALON_CHARACTER_LCD"
+ intended_family="Cyclone IV E"
+ specifies="all_ports">
+ <global>
+  <pin name="clk" direction="input" scope="external" />
+  <pin name="reset" direction="input" scope="external" />
+  <pin name="address" direction="input" scope="external" />
+  <pin name="chipselect" direction="input" scope="external" />
+  <pin name="read" direction="input" scope="external" />
+  <pin name="write" direction="input" scope="external" />
+  <pin name="writedata[7..0]" direction="input" scope="external" />
+  <pin name="readdata[7..0]" direction="output" scope="external" />
+  <pin name="waitrequest" direction="output" scope="external" />
+  <pin name="LCD_DATA[7..0]" direction="bidir" scope="external" />
+  <pin name="LCD_ON" direction="output" scope="external" />
+  <pin name="LCD_BLON" direction="output" scope="external" />
+  <pin name="LCD_EN" direction="output" scope="external" />
+  <pin name="LCD_RS" direction="output" scope="external" />
+  <pin name="LCD_RW" direction="output" scope="external" />
+ </global>
+</pinplan>

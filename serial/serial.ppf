@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pinplan
+ variation_name="spislave_0"
+ megafunction_name="SPISLAVE"
+ intended_family="Cyclone IV E"
+ specifies="all_ports">
+ <global>
+  <pin name="sysclk" direction="input" scope="external" />
+  <pin name="nreset" direction="input" scope="external" />
+  <pin name="mosi" direction="input" scope="external" />
+  <pin name="nss" direction="input" scope="external" />
+  <pin name="miso" direction="bidir" scope="external" />
+  <pin name="sclk" direction="input" scope="external" />
+  <pin name="stsourceready" direction="input" scope="external" />
+  <pin name="stsourcevalid" direction="output" scope="external" />
+  <pin name="stsourcedata[7..0]" direction="output" scope="external" />
+  <pin name="stsinkvalid" direction="input" scope="external" />
+  <pin name="stsinkdata[7..0]" direction="input" scope="external" />
+  <pin name="stsinkready" direction="output" scope="external" />
+ </global>
+</pinplan>

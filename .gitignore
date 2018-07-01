@@ -63,6 +63,8 @@
 
 !*.tcl
 
+!lcd1602/
+!serial/
 
 # End of https://www.gitignore.io/api/alteraquartusii
 

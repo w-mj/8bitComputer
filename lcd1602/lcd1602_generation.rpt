@@ -1,0 +1,29 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate /home/wmj/Documents/8bitComputer/lcd1602.qsys --block-symbol-file --output-directory=/home/wmj/Documents/8bitComputer/lcd1602 --family="Cyclone IV E" --part=EP4CE6E22C8
+Progress: Loading 8bitComputer/lcd1602.qsys
+Progress: Reading input file
+Progress: Adding character_lcd_0 [altera_up_avalon_character_lcd 18.0]
+Progress: Parameterizing module character_lcd_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/wmj/Documents/8bitComputer/lcd1602.qsys --synthesis=VHDL --output-directory=/home/wmj/Documents/8bitComputer/lcd1602/synthesis --family="Cyclone IV E" --part=EP4CE6E22C8
+Progress: Loading 8bitComputer/lcd1602.qsys
+Progress: Reading input file
+Progress: Adding character_lcd_0 [altera_up_avalon_character_lcd 18.0]
+Progress: Parameterizing module character_lcd_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: lcd1602: Generating lcd1602 "lcd1602" for QUARTUS_SYNTH
+Info: character_lcd_0: Starting Generation of Character LCD
+Info: character_lcd_0: "lcd1602" instantiated altera_up_avalon_character_lcd "character_lcd_0"
+Info: lcd1602: Done "lcd1602" with 2 modules, 4 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

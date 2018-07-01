@@ -1,0 +1,39 @@
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_TOOL_NAME "Qsys"
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_TOOL_VERSION "18.0"
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_TOOL_ENV "Qsys"
+set_global_assignment -library "lcd1602" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../lcd1602.sopcinfo"]
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name SLD_INFO "QSYS_NAME lcd1602 HAS_SOPCINFO 1 GENERATION_ID 1530433660"
+set_global_assignment -library "lcd1602" -name MISC_FILE [file join $::quartus(qip_path) "../lcd1602.cmp"]
+set_global_assignment -library "lcd1602" -name SLD_FILE [file join $::quartus(qip_path) "lcd1602.debuginfo"]
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_TARGETED_DEVICE_FAMILY "Cyclone IV E"
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_GENERATED_DEVICE_FAMILY "{Cyclone IV E}"
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_QSYS_MODE "STANDALONE"
+set_global_assignment -name SYNTHESIS_ONLY_QIP ON
+set_global_assignment -library "lcd1602" -name MISC_FILE [file join $::quartus(qip_path) "../../lcd1602.qsys"]
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_NAME "bGNkMTYwMg=="
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_DISPLAY_NAME "bGNkMTYwMg=="
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_REPORT_HIERARCHY "On"
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_INTERNAL "Off"
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_VERSION "MS4w"
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTUzMDQzMzY2MA==::QXV0byBHRU5FUkFUSU9OX0lE"
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfRkFNSUxZ::Q3ljbG9uZSBJViBF::QXV0byBERVZJQ0VfRkFNSUxZ"
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0U=::RVA0Q0U2RTIyQzg=::QXV0byBERVZJQ0U="
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfU1BFRURHUkFERQ==::OA==::QXV0byBERVZJQ0VfU1BFRURHUkFERQ=="
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_PARAMETER "QVVUT19DTEtfQ0xPQ0tfUkFURQ==::LTE=::QXV0byBDTE9DS19SQVRF"
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_PARAMETER "QVVUT19DTEtfQ0xPQ0tfRE9NQUlO::LTE=::QXV0byBDTE9DS19ET01BSU4="
+set_global_assignment -entity "lcd1602" -library "lcd1602" -name IP_COMPONENT_PARAMETER "QVVUT19DTEtfUkVTRVRfRE9NQUlO::LTE=::QXV0byBSRVNFVF9ET01BSU4="
+set_global_assignment -entity "lcd1602_character_lcd_0" -library "lcd1602" -name IP_COMPONENT_NAME "bGNkMTYwMl9jaGFyYWN0ZXJfbGNkXzA="
+set_global_assignment -entity "lcd1602_character_lcd_0" -library "lcd1602" -name IP_COMPONENT_DISPLAY_NAME "MTZ4MiBDaGFyYWN0ZXIgRGlzcGxheQ=="
+set_global_assignment -entity "lcd1602_character_lcd_0" -library "lcd1602" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
+set_global_assignment -entity "lcd1602_character_lcd_0" -library "lcd1602" -name IP_COMPONENT_INTERNAL "Off"
+set_global_assignment -entity "lcd1602_character_lcd_0" -library "lcd1602" -name IP_COMPONENT_AUTHOR "SW50ZWwgRlBHQSBVbml2ZXJzaXR5IFByb2dyYW0="
+set_global_assignment -entity "lcd1602_character_lcd_0" -library "lcd1602" -name IP_COMPONENT_VERSION "MTguMA=="
+set_global_assignment -entity "lcd1602_character_lcd_0" -library "lcd1602" -name IP_COMPONENT_DESCRIPTION "Q2hhcmFjdGVyIExDRCBjb250cm9sbGVyIGZvciBERTItc2VyaWVzIGJvYXJkcw=="
+set_global_assignment -entity "lcd1602_character_lcd_0" -library "lcd1602" -name IP_COMPONENT_PARAMETER "Y3Vyc29y::Tm9ybWFs::RGlzcGxheSBDdXJzb3I="
+set_global_assignment -entity "lcd1602_character_lcd_0" -library "lcd1602" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfRkFNSUxZ::Q3ljbG9uZSBJViBF::QXV0byBERVZJQ0VfRkFNSUxZ"
+set_global_assignment -entity "lcd1602_character_lcd_0" -library "lcd1602" -name IP_COMPONENT_PARAMETER "QVVUT19DTEtfQ0xPQ0tfUkFURQ==::MA==::QXV0byBDTE9DS19SQVRF"
+
+set_global_assignment -library "lcd1602" -name VHDL_FILE [file join $::quartus(qip_path) "lcd1602.vhd"]
+set_global_assignment -library "lcd1602" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/altera_up_character_lcd_communication.v"]
+set_global_assignment -library "lcd1602" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/altera_up_character_lcd_initialization.v"]
+set_global_assignment -library "lcd1602" -name VERILOG_FILE [file join $::quartus(qip_path) "submodules/lcd1602_character_lcd_0.v"]
