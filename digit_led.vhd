@@ -12,8 +12,9 @@ entity digit_led is port(
 end digit_led;
 
 architecture digit_led_arch of digit_led is
-signal cs_scan: std_logic_vector(3 downto 0);
+signal cs_scan: std_logic_vector(3 downto 0) := "1110";
 signal dig1, dig2, dig3, dig4, A: std_logic_vector(4 downto 0);
+--signal low_clk;
 begin
 digit_cs_out <= cs_scan;
 process (CLK) begin

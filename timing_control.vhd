@@ -15,7 +15,7 @@ entity timing_control is port(
 	regarr_load, regarr_put, regarr_inc, regarr_dec: out std_logic;
 	addrbuff_load: out std_logic;
 	ireg_load: out std_logic;
-	databuff_load_bus, databuff_load_inner, databuff_put_inner, databuff_put_bus, databuffclr_pc: out std_logic;
+	databuff_load_data, databuff_load_inner, databuff_put_inner, databuff_put_data, databuffclr_pc: out std_logic;
 	flag_load_bus, flag_put_bus, flag_load_alu, flag_STC: out std_logic;
 	alu_s: out std_logic_vector(3 downto 0);
 	alu_put: out std_logic;
@@ -66,8 +66,8 @@ process(IR, bM, bT, IR_input) begin
 			end if;
 		end case;
 	RST<='0'; nextM<='0'; nextT<='0'; regarr_cs<="0000"; regarr_load<='0'; regarr_put<='0';
-	regarr_inc<='0'; regarr_dec<='0'; addrbuff_load<='0'; ireg_load<='0'; databuff_load_bus<='0';
-	databuff_load_inner<='0'; databuff_put_bus<='0'; databuff_put_bus<='0';
+	regarr_inc<='0'; regarr_dec<='0'; addrbuff_load<='0'; ireg_load<='0'; databuff_load_data<='0';
+	databuff_load_inner<='0'; databuff_put_data<='0'; databuff_put_inner<='0';
 	flag_load_bus<='0'; flag_put_bus<='0'; flag_load_alu<='0'; flag_STC<='0';
 	alu_s<="0000"; alu_put<='0'; tmp_load<='0'; tmp_put<='0'; acc_load<='0'; acc_put<='0';
 	
@@ -76,7 +76,7 @@ process(IR, bM, bT, IR_input) begin
 		regarr_put <= m1 and t1;
 		addrbuff_load <= m1 and t1;
 		regarr_inc <= m1 and t2;
-		databuff_load_bus <= m1 and t2;
+		databuff_load_data <= m1 and t2;
 		databuff_put_inner <= m1 and t3;
 		ireg_load <= m1 and t3;
 		nextT <= m1 and (t1 or t2 or t3);
@@ -98,7 +98,7 @@ process(IR, bM, bT, IR_input) begin
 			addrbuff_load <= m2 and t1;
 			regarr_load <= m2 and t3;
 			regarr_inc <= m2 and t2;
-			databuff_load_bus <= m2 and t2;
+			databuff_load_data <= m2 and t2;
 			databuff_put_inner <= m2 and (t2 or t3);
 			nextT <= m2 and (t1 or t2);
 			RST <= m2 and t3;
@@ -146,7 +146,7 @@ process(IR, bM, bT, IR_input) begin
 		when "00000111"=> null; -- 47 RLC
 		when "00001111"=> null; -- 48 RRC
 		when "00010111"=> null; -- 49 RAL
-		when "00011111"=> null; -- 50 RAR
+		when "00011111"=> null; -- 50 RAt1 or R
 		when "00101111"=> null; -- 51 CMA
 		when "00111111"=> null; -- 52 CMC
 		when "00110111"=> null; -- 53 STC
@@ -164,7 +164,21 @@ process(IR, bM, bT, IR_input) begin
 		when "11110001"=> null; -- 65 POP PSW
 		when "11100011"=> null; -- 66 XTHL
 		when "11011011"=> null; -- 67 IN port
-		when "11010011"=> null; -- 68 OUT port
+		when "11010011"=> -- 68 OUT port
+			nextM <= (m1 and t4) or (m2 and t5);
+			addrbuff_load <= (m2 and (t1 or t3)) or (m3 and t1);
+			databuff_load_data <= m2 and t2;
+			databuff_put_inner <= m2 and (t3 or t3);
+			regarr_cs <= onn("1111", m2 and t2) or onn("1100", m2 and t3) or 
+							 onn("1101", m2 and t5) or onn("1110", m3 and t1) ;
+			regarr_inc <= m2 and t2;
+			regarr_load <= m2 and t3;
+			databuff_load_data <= m2 and t4;
+			databuff_put_inner <= m2 and (t4 or t5);
+			regarr_load <= m2 and t5;
+			acc_put <= m3 and t2;
+			nextT <= (m1 and (t1 or t2 or t3 or t4)) or (m2 and t1);
+			RST <= m2 and t2;
 		when "11111011"=> null; -- 69 EI
 		when "11110011"=> null; -- 70 DI
 		when "01110110"=> null; -- 71 HLT

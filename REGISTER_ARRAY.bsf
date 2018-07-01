@@ -80,6 +80,20 @@ refer to the applicable agreement for further details.
 		(line (pt 232 48)(pt 216 48)(line_width 3))
 	)
 	(port
+		(pt 232 64)
+		(output)
+		(text "load_a" (rect 0 0 25 12)(font "Arial" ))
+		(text "load_a" (rect 186 59 211 71)(font "Arial" ))
+		(line (pt 232 64)(pt 216 64)(line_width 1))
+	)
+	(port
+		(pt 232 80)
+		(output)
+		(text "put_a" (rect 0 0 22 12)(font "Arial" ))
+		(text "put_a" (rect 189 75 211 87)(font "Arial" ))
+		(line (pt 232 80)(pt 216 80)(line_width 1))
+	)
+	(port
 		(pt 232 32)
 		(bidir)
 		(text "data[7..0]" (rect 0 0 36 12)(font "Arial" ))

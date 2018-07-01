@@ -138,8 +138,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 232 208)
 		(output)
-		(text "databuff_load_bus" (rect 0 0 74 12)(font "Arial" ))
-		(text "databuff_load_bus" (rect 137 203 211 215)(font "Arial" ))
+		(text "databuff_load_data" (rect 0 0 76 12)(font "Arial" ))
+		(text "databuff_load_data" (rect 135 203 211 215)(font "Arial" ))
 		(line (pt 232 208)(pt 216 208)(line_width 1))
 	)
 	(port
@@ -159,8 +159,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 232 256)
 		(output)
-		(text "databuff_put_bus" (rect 0 0 70 12)(font "Arial" ))
-		(text "databuff_put_bus" (rect 141 251 211 263)(font "Arial" ))
+		(text "databuff_put_data" (rect 0 0 73 12)(font "Arial" ))
+		(text "databuff_put_data" (rect 138 251 211 263)(font "Arial" ))
 		(line (pt 232 256)(pt 216 256)(line_width 1))
 	)
 	(port

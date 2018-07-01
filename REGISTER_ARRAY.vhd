@@ -9,6 +9,7 @@ entity REGISTER_ARRAY is port(
 	address: out std_logic_vector(15 downto 0);
 	register_select: in std_logic_vector(3 downto 0);
 	load, put, inc, dec: in std_logic := '0';
+	load_a, put_a: out std_logic;
 	clr_pc: in std_logic
 	);
 end REGISTER_ARRAY;
@@ -41,6 +42,7 @@ process(register_select) begin
 	data <= (others=>'Z');
 	address <= (others=>'Z');
 	B_EN<='0'; C_EN<='0'; D_EN<='0'; E_EN<='0'; H_EN<='0'; L_EN<='0'; SP_EN<='0'; PC_EN<='0';
+	put_a <= '0'; load_a <= '0';
 	reg_in_buff_high <= data;
 	reg_in_buff_low <= data;
 	latch_input <= (others=>'0');
@@ -62,7 +64,7 @@ process(register_select) begin
 				when "1101"=> data <= Z_out;
 				when "1110"=> address <= w_out & Z_out;
 				when "1111"=> address <= PC_out;
-				when "0111"=> null; -- accumulator.
+				when "0111"=> put_a <= '1'; -- accumulator.
 			end case;
 		when "010"=>  -- load data from bus.
 			case register_select is 
@@ -76,6 +78,7 @@ process(register_select) begin
 				when "1101"=> Z_EN <= '1';
 				when "1011"=> reg_in_buff_high <= H_out; reg_in_buff_low <= L_out; SP_EN <= '1';
 				when "1111"=> reg_in_buff_high <= H_out; reg_in_buff_low <= L_out; PC_EN <= '1';
+				when "0111"=> load_a <= '1';
 				when others=> null;
 			end case;
 		when "001"=>  -- increse or decrese.

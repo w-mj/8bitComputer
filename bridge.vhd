@@ -28,25 +28,29 @@ ram_weN <= not load;
 ram_oeN <= not put;
 ram_address <= address(14 downto 0);
 
-process (address, put, load) begin
-	set_digit <= '0';
-	if (put = '1') then
-		if (address(15) = '0') then 
-			data <= ram_data;
-		elsif (address = "1111111111110000") then 
-			data <= switch & key_data;
-		else 
-			data <= (others=>'Z');
-		end if;
-	end if;
-	if (load = '1') then
-		if (address(15) = '0') then
-			ram_data <= data;
-		elsif (address(15 downto 2) = "11111111111111") then
-			digit_cs <= address(1 downto 0);
-			set_digit <= '1';
-			digit_data <= data(4 downto 0);
-		end if;
-	end if;
-end process;
+digit_cs <= "10";
+digit_data <= key_flag & key_data;
+set_digit <= '1';
+--
+--process (address, put, load) begin
+--	set_digit <= '0';
+--	if (put = '1') then
+--		if (address(15) = '0') then 
+--			data <= ram_data;
+--		elsif (address = "1111111111110000") then 
+--			data <= switch & key_data;
+--		else 
+--			data <= (others=>'Z');
+--		end if;
+--	end if;
+--	if (load = '1') then
+--		if (address(15) = '0') then
+--			ram_data <= data;
+--		elsif (address(15 downto 2) = "11111111111111") then
+--			digit_cs <= address(1 downto 0);
+--			set_digit <= '1';
+--			digit_data <= data(4 downto 0);
+--		end if;
+--	end if;
+--end process;
 end bridge_arch;
