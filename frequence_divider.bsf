@@ -18,26 +18,26 @@ the sole purpose of programming logic devices manufactured by
 Intel and sold by Intel or its authorized distributors.  Please
 refer to the applicable agreement for further details.
 */
-(header "symbol" (version "1.1"))
+(header "symbol" (version "1.2"))
 (symbol
-	(rect 16 16 64 96)
-	(text "frequence_divider" (rect 5 0 76 12)(font "Arial" ))
-	(text "inst" (rect 8 64 20 76)(font "Arial" ))
+	(rect 64 64 112 144)
+	(text "frequence_divider" (rect 5 0 115 14)(font "Arial" ))
+	(text "inst" (rect 8 64 32 78)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "i" (rect 0 0 1 12)(font "Arial" ))
-		(text "i" (rect 21 27 22 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 1))
+		(text "i" (rect 0 0 3 14)(font "Arial" ))
+		(text "i" (rect 21 27 24 41)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
 	)
 	(port
 		(pt 48 32)
 		(output)
-		(text "o" (rect 0 0 4 12)(font "Arial" ))
-		(text "o" (rect 23 27 27 39)(font "Arial" ))
-		(line (pt 48 32)(pt 32 32)(line_width 1))
+		(text "o" (rect 0 0 9 14)(font "Arial" ))
+		(text "o" (rect 24 24 31 38)(font "Arial" ))
+		(line (pt 48 32)(pt 32 32))
 	)
 	(drawing
-		(rectangle (rect 16 16 32 64)(line_width 1))
+		(rectangle (rect 16 16 32 64))
 	)
 )

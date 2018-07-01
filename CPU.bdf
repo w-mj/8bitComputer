@@ -987,28 +987,6 @@ refer to the applicable agreement for further details.
 	(flipy)
 )
 (symbol
-	(rect -136 776 -88 856)
-	(text "frequence_divider" (rect 5 0 115 14)(font "Arial" ))
-	(text "inst11" (rect 8 64 48 80)(font "Intel Clear" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "i" (rect 0 0 3 14)(font "Arial" ))
-		(text "i" (rect 21 27 24 41)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 48 32)
-		(output)
-		(text "o" (rect 0 0 9 14)(font "Arial" ))
-		(text "o" (rect 20 27 29 41)(font "Arial" ))
-		(line (pt 48 32)(pt 32 32))
-	)
-	(drawing
-		(rectangle (rect 16 16 32 64))
-	)
-)
-(symbol
 	(rect 1328 -712 1512 -600)
 	(text "matrix" (rect 5 0 43 14)(font "Arial" ))
 	(text "inst13" (rect 8 96 48 112)(font "Intel Clear" ))
@@ -1264,18 +1242,40 @@ refer to the applicable agreement for further details.
 		(pt 176 32)
 		(output)
 		(text "M_out[7..0]" (rect 0 0 70 14)(font "Arial" ))
-		(text "M_out[7..0]" (rect 96 27 155 41)(font "Arial" ))
+		(text "M_out[7..0]" (rect 96 27 166 41)(font "Arial" ))
 		(line (pt 176 32)(pt 160 32)(line_width 3))
 	)
 	(port
 		(pt 176 48)
 		(output)
 		(text "T_out[7..0]" (rect 0 0 67 14)(font "Arial" ))
-		(text "T_out[7..0]" (rect 99 43 155 57)(font "Arial" ))
+		(text "T_out[7..0]" (rect 99 43 166 57)(font "Arial" ))
 		(line (pt 176 48)(pt 160 48)(line_width 3))
 	)
 	(drawing
 		(rectangle (rect 16 16 160 128))
+	)
+)
+(symbol
+	(rect -136 776 -88 856)
+	(text "frequence_divider" (rect 5 0 115 14)(font "Arial" ))
+	(text "inst11" (rect 8 64 46 78)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "i" (rect 0 0 3 14)(font "Arial" ))
+		(text "i" (rect 21 27 24 41)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 48 32)
+		(output)
+		(text "o" (rect 0 0 9 14)(font "Arial" ))
+		(text "o" (rect 24 24 33 38)(font "Arial" ))
+		(line (pt 48 32)(pt 32 32))
+	)
+	(drawing
+		(rectangle (rect 16 16 32 64))
 	)
 )
 (connector
