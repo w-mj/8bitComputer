@@ -37,7 +37,7 @@ begin
 	
 	if ((row(0) and row(1) and row(2) and row(3)) = '0') then
 		scanning <= '0';
-		if (cnt >= to_unsigned(20000, 32)) then
+		if (cnt >= to_unsigned(2000, 32)) then
 			clkreg <= '1';
 			flag <= '1';
 		else 

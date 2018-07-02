@@ -28,9 +28,9 @@ ram_weN <= not load;
 ram_oeN <= not put;
 ram_address <= address(14 downto 0);
 
-digit_cs <= "10";
+digit_cs <= switch(1 downto 0);
 digit_data <= key_flag & key_data;
-set_digit <= '1';
+set_digit <= CLK;
 --
 --process (address, put, load) begin
 --	set_digit <= '0';
