@@ -113,7 +113,15 @@ process(IR, bM, bT, IR_input) begin
 		when "00001010"=> null; -- 12 LDAX rp
 		when "00000010"=> null; -- 13 STAX rp; 
 		when "11101011"=> null; -- 14 XCHG
-		when "10000000"=> null; -- 15 ADD r
+		when "10000000"=>  -- 15 ADD r
+			regarr_cs <= onn("0"&sss, m1 and t4);
+			regarr_put <= m1 and t4;
+			tmp_load <= m1 and t4;
+			alu_s <= onn("0010", m1 and t5);
+			alu_put <= m1 and t5;
+			acc_load <= m1 and t5;
+			nextT <= m1 and t4;
+			RST <= m1 and t5;
 		when "10000110"=> null; -- 16 ADD M
 		when "11000110"=> null; -- 17 ADI data
 		when "10001000"=> null; -- 18 ADC r
