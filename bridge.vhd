@@ -21,16 +21,25 @@ end bridge;
 
 
 architecture bridge_arch of bridge is
-
+signal data_t: std_logic_vector(7 downto 0);
 begin
-ram_csN <= address(15);
-ram_weN <= not load;
-ram_oeN <= not put;
+data <= data_t when put='1' else (others=>'Z');
+with address select data_t <=
+	"00001110" when "0000000000000000",
+	"10001000" when "0000000000000001",
+	"01111001" when "0000000000000010",
+	"11010011" when "0000000000000011",
+	"11111110" when "0000000000000100",
+	"11111111" when others;
 ram_address <= address(14 downto 0);
-
-digit_cs <= switch(1 downto 0);
-digit_data <= key_flag & key_data;
-set_digit <= CLK;
+--ram_csN <= address(15);
+--ram_weN <= not load;
+--ram_oeN <= not put;
+--ram_address <= address(14 downto 0);
+--
+--digit_cs <= switch(1 downto 0);
+--digit_data <= key_flag & key_data;
+--set_digit <= CLK;
 --
 --process (address, put, load) begin
 --	set_digit <= '0';

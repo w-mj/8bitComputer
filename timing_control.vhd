@@ -85,6 +85,8 @@ process(IR, bM, bT, IR_input) begin
 		when "01000000"=>  -- 1 MOV r, r
 			regarr_cs <= onn("0"&sss, m1 and t4) or onn("0"&ddd, m1 and t5);
 			regarr_put <= m1 and t4;
+			tmp_load <= m1 and t4;
+			tmp_put <= m1 and t5;
 			nextT <= m1 and t4;
 			regarr_load <= m1 and t5;
 			RST <= m1 and t5;
@@ -94,13 +96,13 @@ process(IR, bM, bT, IR_input) begin
 		when "00000110"=> -- 5 MVI r, data
 			nextM <= m1 and t4;
 			regarr_cs <= onn("1111", m2 and (t1 or t2)) or onn("0"&ddd, m2 and t3);
-			regarr_put <= m2 and (t1 or t5);
+			regarr_put <= m2 and t1;
 			addrbuff_load <= m2 and t1;
 			regarr_load <= m2 and t3;
 			regarr_inc <= m2 and t2;
 			databuff_load_data <= m2 and t2;
 			databuff_put_inner <= m2 and (t2 or t3);
-			nextT <= m2 and (t1 or t2);
+			nextT <= m2 and (t1 or t2 or t3);
 			RST <= m2 and t3;
 		when "00110110"=> null; -- 6 MVI M, data;
 		when "00000001"=> null; -- 7 LXI rp, data
@@ -165,20 +167,19 @@ process(IR, bM, bT, IR_input) begin
 		when "11100011"=> null; -- 66 XTHL
 		when "11011011"=> null; -- 67 IN port
 		when "11010011"=> -- 68 OUT port
-			nextM <= (m1 and t4) or (m2 and t5);
-			addrbuff_load <= (m2 and (t1 or t3)) or (m3 and t1);
-			databuff_load_data <= m2 and t2;
-			databuff_put_inner <= m2 and (t3 or t3);
-			regarr_cs <= onn("1111", m2 and t2) or onn("1100", m2 and t3) or 
-							 onn("1101", m2 and t5) or onn("1110", m3 and t1) ;
+			nextM <= (m1 and t4) or (m2 and t3);
+			nextT <= (m2 and (t1 or t2)) or (m3 and (t1 or t2));
+			addrbuff_load <= (m2 and t1) or (m3 and t1);
+			regarr_cs <= onn("1111", m2 and (t1 or t2)) or onn("1100", m2 and t3) or
+							 onn("1110", m3 and t1);
 			regarr_inc <= m2 and t2;
+			databuff_load_data <= m2 and t2;
+			databuff_put_inner <= m2 and (t2 or t3);
 			regarr_load <= m2 and t3;
-			databuff_load_data <= m2 and t4;
-			databuff_put_inner <= m2 and (t4 or t5);
-			regarr_load <= m2 and t5;
+			databuff_load_inner <= m3 and t2;
+			databuff_put_data <= m3 and (t2 or t3);
 			acc_put <= m3 and t2;
-			nextT <= (m1 and (t1 or t2 or t3 or t4)) or (m2 and t1);
-			RST <= m2 and t2;
+			RST <= m3 and t3;
 		when "11111011"=> null; -- 69 EI
 		when "11110011"=> null; -- 70 DI
 		when "01110110"=> null; -- 71 HLT
