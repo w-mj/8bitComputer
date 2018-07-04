@@ -18,10 +18,12 @@ begin
 to_bus <= data when put='1' else "ZZZZZZZZ";
 to_alu <= data;
 process (load_bus, load_alu, CLK, STC) begin
-	if (load_bus = '1' and rising_edge(CLK)) then
-		data <= to_bus;
-	elsif (load_alu = '1' and rising_edge(CLK)) then
-		data <= from_alu;
+	if (rising_edge(CLK)) then 
+		if (load_bus = '1') then
+			data <= to_bus;
+		elsif (load_alu = '1') then
+			data <= from_alu;
+		end if;
 	end if;
 	if (STC = '1') then
 		data(0) <= '1';

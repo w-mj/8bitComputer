@@ -178,12 +178,12 @@ process(IR, bM, bT, IR_input) begin
 			nextM <= (m1 and t4) or (m2 and t3);
 			nextT <= (m2 and (t1 or t2)) or (m3 and (t1 or t2));
 			addrbuff_load <= (m2 and t1) or (m3 and t1);
-			regarr_cs <= onn("1111", m2 and (t1 or t2)) or onn("1100", m2 and t3) or
-							 onn("1110", m3 and t1);
+			regarr_cs <= onn("1111", m2 and (t1 or t2)) or onn("1100", m2 and t3) or onn("1110", m3 and t1);
 			regarr_inc <= m2 and t2;
 			databuff_load_data <= m2 and t2;
-			databuff_put_inner <= m2 and (t2 or t3);
+			databuff_put_inner <= m2 and t3;
 			regarr_load <= m2 and t3;
+			regarr_put <= m3 and t1;
 			databuff_load_inner <= m3 and t2;
 			databuff_put_data <= m3 and (t2 or t3);
 			acc_put <= m3 and t2;

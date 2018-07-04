@@ -41,8 +41,8 @@ sign(0) <= inc or dec;
 process(register_select) begin
 	data <= (others=>'Z');
 	address <= (others=>'Z');
+	W_EN<='0'; Z_EN<='0'; put_a <= '0'; load_a <= '0';
 	B_EN<='0'; C_EN<='0'; D_EN<='0'; E_EN<='0'; H_EN<='0'; L_EN<='0'; SP_EN<='0'; PC_EN<='0';
-	put_a <= '0'; load_a <= '0';
 	reg_in_buff_high <= data;
 	reg_in_buff_low <= data;
 	latch_input <= (others=>'0');
@@ -62,7 +62,7 @@ process(register_select) begin
 				when "1011"=> address <= SP_out;
 				when "1100"=> data <= W_out;
 				when "1101"=> data <= Z_out;
-				when "1110"=> address <= w_out & Z_out;
+				when "1110"=> address <= W_out & Z_out;
 				when "1111"=> address <= PC_out;
 				when "0111"=> put_a <= '1'; -- accumulator.
 			end case;

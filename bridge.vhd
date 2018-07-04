@@ -32,8 +32,8 @@ with address select data_t <=
 	"00010110" when "0000000000000100", -- 16
 	"10000001" when "0000000000000101", -- add c
 	"11010011" when "0000000000000110", -- out
-	"11111110" when "0000000000000111", -- fe
-	"11111111" when others;
+	"01111110" when "0000000000000111", -- 7e
+	"01110110" when others;
 ram_address <= address(14 downto 0);
 --ram_csN <= address(15);
 --ram_weN <= not load;
