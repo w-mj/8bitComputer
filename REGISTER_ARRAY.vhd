@@ -77,7 +77,9 @@ process(register_select) begin
 				when "1100"=> W_EN <= '1';
 				when "1101"=> Z_EN <= '1';
 				when "1011"=> reg_in_buff_high <= H_out; reg_in_buff_low <= L_out; SP_EN <= '1';
+				when "1010"=> reg_in_buff_hifh <= W_out; reg_in_buff_low <= Z_out; SP_EN <= '1';
 				when "1111"=> reg_in_buff_high <= H_out; reg_in_buff_low <= L_out; PC_EN <= '1';
+				when "1110"=> reg_in_buff_hifh <= W_out; reg_in_buff_low <= Z_out; PC_EN <= '1';
 				when "0111"=> load_a <= '1';
 				when others=> null;
 			end case;
