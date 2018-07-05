@@ -65,6 +65,7 @@
 
 !lcd1602/
 !serial/
+!msam/
 
 # End of https://www.gitignore.io/api/alteraquartusii
 

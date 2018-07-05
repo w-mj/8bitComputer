@@ -1,0 +1,10 @@
+
+mvi c, 1f
+mov a, c
+XX:
+mvi d, 01
+sub d
+out fe
+jmp XX
+hlt
+
