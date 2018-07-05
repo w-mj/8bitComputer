@@ -51,7 +51,7 @@ process(IR, bM, bT, IR_input) begin
 			end if;
 		when "10"=>
 			if ((ddd = "000" or ddd = "001" or ddd = "100" or ddd = "101" or
-				 ddd = "110" or ddd = "111") and sss /= "110") then 
+				 ddd = "110" or ddd = "111" or ddd = "011") and sss /= "110") then 
 				 IR(2 downto 0) <= "000"; end if;
 		when "00"=>
 			if ((sss = "100" or sss = "101" or sss = "110") and ddd /= "110") then 
@@ -130,7 +130,15 @@ process(IR, bM, bT, IR_input) begin
 		when "10010000"=> null; -- 21 SUB r
 		when "10010110"=> null; -- 22 SUB M
 		when "11010110"=> null; -- 23 SUI data
-		when "10011000"=> null; -- 24 SBB r
+		when "10011000"=>  -- 24 SBB r
+			regarr_cs <= onn("0"&sss, m1 and t4);
+			regarr_put <= m1 and t4;
+			tmp_load <= m1 and t4;
+			alu_s <= onn("0100", m1 and t5);
+			alu_put <= m1 and t5;
+			acc_load <= m1 and t5;
+			nextT <= m1 and t4;
+			RST <= m1 and t5;
 		when "10011110"=> null; -- 25 SBB M
 		when "11011110"=> null; -- 26 SBI data
 		when "00000100"=> null; -- 27 INR r

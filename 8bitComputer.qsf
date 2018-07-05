@@ -152,4 +152,14 @@ set_global_assignment -name SIGNALTAP_FILE signal_tap_ii/stp2.stp
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[7]
+set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[6]
+set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[5]
+set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[4]
+set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[3]
+set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[2]
+set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[1]
+set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[0]
+set_location_assignment PIN_24 -to reset
+set_location_assignment PIN_38 -to shutup
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -103,15 +103,15 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 240 128)
 		(output)
-		(text "digit_data[4..0]" (rect 0 0 57 12)(font "Arial" ))
-		(text "digit_data[4..0]" (rect 162 123 219 135)(font "Arial" ))
+		(text "digit_data[7..0]" (rect 0 0 56 12)(font "Arial" ))
+		(text "digit_data[7..0]" (rect 163 123 219 135)(font "Arial" ))
 		(line (pt 240 128)(pt 224 128)(line_width 3))
 	)
 	(port
 		(pt 240 144)
 		(output)
-		(text "digit_cs[1..0]" (rect 0 0 48 12)(font "Arial" ))
-		(text "digit_cs[1..0]" (rect 171 139 219 151)(font "Arial" ))
+		(text "digit_cs[2..0]" (rect 0 0 49 12)(font "Arial" ))
+		(text "digit_cs[2..0]" (rect 170 139 219 151)(font "Arial" ))
 		(line (pt 240 144)(pt 224 144)(line_width 3))
 	)
 	(port

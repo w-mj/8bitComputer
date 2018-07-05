@@ -3,8 +3,8 @@ use ieee.std_logic_1164.all;
 
 
 entity digit_led is port(
-	digit_cs: in std_logic_vector(1 downto 0);
-	digit_data: in std_logic_vector(4 downto 0);
+	digit_cs: in std_logic_vector(2 downto 0);
+	digit_data: in std_logic_vector(7 downto 0);
 	digit_data_out: out std_logic_vector(7 downto 0);
 	digit_cs_out: out std_logic_vector(3 downto 0);
 	CLK, load: in std_logic
@@ -13,8 +13,8 @@ end digit_led;
 
 architecture digit_led_arch of digit_led is
 signal cs_scan: std_logic_vector(3 downto 0) := "1110";
-signal dig1, dig2, dig3, dig4, num: std_logic_vector(4 downto 0);
---signal low_clk;
+signal dig1, dig2, dig3, dig4, num: std_logic_vector(4 downto 0) := "00000";
+
 begin
 digit_cs_out <= cs_scan;
 process (CLK) begin
@@ -27,17 +27,18 @@ process (CLK) begin
 		when others => cs_scan<="1110";
 	end case;
 	end if;
-end process;
 
-process(load) begin
-if (load'event and load = '1') then
-	case digit_cs is
-		when "00"=> dig1 <= digit_data;
-		when "01"=> dig2 <= digit_data;
-		when "10"=> dig3 <= digit_data;
-		when "11"=> dig4 <= digit_data;
-	end case;
-end if;
+	if (rising_edge(CLK) and load = '1') then
+		case digit_cs is
+			when "000"=> dig1 <= digit_data(4 downto 0);
+			when "001"=> dig2 <= digit_data(4 downto 0);
+			when "010"=> dig3 <= digit_data(4 downto 0);
+			when "011"=> dig4 <= digit_data(4 downto 0);
+			when "100"=> dig1 <= "0"&digit_data(7 downto 4); dig2 <= "0"&digit_data(3 downto 0);
+			when "110"=> dig3 <= "0"&digit_data(7 downto 4); dig4 <= "0"&digit_data(3 downto 0);
+			when others=> null;
+		end case;
+	end if;
 end process;
 
 with cs_scan select num <=
