@@ -309,7 +309,7 @@ refer to the applicable agreement for further details.
 	(output)
 	(rect 744 -664 760 -488)
 	(text "OUTPUT" (rect 3 125 16 175)(font "Arial" (font_size 6))(vertical))
-	(text "shutup" (rect 2 44 16 86)(font "Arial" )(vertical))
+	(text "shut_up" (rect 2 5 16 56)(font "Arial" )(vertical))
 	(pt 8 176)
 	(drawing
 		(line (pt 8 176)(pt 8 124))

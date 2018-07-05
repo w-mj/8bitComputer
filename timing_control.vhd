@@ -51,7 +51,7 @@ process(IR, bM, bT, IR_input) begin
 			end if;
 		when "10"=>
 			if ((ddd = "000" or ddd = "001" or ddd = "100" or ddd = "101" or
-				 ddd = "110" or ddd = "111" or ddd = "011") and sss /= "110") then 
+				 ddd = "110" or ddd = "111" or ddd = "011" or ddd = "010") and sss /= "110") then 
 				 IR(2 downto 0) <= "000"; end if;
 		when "00"=>
 			if ((sss = "100" or sss = "101" or sss = "110") and ddd /= "110") then 
@@ -127,10 +127,7 @@ process(IR, bM, bT, IR_input) begin
 		when "10001000"=> null; -- 18 ADC r
 		when "10001110"=> null; -- 19 ADC M
 		when "11001110"=> null; -- 20 ACI data
-		when "10010000"=> null; -- 21 SUB r
-		when "10010110"=> null; -- 22 SUB M
-		when "11010110"=> null; -- 23 SUI data
-		when "10011000"=>  -- 24 SBB r
+		when "10010000"=>  -- 21 SUB r
 			regarr_cs <= onn("0"&sss, m1 and t4);
 			regarr_put <= m1 and t4;
 			tmp_load <= m1 and t4;
@@ -139,6 +136,9 @@ process(IR, bM, bT, IR_input) begin
 			acc_load <= m1 and t5;
 			nextT <= m1 and t4;
 			RST <= m1 and t5;
+		when "10010110"=> null; -- 22 SUB M
+		when "11010110"=> null; -- 23 SUI data
+		when "10011000"=> null; -- 24 SBB r
 		when "10011110"=> null; -- 25 SBB M
 		when "11011110"=> null; -- 26 SBI data
 		when "00000100"=> null; -- 27 INR r
@@ -168,7 +168,18 @@ process(IR, bM, bT, IR_input) begin
 		when "00101111"=> null; -- 51 CMA
 		when "00111111"=> null; -- 52 CMC
 		when "00110111"=> null; -- 53 STC
-		when "11000011"=> null; -- 54 JMP addr
+		when "11000011"=>  -- 54 JMP addr
+			nextM <= (m1 and t4) or (m2 and t3);
+			addrbuff_load <= ((m2 or m3) and t1) or (m3 and t4);
+			regarr_cs <= onn("1111", (m2 and (t1 or t2)) or (m3 and t1)) or onn("1100", m2 and t3) 
+								or onn("1101", m3 and t3) or onn("1110", m3 and t4);
+			regarr_put <= (m2 or m3) and t1;
+			regarr_inc <= m2 and t2;
+			databuff_load_data <= (m2 or m3) and t2;
+			databuff_put_inner <= (m2 or m3) and t3;
+			regarr_load <= ((m2 or m3) and t3) or (m3 and t4);
+			nextT <= (m2 and (t1 or t2)) or (m3 and (t1 or t2 or t3));
+			RST <= m3 and t4;
 		when "11000010"=> null; -- 55 J cond addr
 		when "11001101"=> null; -- 56 CALL addr
 		when "11000100"=> null; -- 57 C cond addr
