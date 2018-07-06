@@ -42,10 +42,35 @@ def msam_line(s):
                hex2bin(arg1)
     elif cmd == 'HLT':
         return '01110110',
-    elif cmd == 'JMP':
-        return '11000011', \
-               bin(label_map[arg1])[2:].zfill(16)[0:8], \
-               bin(label_map[arg1])[2:].zfill(16)[8:]
+    elif cmd[0] == 'J':
+        code = None
+        if cmd == 'JMP':
+            code = '11000011'
+        elif cmd == 'JNZ':
+            code = '11000010'
+        elif cmd == 'JZ':
+            code = '11001010'
+        elif cmd == 'JNC':
+            code = '11010010'
+        elif cmd == 'JC':
+            code = '11011010'
+        elif cmd == 'JPO':
+            code = '11100010'
+        elif cmd == 'JPE':
+            code = '11101010'
+        elif cmd == 'JP':
+            code = '11110010'
+        elif cmd == 'JM':
+            code = '11111010'
+        if code is not None:
+            return code, \
+                   '--JMPH--'+arg1, '--JMPL--'+arg1
+    elif cmd == 'CMP':
+        if arg1 in reg_list:
+            return '10111' + reg_code[arg1],
+    elif cmd == 'INR':
+        if arg1 in reg_list:
+            return '00' + reg_code[arg1] + '100',
 
 
 if __name__ == '__main__':
@@ -55,6 +80,7 @@ if __name__ == '__main__':
     addr = 0
     out_f = open(sys.argv[1] + '.t', 'w')
     out_f.write("with address select data_t <=\n")
+    result = []
     with open(sys.argv[1]) as f:
         for i, line in enumerate(f):
             line = line[:-1].split(';')[0]
@@ -68,7 +94,15 @@ if __name__ == '__main__':
                 print('something wrong at line {}'.format(i))
                 sys.exit(1)
             for byte in res:
-                out_f.write('    "' + byte + '" when "' + bin(addr)[2:].zfill(16) + '", -- ' + line + '\n')
+                result.append([byte, addr, line])
                 addr += 1
+
+    for byte in result:
+        if '--JMPH--' in byte[0]:
+            byte[0] = bin(int(label_map[byte[0][8:]]))[2:].zfill(16)[:8]
+        elif '--JMPL--' in byte[0]:
+            byte[0] = bin(int(label_map[byte[0][8:]]))[2:].zfill(16)[8:]
+        out_f.write('    "' + byte[0] + '" when "' + bin(byte[1])[2:].zfill(16) + '", -- ' + byte[2] + '\n')
+
     out_f.write('	"01110110" when others;  -- hlt')
     out_f.close()

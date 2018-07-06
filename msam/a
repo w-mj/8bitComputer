@@ -1,10 +1,16 @@
-
-mvi c, 1f
+mvi a, 0
+mvi b, 1
+mvi h, 0a
+LOOP:
+add b
+mov c, a
+mov a, b
+cmp h
+jnc OVER
 mov a, c
-XX:
-mvi d, 01
-sub d
-out fe
-jmp XX
+inr b
+jmp LOOP
+OVER:
+mov a, c
+out fc
 hlt
-

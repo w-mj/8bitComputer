@@ -9,6 +9,7 @@ entity timing_control is port(
 	bM, bT: in std_logic_vector(7 downto 0);
 	
 	ready, reset: in std_logic;
+	flag_reg: in std_logic_vector(7 downto 0);
 	
 	RST, nextM, nextT, CLR: out std_logic;
 	regarr_cs: out std_logic_vector(3 downto 0);
@@ -28,11 +29,14 @@ architecture timing_control_arch of timing_control is
 signal IR: std_logic_vector(7 downto 0);
 signal t1, t2, t3, t4, t5, t6, t7: std_logic;
 signal m1, m2, m3, m4, m5, m6, m7: std_logic;
+signal CF, ZF, AF, PF, SF: std_logic;
 signal sss, ddd: std_logic_vector(2 downto 0);
 signal rp: std_logic_vector(1 downto 0);
+signal success: std_logic;
 begin
 t1 <= bT(0); t2 <= bT(1); t3 <= bT(2); t4 <= bT(3); t5 <= bT(4); t6 <= bT(5); t7 <= bT(6);
 m1 <= bM(0); m2 <= bM(1); m3 <= bM(2); m4 <= bM(3); m5 <= bM(4); m6 <= bM(5); m7 <= bM(6);
+CF <= flag_reg(0); AF <= flag_reg(1); PF<=flag_reg(2); ZF<=flag_reg(3); SF<=flag_reg(4);
 ddd <= IR_input(5 downto 3);
 sss <= IR_input(2 downto 0);
 rp <= IR_input(5 downto 4);
@@ -70,6 +74,7 @@ process(IR, bM, bT, IR_input) begin
 	databuff_load_inner<='0'; databuff_put_data<='0'; databuff_put_inner<='0';
 	flag_load_bus<='0'; flag_put_bus<='0'; flag_load_alu<='0'; flag_STC<='0';
 	alu_s<="0000"; alu_put<='0'; tmp_load<='0'; tmp_put<='0'; acc_load<='0'; acc_put<='0';
+	success <= '0';
 	
 	if ((m1 and (t1 or t2 or t3)) = '1') then 
 		regarr_cs <= onn("1111", m1 and (t1 or t2));
@@ -119,6 +124,7 @@ process(IR, bM, bT, IR_input) begin
 			tmp_load <= m1 and t4;
 			alu_s <= onn("0010", m1 and t5);
 			alu_put <= m1 and t5;
+			flag_load_alu <= m1 and t5;
 			acc_load <= m1 and t5;
 			nextT <= m1 and t4;
 			RST <= m1 and t5;
@@ -133,6 +139,7 @@ process(IR, bM, bT, IR_input) begin
 			tmp_load <= m1 and t4;
 			alu_s <= onn("0100", m1 and t5);
 			alu_put <= m1 and t5;
+			flag_load_alu <= m1 and t5;
 			acc_load <= m1 and t5;
 			nextT <= m1 and t4;
 			RST <= m1 and t5;
@@ -141,7 +148,16 @@ process(IR, bM, bT, IR_input) begin
 		when "10011000"=> null; -- 24 SBB r
 		when "10011110"=> null; -- 25 SBB M
 		when "11011110"=> null; -- 26 SBI data
-		when "00000100"=> null; -- 27 INR r
+		when "00000100"=> -- 27 INR r
+			nextT <= m1 and t4;
+			regarr_cs <= onn("0"&ddd, m1 and (t4 or t5));
+			regarr_put <= m1 and t4;
+			tmp_load <= m1 and t4;
+			alu_s <= onn("0000", m1 and t5);
+			alu_put <= m1 and t5;
+			flag_load_alu <= m1 and t5;
+			regarr_load <= m1 and t5;
+			RST <= m1 and t5;
 		when "00110100"=> null; -- 28 INR M
 		when "00000101"=> null; -- 29 DCR r
 		when "00110101"=> null; -- 30 DCR M
@@ -158,7 +174,14 @@ process(IR, bM, bT, IR_input) begin
 		when "10110000"=> null; -- 41 ORA r
 		when "10110110"=> null; -- 42 ORA data
 		when "11110110"=> null; -- 43 ORI data
-		when "10111000"=> null; -- 44 CMP r
+		when "10111000"=>  -- 44 CMP r
+			regarr_cs <= onn("0"&sss, m1 and t4);
+			regarr_put <= m1 and t4;
+			tmp_load <= m1 and t4;
+			alu_s <= onn("0100", m1 and t5);
+			flag_load_alu <= m1 and t5;
+			nextT <= m1 and t4;
+			RST <= m1 and t5;
 		when "10111110"=> null; -- 45 CMP M
 		when "11111110"=> null; -- 46 CPI data
 		when "00000111"=> null; -- 47 RLC
@@ -171,7 +194,7 @@ process(IR, bM, bT, IR_input) begin
 		when "11000011"=>  -- 54 JMP addr
 			nextM <= (m1 and t4) or (m2 and t3);
 			addrbuff_load <= ((m2 or m3) and t1) or (m3 and t4);
-			regarr_cs <= onn("1111", (m2 and (t1 or t2)) or (m3 and t1)) or onn("1100", m2 and t3) 
+			regarr_cs <= onn("1111", (m2 and (t1 or t2)) or (m3 and (t1 or t2))) or onn("1100", m2 and t3) 
 								or onn("1101", m3 and t3) or onn("1110", m3 and t4);
 			regarr_put <= (m2 or m3) and t1;
 			regarr_inc <= m2 and t2;
@@ -180,7 +203,23 @@ process(IR, bM, bT, IR_input) begin
 			regarr_load <= ((m2 or m3) and t3) or (m3 and t4);
 			nextT <= (m2 and (t1 or t2)) or (m3 and (t1 or t2 or t3));
 			RST <= m3 and t4;
-		when "11000010"=> null; -- 55 J cond addr
+		when "11000010"=>  -- 55 J cond addr	nextM <= (m1 and t4) or (m2 and t3);
+			if	((ddd="000" and ZF='0') or (ddd="001" and ZF='1') or (ddd="010" and CF='0') or
+					 (ddd="011" and CF='1') or (ddd="100" and PF='0') or (ddd="101" and PF='1') or
+					 (ddd="110" and SF='0') or (ddd="111" and SF='1')) then
+					 success <= '1'; end if;
+			nextM <= (m1 and t4) or (m2 and t3);
+			addrbuff_load <= ((m2 or m3) and t1) or (m3 and t4);
+			regarr_cs <= onn("1111", (m2 and (t1 or t2)) or (m3 and (t1 or t2))) or onn("1100", m2 and t3) 
+								or onn("1101", m3 and t3) or onn("1110", m3 and t4);
+			regarr_put <= (m2 or m3) and t1;
+			regarr_inc <= (m2 or m3) and t2;
+			databuff_load_data <= (m2 or m3) and t2;
+			databuff_put_inner <= (m2 or m3) and t3;
+			regarr_load <= ((m2 or m3) and t3) or (m3 and t4);
+			nextT <= (m2 and (t1 or t2)) or (m3 and (t1 or t2 or (success and t3)));
+			RST <= (m3 and t4) or (m3 and t3 and (not success));
+					
 		when "11001101"=> null; -- 56 CALL addr
 		when "11000100"=> null; -- 57 C cond addr
 		when "11001001"=> null; -- 58 RET
