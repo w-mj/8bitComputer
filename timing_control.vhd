@@ -231,7 +231,19 @@ process(IR, bM, bT, IR_input) begin
 		when "11000001"=> null; -- 64 POP rp
 		when "11110001"=> null; -- 65 POP PSW
 		when "11100011"=> null; -- 66 XTHL
-		when "11011011"=> null; -- 67 IN port
+		when "11011011"=> -- 67 IN port
+			nextM <= (m1 and t4) or (m2 and t3);
+			nextT <= (m2 and (t1 or t2)) or (m3 and (t1 or t2));
+			regarr_cs <= onn("1111", m2 and (t1 or t2)) or onn("1100", m2 and t3) or onn("1110", m3 and t1);
+			regarr_put <= (m2 and t1) or (m3 and t1);
+			addrbuff_load <= (m2 and t1) or (m3 and t1);
+			regarr_inc <= m2 and t2;
+			databuff_load_data <= (m2 or m3) and t2;
+			databuff_put_inner <= (m2 or m3) and t3;
+			regarr_load <= m2 and t3;
+			acc_load <= m3 and t3;
+			RST <= m3 and t3;
+			
 		when "11010011"=> -- 68 OUT port
 			nextM <= (m1 and t4) or (m2 and t3);
 			nextT <= (m2 and (t1 or t2)) or (m3 and (t1 or t2));

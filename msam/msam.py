@@ -40,6 +40,9 @@ def msam_line(s):
     elif cmd == 'OUT':
         return '11010011', \
                hex2bin(arg1)
+    elif cmd == 'IN':
+        return '11011011', \
+               hex2bin(arg1)
     elif cmd == 'HLT':
         return '01110110',
     elif cmd[0] == 'J':
@@ -78,8 +81,6 @@ if __name__ == '__main__':
         print('No input file.')
         sys.exit(0)
     addr = 0
-    out_f = open(sys.argv[1] + '.t', 'w')
-    out_f.write("with address select data_t <=\n")
     result = []
     with open(sys.argv[1]) as f:
         for i, line in enumerate(f):
@@ -97,12 +98,13 @@ if __name__ == '__main__':
                 result.append([byte, addr, line])
                 addr += 1
 
+    out_f = open(sys.argv[1] + '.t', 'w')
+    out_f.write("case address is\n")
     for byte in result:
         if '--JMPH--' in byte[0]:
             byte[0] = bin(int(label_map[byte[0][8:]]))[2:].zfill(16)[:8]
         elif '--JMPL--' in byte[0]:
             byte[0] = bin(int(label_map[byte[0][8:]]))[2:].zfill(16)[8:]
-        out_f.write('    "' + byte[0] + '" when "' + bin(byte[1])[2:].zfill(16) + '", -- ' + byte[2] + '\n')
-
-    out_f.write('	"01110110" when others;  -- hlt')
+        out_f.write('    when "' + bin(byte[1])[2:].zfill(16) + '"=> data_t <= "' + byte[0] + '"; -- ' + byte[2] + '\n')
+    out_f.write('	when others=> data_t <= "01110110";  -- hlt\nend case;')
     out_f.close()

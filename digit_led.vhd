@@ -13,7 +13,11 @@ end digit_led;
 
 architecture digit_led_arch of digit_led is
 signal cs_scan: std_logic_vector(3 downto 0) := "1110";
-signal dig1, dig2, dig3, dig4, num: std_logic_vector(4 downto 0) := "00000";
+signal dig1: std_logic_vector(4 downto 0) := "00001";
+signal dig2: std_logic_vector(4 downto 0) := "00010";
+signal dig3: std_logic_vector(4 downto 0) := "00011";
+signal dig4: std_logic_vector(4 downto 0) := "00100";
+signal num: std_logic_vector(4 downto 0) := "00000";
 
 begin
 digit_cs_out <= cs_scan;

@@ -1,16 +1,6 @@
-mvi a, 0
-mvi b, 1
-mvi h, 0a
-LOOP:
-add b
-mov c, a
-mov a, b
-cmp h
-jnc OVER
-mov a, c
-inr b
-jmp LOOP
-OVER:
-mov a, c
+L:
+in f8
 out fc
-hlt
+jmp L
+
+
