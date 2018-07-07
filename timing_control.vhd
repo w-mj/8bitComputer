@@ -262,7 +262,7 @@ process(IR, bM, bT, IR_input) begin
 			databuff_load_data <= m2 and t2;
 			databuff_put_inner <= m2 and t3;
 			regarr_load <= m2 and t3;
-			regarr_put <= m3 and t1;
+			regarr_put <= (m3 or m2) and t1;
 			databuff_load_inner <= m3 and t2;
 			databuff_put_data <= m3 and (t2 or t3);
 			acc_put <= m3 and t2;
