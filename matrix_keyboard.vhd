@@ -16,7 +16,8 @@ end matrix;
 architecture behave of matrix is
 signal colreg: std_logic_vector(3 downto 0);
 signal con: std_logic_vector(7 downto 0);
-signal cnt: unsigned(31 downto 0);
+signal cnt: std_logic_vector(31 downto 0);
+constant cnt20ms: integer:= 10000;
 signal clkreg, scanning: std_logic;
 begin
 col<=colreg;
@@ -37,15 +38,15 @@ begin
 	
 	if ((row(0) and row(1) and row(2) and row(3)) = '0') then
 		scanning <= '0';
-		if (cnt >= to_unsigned(2000, 32)) then
+		if (cnt >= cnt20ms) then
 			clkreg <= '1';
 			flag <= '1';
 		else 
-			cnt <= cnt + to_unsigned(1, 32);
+			cnt <= cnt + '1';
 		end if;
 	else 
 		scanning <= '1';
-		cnt <= to_unsigned(0, 32);
+		cnt <= (others=>'0');
 		clkreg <= '0';
 		flag <= '0';
 	end if;

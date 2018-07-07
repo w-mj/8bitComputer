@@ -273,7 +273,7 @@ refer to the applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 2584 -344 2760 -328)
+	(rect 2632 -344 2808 -328)
 	(text "OUTPUT" (rect 1 0 51 13)(font "Arial" (font_size 6)))
 	(text "digit_h" (rect 90 0 132 14)(font "Arial" ))
 	(pt 0 8)
@@ -286,7 +286,7 @@ refer to the applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 2816 -320 2872 -296))
+	(annotation_block (location)(rect 2864 -320 2920 -296))
 )
 (pin
 	(output)
@@ -2415,10 +2415,6 @@ refer to the applicable agreement for further details.
 	(pt 1552 -336)
 )
 (connector
-	(pt 1552 -648)
-	(pt 1552 -336)
-)
-(connector
 	(pt 1512 -680)
 	(pt 1544 -680)
 	(bus)
@@ -2454,21 +2450,6 @@ refer to the applicable agreement for further details.
 	(text "digit_data_out[6..0]" (rect 2520 -400 2641 -384)(font "Intel Clear" ))
 	(pt 2512 -368)
 	(pt 2584 -368)
-	(bus)
-)
-(connector
-	(pt 2512 -336)
-	(pt 2512 -368)
-	(bus)
-)
-(connector
-	(text "digit_data_out[7]" (rect 2512 -352 2619 -336)(font "Intel Clear" ))
-	(pt 2584 -336)
-	(pt 2512 -336)
-)
-(connector
-	(pt 2512 -272)
-	(pt 2512 -336)
 	(bus)
 )
 (connector
@@ -2718,6 +2699,31 @@ refer to the applicable agreement for further details.
 	(pt 1120 440)
 	(pt 1120 552)
 )
+(connector
+	(pt 2512 -368)
+	(pt 2512 -272)
+	(bus)
+)
+(connector
+	(pt 2632 -336)
+	(pt 2552 -336)
+)
+(connector
+	(pt 2552 -512)
+	(pt 2552 -336)
+)
+(connector
+	(pt 2552 -512)
+	(pt 1552 -512)
+)
+(connector
+	(pt 1552 -648)
+	(pt 1552 -512)
+)
+(connector
+	(pt 1552 -512)
+	(pt 1552 -336)
+)
 (junction (pt 384 88))
 (junction (pt 776 248))
 (junction (pt 776 -8))
@@ -2733,7 +2739,6 @@ refer to the applicable agreement for further details.
 (junction (pt 384 112))
 (junction (pt 1576 -160))
 (junction (pt 1520 -112))
-(junction (pt 2512 -336))
 (junction (pt 1576 -240))
 (junction (pt 1312 -160))
 (junction (pt 1496 -144))
@@ -2741,3 +2746,4 @@ refer to the applicable agreement for further details.
 (junction (pt 472 400))
 (junction (pt 72 808))
 (junction (pt 1120 440))
+(junction (pt 1552 -512))
