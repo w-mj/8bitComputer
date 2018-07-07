@@ -16,7 +16,7 @@ o <= b;
 process (i) begin
 	if (rising_edge(i)) then 
 		s <= s + to_unsigned(1, s'length);
-		if (s = 6) then
+		if (s = 12) then
 			s <= to_unsigned(0, 23);
 			b <= not b;
 		end if;

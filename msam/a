@@ -1,6 +1,5 @@
-L:
-in f8
+LOOP:
+in f0
 out fc
-jmp L
-
+jmp LOOP
 

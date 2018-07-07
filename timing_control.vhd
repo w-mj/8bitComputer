@@ -130,7 +130,16 @@ process(IR, bM, bT, IR_input) begin
 			RST <= m1 and t5;
 		when "10000110"=> null; -- 16 ADD M
 		when "11000110"=> null; -- 17 ADI data
-		when "10001000"=> null; -- 18 ADC r
+		when "10001000"=> -- 18 ADC r
+			regarr_cs <= onn("0"&sss, m1 and t4);
+			regarr_put <= m1 and t4;
+			tmp_load <= m1 and t4;
+			alu_s <= onn("0011", m1 and t5);
+			alu_put <= m1 and t5;
+			flag_load_alu <= m1 and t5;
+			acc_load <= m1 and t5;
+			nextT <= m1 and t4;
+			RST <= m1 and t5;
 		when "10001110"=> null; -- 19 ADC M
 		when "11001110"=> null; -- 20 ACI data
 		when "10010000"=>  -- 21 SUB r
@@ -197,12 +206,12 @@ process(IR, bM, bT, IR_input) begin
 			regarr_cs <= onn("1111", (m2 and (t1 or t2)) or (m3 and (t1 or t2))) or onn("1100", m2 and t3) 
 								or onn("1101", m3 and t3) or onn("1110", m3 and t4);
 			regarr_put <= (m2 or m3) and t1;
-			regarr_inc <= m2 and t2;
+			regarr_inc <= (m2 or m3) and t2;
 			databuff_load_data <= (m2 or m3) and t2;
 			databuff_put_inner <= (m2 or m3) and t3;
 			regarr_load <= ((m2 or m3) and t3) or (m3 and t4);
 			nextT <= (m2 and (t1 or t2)) or (m3 and (t1 or t2 or t3));
-			RST <= m3 and t4;
+			RST <= (m3 and t4) ;
 		when "11000010"=>  -- 55 J cond addr	nextM <= (m1 and t4) or (m2 and t3);
 			if	((ddd="000" and ZF='0') or (ddd="001" and ZF='1') or (ddd="010" and CF='0') or
 					 (ddd="011" and CF='1') or (ddd="100" and PF='0') or (ddd="101" and PF='1') or
