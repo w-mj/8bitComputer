@@ -102,9 +102,10 @@ if __name__ == '__main__':
     out_f.write("case address is\n")
     for byte in result:
         if '--JMPH--' in byte[0]:
-            byte[0] = bin(int(label_map[byte[0][8:]]))[2:].zfill(16)[:8]
+            byte[0] = bin(label_map[byte[0][8:]])[2:].zfill(16)[:8]
         elif '--JMPL--' in byte[0]:
-            byte[0] = bin(int(label_map[byte[0][8:]]))[2:].zfill(16)[8:]
-        out_f.write('    when "' + bin(byte[1])[2:].zfill(16) + '"=> data_t <= "' + byte[0] + '"; -- ' + byte[2] + '\n')
-    out_f.write('	when others=> data_t <= "01110110";  -- hlt\nend case;')
+            byte[0] = bin(label_map[byte[0][8:]])[2:].zfill(16)[8:]
+        out_f.write('    when "' + bin(byte[1])[2:].zfill(16) + '"=> data_t <= "' + byte[0] + '";  '
+                    '-- ' + byte[2] + '  ' + hex(int(byte[0], 2)) + '\n')
+    out_f.write('	when others=> data_t <= "01110110";  -- hlt 76\nend case;')
     out_f.close()

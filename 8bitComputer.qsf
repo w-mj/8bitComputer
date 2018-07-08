@@ -111,9 +111,6 @@ set_location_assignment PIN_28 -to led_data[1]
 set_location_assignment PIN_10 -to led_data[0]
 set_global_assignment -name ENABLE_SIGNALTAP OFF
 set_global_assignment -name USE_SIGNALTAP_FILE signal_tap_ii/stp2.stp
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[7]
 set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[6]
 set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[5]
@@ -132,6 +129,57 @@ set_instance_assignment -name VIRTUAL_PIN ON -to flag[5]
 set_instance_assignment -name VIRTUAL_PIN ON -to flag[6]
 set_instance_assignment -name VIRTUAL_PIN ON -to flag[7]
 set_location_assignment PIN_38 -to shut_up
+set_instance_assignment -name VIRTUAL_PIN ON -to IR[0]
+set_instance_assignment -name VIRTUAL_PIN ON -to IR[1]
+set_instance_assignment -name VIRTUAL_PIN ON -to IR[2]
+set_instance_assignment -name VIRTUAL_PIN ON -to IR[3]
+set_instance_assignment -name VIRTUAL_PIN ON -to IR[4]
+set_instance_assignment -name VIRTUAL_PIN ON -to IR[5]
+set_instance_assignment -name VIRTUAL_PIN ON -to IR[6]
+set_instance_assignment -name VIRTUAL_PIN ON -to IR[7]
+set_location_assignment PIN_43 -to rx
+set_location_assignment PIN_44 -to tx
+set_instance_assignment -name VIRTUAL_PIN ON -to T[7]
+set_instance_assignment -name VIRTUAL_PIN ON -to T[6]
+set_instance_assignment -name VIRTUAL_PIN ON -to T[5]
+set_instance_assignment -name VIRTUAL_PIN ON -to T[4]
+set_instance_assignment -name VIRTUAL_PIN ON -to T[3]
+set_instance_assignment -name VIRTUAL_PIN ON -to T[2]
+set_instance_assignment -name VIRTUAL_PIN ON -to T[1]
+set_instance_assignment -name VIRTUAL_PIN ON -to T[0]
+set_instance_assignment -name VIRTUAL_PIN ON -to M[7]
+set_instance_assignment -name VIRTUAL_PIN ON -to M[6]
+set_instance_assignment -name VIRTUAL_PIN ON -to M[5]
+set_instance_assignment -name VIRTUAL_PIN ON -to M[4]
+set_instance_assignment -name VIRTUAL_PIN ON -to M[3]
+set_instance_assignment -name VIRTUAL_PIN ON -to M[2]
+set_instance_assignment -name VIRTUAL_PIN ON -to M[1]
+set_instance_assignment -name VIRTUAL_PIN ON -to M[0]
+set_global_assignment -name PARTITION_NETLIST_TYPE POST_FIT -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[11] -comment PIN_67
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[10]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[9]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[8]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[7]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[6]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[5]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[4]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[3]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[2]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[1]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_addr[0]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[7]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[6]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[5]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[4]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[3]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[2]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[1]
+set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[0]
+set_global_assignment -name MIF_FILE initialize.mif
+set_global_assignment -name QIP_FILE startup_rom.qip
 set_global_assignment -name VHDL_FILE digit_led.vhd
 set_global_assignment -name VHDL_FILE matrix_keyboard.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE register8_wave.vwf
@@ -167,30 +215,6 @@ set_global_assignment -name VHDL_FILE uart/uart.vhd
 set_global_assignment -name VHDL_FILE uart/uart_receive.vhd
 set_global_assignment -name VHDL_FILE uart/uart_bps.vhd
 set_global_assignment -name VHDL_FILE uart/uart_send.vhd
-set_instance_assignment -name VIRTUAL_PIN ON -to IR[0]
-set_instance_assignment -name VIRTUAL_PIN ON -to IR[1]
-set_instance_assignment -name VIRTUAL_PIN ON -to IR[2]
-set_instance_assignment -name VIRTUAL_PIN ON -to IR[3]
-set_instance_assignment -name VIRTUAL_PIN ON -to IR[4]
-set_instance_assignment -name VIRTUAL_PIN ON -to IR[5]
-set_instance_assignment -name VIRTUAL_PIN ON -to IR[6]
-set_instance_assignment -name VIRTUAL_PIN ON -to IR[7]
-set_location_assignment PIN_43 -to rx
-set_location_assignment PIN_44 -to tx
-set_instance_assignment -name VIRTUAL_PIN ON -to T[7]
-set_instance_assignment -name VIRTUAL_PIN ON -to T[6]
-set_instance_assignment -name VIRTUAL_PIN ON -to T[5]
-set_instance_assignment -name VIRTUAL_PIN ON -to T[4]
-set_instance_assignment -name VIRTUAL_PIN ON -to T[3]
-set_instance_assignment -name VIRTUAL_PIN ON -to T[2]
-set_instance_assignment -name VIRTUAL_PIN ON -to T[1]
-set_instance_assignment -name VIRTUAL_PIN ON -to T[0]
-set_instance_assignment -name VIRTUAL_PIN ON -to M[7]
-set_instance_assignment -name VIRTUAL_PIN ON -to M[6]
-set_instance_assignment -name VIRTUAL_PIN ON -to M[5]
-set_instance_assignment -name VIRTUAL_PIN ON -to M[4]
-set_instance_assignment -name VIRTUAL_PIN ON -to M[3]
-set_instance_assignment -name VIRTUAL_PIN ON -to M[2]
-set_instance_assignment -name VIRTUAL_PIN ON -to M[1]
-set_instance_assignment -name VIRTUAL_PIN ON -to M[0]
+set_global_assignment -name VHDL_FILE ram_selecter.vhd
+set_global_assignment -name QIP_FILE ram.qip
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

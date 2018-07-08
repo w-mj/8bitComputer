@@ -21,7 +21,8 @@ entity timing_control is port(
 	alu_s: out std_logic_vector(3 downto 0);
 	alu_put: out std_logic;
 	tmp_load, tmp_put: out std_logic;
-	acc_load, acc_put: out std_logic
+	acc_load, acc_put: out std_logic;
+	tmp_clr: out std_logic
 );
 end timing_control;
 
@@ -74,7 +75,7 @@ process(IR, bM, bT, IR_input) begin
 	databuff_load_inner<='0'; databuff_put_data<='0'; databuff_put_inner<='0';
 	flag_load_bus<='0'; flag_put_bus<='0'; flag_load_alu<='0'; flag_STC<='0';
 	alu_s<="0000"; alu_put<='0'; tmp_load<='0'; tmp_put<='0'; acc_load<='0'; acc_put<='0';
-	success <= '0';
+	success <= '0'; tmp_clr <= '0';
 	
 	if ((m1 and (t1 or t2 or t3)) = '1') then 
 		regarr_cs <= onn("1111", m1 and (t1 or t2));
@@ -233,7 +234,16 @@ process(IR, bM, bT, IR_input) begin
 		when "11000100"=> null; -- 57 C cond addr
 		when "11001001"=> null; -- 58 RET
 		when "11000000"=> null; -- 59 R cond addr
-		when "11000111"=> null; -- 60 RST n
+		when "11000111"=>  -- 60 RST n
+			nextM <= m1 and t4;
+			tmp_clr <= m2 and t1;
+			tmp_put <= m2 and (t1 or t2);
+			regarr_cs <= onn ("1100", m2 and t1) or onn("1101", m2 and t2) or onn("1110", m2 and t3);
+			regarr_load <= m2 and (t1 or t2 or t3);
+			regarr_put <= m2 and t4;
+			addrbuff_load <= m2 and t4;
+			nextT <= m2 and (t1 or t2 or t3);
+			RST <= m2 and t4;
 		when "11101001"=> null; -- 61 PCHL
 		when "11000101"=> null; -- 62 PUSH rp
 		when "11110101"=> null; -- 63 PUSH PSW
