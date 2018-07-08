@@ -27,7 +27,7 @@ begin
 data <= data_t when put='1' else (others=>'Z');
 
 ram_csN <= address(15);
-ram_weN <= not load;
+ram_weN <= put;
 ram_oeN <= not put;
 ram_address <= address(14 downto 0);
 
