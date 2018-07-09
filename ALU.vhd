@@ -44,10 +44,10 @@ process (S) begin
 		when "0111"=> adder_A_in <= A xor T;  -- A xor T
 		when "1000"=> adder_A_in <= A or T;
 		when "1001"=> null;  -- used to be cmp.
-		when "1010"=> F_out(0) <= A(7); adder_A_in <= A(6 downto 0) & A(7);
-		when "1011"=> F_out(0) <= A(0); adder_A_in <= A(0) & A(7 downto 1);
-		when "1100"=> F_out(0) <= A(7); adder_A_in <= A(6 downto 0) & F_in(0);
-		when "1101"=> F_out(0) <= A(0); adder_A_in <= F_in(0) & A(6 downto 0);
+		when "1010"=> F_out(0) <= A(7); adder_A_in <= A(6 downto 0) & A(7);  -- ROL
+		when "1011"=> F_out(0) <= A(0); adder_A_in <= A(0) & A(7 downto 1);  -- ROR
+		when "1100"=> F_out(0) <= A(7); adder_A_in <= A(6 downto 0) & F_in(0);  -- RCL
+		when "1101"=> F_out(0) <= A(0); adder_A_in <= F_in(0) & A(6 downto 0);  -- RCR
 		when "1110"=> null;
 		when "1111"=> null;
 	end case;
