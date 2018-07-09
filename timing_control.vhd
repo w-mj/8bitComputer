@@ -96,8 +96,34 @@ process(IR, bM, bT, IR_input) begin
 			nextT <= m1 and t4;
 			regarr_load <= m1 and t5;
 			RST <= m1 and t5;
-		when "01000110"=> null; -- 2 MOV r, M
-		when "01110000"=> null; -- 3 MOV M, r
+		when "01000110"=> -- 2 MOV r, M
+			nextM <= (m1 and t4) or (m2 and t3);
+			regarr_cs <= onn("1111", (m2 or m3) and (t1 or t2)) or 
+							 onn("1100", m2 and t3) or onn("1101", m3 and t3)or
+							 onn("1110", m4 and t1) or 
+							 onn("0"&ddd, m4 and t3);
+			addrbuff_load <= (m2 or m3 or m4) and t1;
+			regarr_put <= (m2 or m3 or m4) and t1;
+			regarr_inc <= (m2 or m3) or t2;
+			databuff_load_data <= (m2 or m3 or m4) and t2;
+			databuff_put_inner <= (m2 or m3 or m4) and t3;
+			nextT <= (m2 or m3 or m4) and (t1 or t2);
+			RST <= m4 and t3;
+		when "01110000"=> -- 3 MOV M, r
+			nextM <= (m1 and t4) or (m2 and t3);
+			regarr_cs <= onn("1111", (m2 or m3) and (t1 or t2)) or 
+							 onn("1100", m2 and t3) or onn("1101", m3 and t3)or
+							 onn("1110", m4 and t1) or 
+							 onn("0"&sss, m4 and t2);
+			addrbuff_load <= (m2 or m3 or m4) and t1;
+			regarr_put <= ((m2 or m3) and t1) or (m4 and (t1 or t2));
+			regarr_inc <= (m2 or m3) or t2;
+			databuff_load_data <= (m2 or m3) and t2;
+			databuff_put_data <= m4 and t3;
+			databuff_load_inner <= m4 and t2;
+			databuff_put_inner <= (m2 or m3) and t3;
+			nextT <= (m2 or m3 or m4) and (t1 or t2);
+			RST <= m4 and t3;
 		when "11111001"=> null; -- 4 SPHL;
 		when "00000110"=> -- 5 MVI r, data
 			nextM <= m1 and t4;
