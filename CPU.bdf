@@ -1628,7 +1628,7 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 2360 -456 2576 -328)
+	(rect 2368 -456 2584 -328)
 	(text "ram" (rect 94 0 128 20)(font "Arial" (font_size 10)))
 	(text "inst25" (rect 8 110 46 124)(font "Arial" ))
 	(port
@@ -1657,14 +1657,14 @@ refer to the applicable agreement for further details.
 		(input)
 		(text "clock" (rect 0 0 37 16)(font "Arial" (font_size 8)))
 		(text "clock" (rect 4 96 41 112)(font "Arial" (font_size 8)))
-		(line (pt 0 112)(pt 144 112))
+		(line (pt 0 112)(pt 80 112))
 	)
 	(port
 		(pt 216 32)
 		(output)
 		(text "q[7..0]" (rect 0 0 43 16)(font "Arial" (font_size 8)))
 		(text "q[7..0]" (rect 176 16 219 32)(font "Arial" (font_size 8)))
-		(line (pt 216 32)(pt 160 32)(line_width 3))
+		(line (pt 216 32)(pt 136 32)(line_width 3))
 	)
 	(drawing
 		(text "8 bits" (rect 107 26 121 60)(font "Arial" )(vertical))
@@ -1684,14 +1684,6 @@ refer to the applicable agreement for further details.
 		(line (pt 90 36)(pt 88 38))
 		(line (pt 80 36)(pt 88 36))
 		(line (pt 96 32)(pt 104 32)(line_width 3))
-		(line (pt 152 27)(pt 160 27))
-		(line (pt 160 27)(pt 160 39))
-		(line (pt 160 39)(pt 152 39))
-		(line (pt 152 39)(pt 152 27))
-		(line (pt 152 34)(pt 154 36))
-		(line (pt 154 36)(pt 152 38))
-		(line (pt 144 36)(pt 152 36))
-		(line (pt 136 32)(pt 152 32)(line_width 3))
 		(line (pt 88 43)(pt 96 43))
 		(line (pt 96 43)(pt 96 55))
 		(line (pt 96 55)(pt 88 55))
@@ -1709,7 +1701,6 @@ refer to the applicable agreement for further details.
 		(line (pt 80 68)(pt 88 68))
 		(line (pt 96 64)(pt 104 64)(line_width 3))
 		(line (pt 80 112)(pt 80 36))
-		(line (pt 144 112)(pt 144 36))
 		(line (pt 0 0)(pt 217 0))
 		(line (pt 217 0)(pt 217 130))
 		(line (pt 0 130)(pt 217 130))
@@ -2834,12 +2825,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(text "digit_data_out[0..6]" (rect 2568 -385 2584 -264)(font "Intel Clear" )(vertical))
-	(pt 2584 -312)
-	(pt 2584 -272)
-	(bus)
-)
-(connector
 	(text "digit_data_out[7]" (rect 2584 -288 2691 -272)(font "Intel Clear" ))
 	(pt 2584 -272)
 	(pt 2640 -272)
@@ -2851,29 +2836,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 2272 -400)
-	(pt 2272 -424)
-	(bus)
-)
-(connector
-	(pt 2288 -368)
-	(pt 2288 -408)
-)
-(connector
-	(pt 2856 -424)
-	(pt 2576 -424)
-	(bus)
-)
-(connector
-	(pt 2272 -424)
-	(pt 2360 -424)
-	(bus)
-)
-(connector
-	(pt 2288 -408)
-	(pt 2360 -408)
-)
-(connector
 	(pt 2344 -608)
 	(pt 2328 -608)
 	(bus)
@@ -2881,17 +2843,6 @@ refer to the applicable agreement for further details.
 (connector
 	(pt 2328 -608)
 	(pt 2328 -392)
-	(bus)
-)
-(connector
-	(pt 2296 -392)
-	(pt 2328 -392)
-	(bus)
-)
-(connector
-	(text "ram_address[13..0]" (rect 2296 -408 2416 -392)(font "Intel Clear" ))
-	(pt 2328 -392)
-	(pt 2360 -392)
 	(bus)
 )
 (connector
@@ -2911,22 +2862,8 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 2856 -424)
-	(pt 2856 -392)
-	(bus)
-)
-(connector
-	(pt 2856 -392)
-	(pt 2856 -184)
-	(bus)
-)
-(connector
 	(pt 1576 -240)
 	(pt 2256 -240)
-)
-(connector
-	(pt 2160 -344)
-	(pt 2360 -344)
 )
 (connector
 	(pt 48 1000)
@@ -2941,8 +2878,62 @@ refer to the applicable agreement for further details.
 	(pt 48 1000)
 )
 (connector
+	(text "digit_data_out[6..0]" (rect 2567 -386 2583 -265)(font "Intel Clear" )(vertical))
+	(pt 2584 -312)
+	(pt 2584 -272)
+	(bus)
+)
+(connector
+	(pt 2272 -400)
+	(pt 2272 -424)
+	(bus)
+)
+(connector
+	(pt 2288 -368)
+	(pt 2288 -408)
+)
+(connector
+	(pt 2856 -424)
+	(pt 2584 -424)
+	(bus)
+)
+(connector
 	(pt 2160 1000)
 	(pt 2160 -344)
+)
+(connector
+	(pt 2296 -392)
+	(pt 2328 -392)
+	(bus)
+)
+(connector
+	(pt 2856 -424)
+	(pt 2856 -392)
+	(bus)
+)
+(connector
+	(pt 2856 -392)
+	(pt 2856 -184)
+	(bus)
+)
+(connector
+	(pt 2272 -424)
+	(pt 2368 -424)
+	(bus)
+)
+(connector
+	(pt 2288 -408)
+	(pt 2368 -408)
+)
+(connector
+	(text "ram_address[13..0]" (rect 2304 -408 2424 -392)(font "Intel Clear" ))
+	(pt 2328 -392)
+	(pt 2368 -392)
+	(bus)
+)
+(connector
+	(pt 2160 -344)
+	(pt 2368 -344)
 )
 (junction (pt 384 88))
 (junction (pt 776 248))

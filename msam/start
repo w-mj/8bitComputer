@@ -1,0 +1,4 @@
+in f0
+ani f0  ; ani
+mov l, a
+pchl

@@ -27,8 +27,8 @@ begin
 data <= data_t when put='1' else (others=>'Z');
 
 ram_csN <= address(15);
-ram_weN <= put;
-ram_oeN <= not put;
+ram_weN <= load;
+ram_oeN <= put;
 ram_address <= address(14 downto 0);
 
 process (address, put, load) begin
@@ -40,7 +40,7 @@ process (address, put, load) begin
 		if (address(15) = '0') then 
 			data_t <= ram_data_in;
 		elsif (address(15 downto 8) = "11110000") then 
-			data_t <= switch & key_data;
+			data_t <= key_data & switch;
 		end if;
 	end if;
 	if (load = '1') then
