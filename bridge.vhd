@@ -40,7 +40,7 @@ process (address, put, load) begin
 		if (address(15) = '0') then 
 			data_t <= ram_data_in;
 		elsif (address(15 downto 8) = "11110000") then 
-			data_t <= key_data & switch;
+			data_t <= key_data & (not switch);
 		end if;
 	end if;
 	if (load = '1') then

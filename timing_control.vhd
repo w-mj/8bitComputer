@@ -22,7 +22,8 @@ entity timing_control is port(
 	alu_put: out std_logic;
 	tmp_load, tmp_put: out std_logic;
 	acc_load, acc_put: out std_logic;
-	tmp_clr: out std_logic
+	tmp_clr: out std_logic;
+	key_flag: in std_logic
 );
 end timing_control;
 
@@ -148,16 +149,20 @@ process(IR, bM, bT, IR_input) begin
 		when "00100010"=> null; -- 11 SHLD addr;
 		when "00001010"=> -- 12 LDAX rp
 			regarr_cs <= onn("10"&ddd(2 downto 1), m1 and t4);
-			acc_load <= m1 and t5;
-			databuff_load_data <= m1 and t4;
-			databuff_put_inner <= m1 and t5;
-			nextT <= m1 and t4;
-			RST <= m1 and t5;
+			regarr_put <= m1 and t4;
+			addrbuff_load <= m1 and t4;
+			acc_load <= m1 and t6;
+			databuff_load_data <= m1 and t5;
+			databuff_put_inner <= m1 and t6;
+			nextT <= m1 and (t4 or t5);
+			RST <= m1 and t6;
 		when "00000010"=> -- 13 STAX rp; 
-			regarr_cs <= onn("10"&ddd(2 downto 1), m1 and t5);
+			regarr_cs <= onn("10"&ddd(2 downto 1), m1 and t4);
+			regarr_put <= m1 and t4;
 			acc_put <= m1 and t4;
 			databuff_load_inner <= m1 and t4;
 			databuff_put_data <= m1 and t5;
+			addrbuff_load <= m1 and t4;
 			nextT <= m1 and t4;
 			RST <= m1 and t5;
 		when "11101011"=> null; -- 14 XCHG
@@ -183,6 +188,7 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= (m2 or m3 or m4) and t3;
 			tmp_load <= m4 and t3;
 			alu_s <= onn("0010", m4 and t4);
+			flag_load_alu <= m4 and t4;
 			alu_put <= m4 and t4;
 			acc_load <= m4 and t4;
 			nextT <= ((m2 or m3 or m4) and (t1 or t2)) or (m4 and t4);
@@ -197,6 +203,7 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= m2 and t3;
 			tmp_load <= m2 and t3;
 			alu_s <= onn("0010", m2 and t4);
+			flag_load_alu <= m2 and t4;
 			alu_put <= m2 and t4;
 			acc_load <= m2 and t4;
 			RST <= m2 and t4;
@@ -223,6 +230,7 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= (m2 or m3 or m4) and t3;
 			tmp_load <= m4 and t3;
 			alu_s <= onn("0011", m4 and t4);
+			flag_load_alu <= m4 and t4;
 			alu_put <= m4 and t4;
 			acc_load <= m4 and t4;
 			nextT <= ((m2 or m3 or m4) and (t1 or t2)) or (m4 and t4);
@@ -237,6 +245,7 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= m2 and t3;
 			tmp_load <= m2 and t3;
 			alu_s <= onn("0011", m2 and t4);
+			flag_load_alu <= m2 and t4;
 			alu_put <= m2 and t4;
 			acc_load <= m2 and t4;
 			RST <= m2 and t4;
@@ -263,6 +272,7 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= (m2 or m3 or m4) and t3;
 			tmp_load <= m4 and t3;
 			alu_s <= onn("0100", m4 and t4);
+			flag_load_alu <= m4 and t4;
 			alu_put <= m4 and t4;
 			acc_load <= m4 and t4;
 			nextT <= ((m2 or m3 or m4) and (t1 or t2)) or (m4 and t4);
@@ -277,6 +287,7 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= m2 and t3;
 			tmp_load <= m2 and t3;
 			alu_s <= onn("0100", m2 and t4);
+			flag_load_alu <= m2 and t4;
 			alu_put <= m2 and t4;
 			acc_load <= m2 and t4;
 			RST <= m2 and t4;
@@ -303,6 +314,7 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= (m2 or m3 or m4) and t3;
 			tmp_load <= m4 and t3;
 			alu_s <= onn("0101", m4 and t4);
+			flag_load_alu <= m4 and t4;
 			alu_put <= m4 and t4;
 			acc_load <= m4 and t4;
 			nextT <= ((m2 or m3 or m4) and (t1 or t2)) or (m4 and t4);
@@ -317,6 +329,7 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= m2 and t3;
 			tmp_load <= m2 and t3;
 			alu_s <= onn("0101", m2 and t4);
+			flag_load_alu <= m2 and t4;
 			alu_put <= m2 and t4;
 			acc_load <= m2 and t4;
 			RST <= m2 and t4;
@@ -342,8 +355,14 @@ process(IR, bM, bT, IR_input) begin
 			regarr_load <= m1 and t5;
 			RST <= m1 and t5;
 		when "00110101"=> null; -- 30 DCR M
-		when "00000011"=> null; -- 31 INX rp
-		when "00001011"=> null; -- 32 DCX rp
+		when "00000011"=> -- 31 INX rp
+			regarr_cs <= onn("10"&ddd(2 downto 1), m1 and t4);
+			regarr_inc <= m1 and t4;
+			RST <= m1 and t4;
+		when "00001011"=> -- 32 DCX rp
+			regarr_cs <= onn("10"&ddd(2 downto 1), m1 and t4);
+			regarr_dec <= m1 and t4;
+			RST <= m1 and t4;
 		when "00001001"=> null; -- 33 DAD rp
 		when "00100111"=> null; -- 34 DAA
 		when "10100000"=> -- 35 ANA r
@@ -368,6 +387,7 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= m2 and t3;
 			tmp_load <= m2 and t3;
 			alu_s <= onn("0110", m2 and t4);
+			flag_load_alu <= m2 and t4;
 			alu_put <= m2 and t4;
 			acc_load <= m2 and t4;
 			RST <= m2 and t4;
@@ -382,7 +402,21 @@ process(IR, bM, bT, IR_input) begin
 			regarr_load <= m1 and t5;
 			RST <= m1 and t5;
 		when "10101110"=> null; -- 39 XRA M
-		when "11101110"=> null; -- 40 XRA data
+		when "11101110"=> -- 40 XRI data
+			nextM <= m1 and t4;
+			nextT <= m2 and (t1 or t2 or t3);
+			regarr_cs <= onn("1111", m2 and (t1 or t2));
+			addrbuff_load <= m2 and t1;
+			regarr_put <= m2 and t1;
+			databuff_load_data <= m2 and t2;
+			regarr_inc <= m2 and t2;
+			databuff_put_inner <= m2 and t3;
+			tmp_load <= m2 and t3;
+			alu_s <= onn("0111", m2 and t4);
+			flag_load_alu <= m2 and t4;
+			alu_put <= m2 and t4;
+			acc_load <= m2 and t4;
+			RST <= m2 and t4;
 		when "10110000"=> -- 41 ORA r
 			nextT <= m1 and t4;
 			regarr_cs <= onn("0"&ddd, m1 and (t4 or t5));
@@ -393,8 +427,22 @@ process(IR, bM, bT, IR_input) begin
 			flag_load_alu <= m1 and t5;
 			regarr_load <= m1 and t5;
 			RST <= m1 and t5;
-		when "10110110"=> null; -- 42 ORA data
-		when "11110110"=> null; -- 43 ORI data
+		when "10110110"=> null; -- 42 ORA M
+		when "11110110"=> -- 43 ORI data
+			nextM <= m1 and t4;
+			nextT <= m2 and (t1 or t2 or t3);
+			regarr_cs <= onn("1111", m2 and (t1 or t2));
+			addrbuff_load <= m2 and t1;
+			regarr_put <= m2 and t1;
+			databuff_load_data <= m2 and t2;
+			regarr_inc <= m2 and t2;
+			databuff_put_inner <= m2 and t3;
+			tmp_load <= m2 and t3;
+			alu_s <= onn("1000", m2 and t4);
+			flag_load_alu <= m2 and t4;
+			alu_put <= m2 and t4;
+			acc_load <= m2 and t4;
+			RST <= m2 and t4;
 		when "10111000"=>  -- 44 CMP r
 			regarr_cs <= onn("0"&sss, m1 and t4);
 			regarr_put <= m1 and t4;
@@ -404,7 +452,19 @@ process(IR, bM, bT, IR_input) begin
 			nextT <= m1 and t4;
 			RST <= m1 and t5;
 		when "10111110"=> null; -- 45 CMP M
-		when "11111110"=> null; -- 46 CPI data
+		when "11111110"=> -- 46 CPI data
+			nextM <= m1 and t4;
+			nextT <= m2 and (t1 or t2 or t3);
+			regarr_cs <= onn("1111", m2 and (t1 or t2));
+			addrbuff_load <= m2 and t1;
+			regarr_put <= m2 and t1;
+			databuff_load_data <= m2 and t2;
+			regarr_inc <= m2 and t2;
+			databuff_put_inner <= m2 and t3;
+			tmp_load <= m2 and t3;
+			alu_s <= onn("0100", m2 and t4);
+			flag_load_alu <= m2 and t4;
+			RST <= m2 and t4;
 		when "00000111"=> -- 47 RLC
 			alu_s <= onn("1100", m1 and t4);
 			alu_put <= m1 and t4;
@@ -414,20 +474,25 @@ process(IR, bM, bT, IR_input) begin
 			alu_s <= onn("1101", m1 and t4);
 			alu_put <= m1 and t4;
 			acc_load <= m1 and t4;
+			flag_load_alu <= m1 and t4;
 			RST <= m1 and t4;
 		when "00010111"=> -- 49 RAL
 			alu_s <= onn("1010", m1 and t4);
 			alu_put <= m1 and t4;
 			acc_load <= m1 and t4;
+			flag_load_alu <= m1 and t4;
 			RST <= m1 and t4;
 		when "00011111"=> -- 50 RAR
 			alu_s <= onn("1011", m1 and t4);
 			alu_put <= m1 and t4;
 			acc_load <= m1 and t4;
+			flag_load_alu <= m1 and t4;
 			RST <= m1 and t4;
 		when "00101111"=> null; -- 51 CMA
 		when "00111111"=> null; -- 52 CMC
-		when "00110111"=> null; -- 53 STC
+		when "00110111"=> -- 53 STC
+			flag_stc <= m1 and t4;
+			RST <= m1 and t4;
 		when "11000011"=>  -- 54 JMP addr
 			nextM <= (m1 and t4) or (m2 and t3);
 			addrbuff_load <= ((m2 or m3) and t1) or (m3 and t4);
@@ -442,7 +507,7 @@ process(IR, bM, bT, IR_input) begin
 			RST <= (m3 and t4) ;
 		when "11000010"=>  -- 55 J cond addr	nextM <= (m1 and t4) or (m2 and t3);
 			if	((ddd="000" and ZF='0') or (ddd="001" and ZF='1') or (ddd="010" and CF='0') or
-					 (ddd="011" and CF='1') or (ddd="100" and PF='0') or (ddd="101" and PF='1') or
+					 (ddd="011" and CF='1') or (ddd="100" and key_flag='0') or (ddd="101" and key_flag='1') or
 					 (ddd="110" and SF='0') or (ddd="111" and SF='1')) then
 					 success <= '1'; end if;
 			nextM <= (m1 and t4) or (m2 and t3);

@@ -178,6 +178,7 @@ set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[3]
 set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[2]
 set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[1]
 set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[0]
+set_global_assignment -name MIF_FILE start.mif
 set_global_assignment -name VHDL_FILE digit_led.vhd
 set_global_assignment -name VHDL_FILE matrix_keyboard.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE register8_wave.vwf

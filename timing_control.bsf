@@ -66,6 +66,13 @@ refer to the applicable agreement for further details.
 		(line (pt 0 112)(pt 16 112)(line_width 3))
 	)
 	(port
+		(pt 0 128)
+		(input)
+		(text "key_flag" (rect 0 0 35 12)(font "Arial" ))
+		(text "key_flag" (rect 21 123 56 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
+	(port
 		(pt 232 32)
 		(output)
 		(text "RST" (rect 0 0 20 12)(font "Arial" ))
