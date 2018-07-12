@@ -261,6 +261,13 @@ refer to the applicable agreement for further details.
 		(text "tmp_clr" (rect 181 443 211 455)(font "Arial" ))
 		(line (pt 232 448)(pt 216 448)(line_width 1))
 	)
+	(port
+		(pt 232 464)
+		(output)
+		(text "key_clr" (rect 0 0 30 12)(font "Arial" ))
+		(text "key_clr" (rect 181 459 211 471)(font "Arial" ))
+		(line (pt 232 464)(pt 216 464)(line_width 1))
+	)
 	(drawing
 		(rectangle (rect 16 16 216 480)(line_width 1))
 	)

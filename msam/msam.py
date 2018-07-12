@@ -100,6 +100,8 @@ def msam_line(s):
         return '00' + rp_code[arg1] + '0010',
     elif cmd == 'LDAX':
         return '00' + rp_code[arg1] + '1010',
+    elif cmd == 'NOP':
+        return '00000000'
 
 
 

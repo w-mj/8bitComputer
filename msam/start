@@ -79,6 +79,19 @@ add c
 out fe
 jmp LOOP6
 
+ORG 700
+mvi a, 0
+mvi b, 0
+LOOP7:
+out fc
+jnk LOOP7
+inr a
+SLEEP7:
+inr b
+jnz SLEEP7
+jk SLEEP7
+jmp LOOP7
+
 ORG F00
 mvi b, 10
 mvi c, 00
@@ -131,10 +144,10 @@ jmp LDL
 STD:
 jk STD
 mov a, h
-rlc  ; rotate 4 times for insure h in high 4 bits;
-rlc
-rlc
-rlc
+ral  ; rotate 4 times for insure h in high 4 bits;
+ral
+ral
+ral
 ora l  ;merge with low 4 bits
 stax b ; store to memory
 inx b  ; increse address pointer

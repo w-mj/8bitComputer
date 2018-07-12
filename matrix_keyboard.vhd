@@ -8,7 +8,8 @@ port(clk: in std_logic;
 	row:  in std_logic_vector(3 downto 0);
 	col: out std_logic_vector(3 downto 0);
 	keyout: out std_logic_vector(3 downto 0);
-	flag: out std_logic
+	flag: out std_logic;
+	flag_clr: in std_logic
 	);
 end matrix;
 
@@ -17,7 +18,7 @@ architecture behave of matrix is
 signal colreg: std_logic_vector(3 downto 0);
 signal con: std_logic_vector(7 downto 0);
 signal cnt: std_logic_vector(31 downto 0);
-constant cnt20ms: integer:= 10000;
+constant cnt50ms: integer:= 100000;
 signal clkreg, scanning: std_logic;
 begin
 col<=colreg;
@@ -38,7 +39,7 @@ begin
 	
 	if ((row(0) and row(1) and row(2) and row(3)) = '0') then
 		scanning <= '0';
-		if (cnt >= cnt20ms) then
+		if (cnt >= cnt50ms) then
 			clkreg <= '1';
 			flag <= '1';
 		else 
@@ -51,6 +52,7 @@ begin
 		flag <= '0';
 	end if;
 end process;
+
 process(clkreg)
 begin
 if clkreg'event and clkreg = '1' then

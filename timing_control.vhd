@@ -23,7 +23,8 @@ entity timing_control is port(
 	tmp_load, tmp_put: out std_logic;
 	acc_load, acc_put: out std_logic;
 	tmp_clr: out std_logic;
-	key_flag: in std_logic
+	key_flag: in std_logic;
+	key_clr: out std_logic
 );
 end timing_control;
 
@@ -76,7 +77,7 @@ process(IR, bM, bT, IR_input) begin
 	databuff_load_inner<='0'; databuff_put_data<='0'; databuff_put_inner<='0';
 	flag_load_bus<='0'; flag_put_bus<='0'; flag_load_alu<='0'; flag_STC<='0';
 	alu_s<="0000"; alu_put<='0'; tmp_load<='0'; tmp_put<='0'; acc_load<='0'; acc_put<='0';
-	success <= '0'; tmp_clr <= '0';
+	success <= '0'; tmp_clr <= '0'; key_clr <= '0';
 	
 	if ((m1 and (t1 or t2 or t3)) = '1') then 
 		regarr_cs <= onn("1111", m1 and (t1 or t2));
@@ -509,7 +510,7 @@ process(IR, bM, bT, IR_input) begin
 			if	((ddd="000" and ZF='0') or (ddd="001" and ZF='1') or (ddd="010" and CF='0') or
 					 (ddd="011" and CF='1') or (ddd="100" and key_flag='0') or (ddd="101" and key_flag='1') or
 					 (ddd="110" and SF='0') or (ddd="111" and SF='1')) then
-					 success <= '1'; end if;
+					 success <= '1'; key_clr <= '1'; end if;
 			nextM <= (m1 and t4) or (m2 and t3);
 			addrbuff_load <= ((m2 or m3) and t1) or (m3 and t4);
 			regarr_cs <= onn("1111", (m2 and (t1 or t2)) or (m3 and (t1 or t2))) or onn("1100", m2 and t3) 

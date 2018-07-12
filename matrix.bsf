@@ -38,6 +38,13 @@ refer to the applicable agreement for further details.
 		(line (pt 0 48)(pt 16 48)(line_width 3))
 	)
 	(port
+		(pt 0 64)
+		(input)
+		(text "flag_clr" (rect 0 0 29 12)(font "Arial" ))
+		(text "flag_clr" (rect 21 59 50 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 1))
+	)
+	(port
 		(pt 184 32)
 		(output)
 		(text "col[3..0]" (rect 0 0 30 12)(font "Arial" ))
