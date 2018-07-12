@@ -50,7 +50,7 @@ set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
 set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
-set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 4
 
 
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
@@ -111,6 +111,45 @@ set_location_assignment PIN_28 -to led_data[1]
 set_location_assignment PIN_10 -to led_data[0]
 set_global_assignment -name ENABLE_SIGNALTAP OFF
 set_global_assignment -name USE_SIGNALTAP_FILE signal_tap_ii/stp2.stp
+set_location_assignment PIN_24 -to reset
+set_location_assignment PIN_38 -to shut_up
+set_location_assignment PIN_43 -to rx
+set_location_assignment PIN_44 -to tx
+set_global_assignment -name MIF_FILE start.mif
+set_global_assignment -name VHDL_FILE digit_led.vhd
+set_global_assignment -name VHDL_FILE matrix_keyboard.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE register8_wave.vwf
+set_global_assignment -name VHDL_FILE add8.vhd
+set_global_assignment -name VHDL_FILE register8.vhd
+set_global_assignment -name VHDL_FILE pkg.vhd
+set_global_assignment -name VHDL_FILE ALU.vhd
+set_global_assignment -name VHDL_FILE register16.vhd
+set_global_assignment -name VHDL_FILE REGISTER_ARRAY.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE register_array_wave.vwf
+set_global_assignment -name VHDL_FILE inc_dec_latch.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE inc_dec_latch.vwf
+set_global_assignment -name VHDL_FILE data_bus_buffer.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE data_bus_buffer_wave.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU.vwf
+set_global_assignment -name VHDL_FILE flag_ff.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE flag_ff_wave.vwf
+set_global_assignment -name VHDL_FILE temp_reg.vhd
+set_global_assignment -name VHDL_FILE accumulator.vhd
+set_global_assignment -name VHDL_FILE beats.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE beats_wave.vwf
+set_global_assignment -name VHDL_FILE timing_control.vhd
+set_global_assignment -name VHDL_FILE machine_cycle_encoding.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE machine_cycle_encoding_wave.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE CPU_wave.vwf
+set_global_assignment -name BDF_FILE CPU.bdf
+set_global_assignment -name VHDL_FILE bridge.vhd
+set_global_assignment -name VHDL_FILE startup.vhd
+set_global_assignment -name SIGNALTAP_FILE signal_tap_ii/stp2.stp
+set_global_assignment -name QIP_FILE pll.qip
+set_global_assignment -name QIP_FILE ram.qip
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[7]
 set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[6]
 set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[5]
@@ -119,7 +158,6 @@ set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[3]
 set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[2]
 set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[1]
 set_instance_assignment -name VIRTUAL_PIN ON -to inner_bus[0]
-set_location_assignment PIN_24 -to reset
 set_instance_assignment -name VIRTUAL_PIN ON -to flag[0]
 set_instance_assignment -name VIRTUAL_PIN ON -to flag[1]
 set_instance_assignment -name VIRTUAL_PIN ON -to flag[2]
@@ -128,7 +166,6 @@ set_instance_assignment -name VIRTUAL_PIN ON -to flag[4]
 set_instance_assignment -name VIRTUAL_PIN ON -to flag[5]
 set_instance_assignment -name VIRTUAL_PIN ON -to flag[6]
 set_instance_assignment -name VIRTUAL_PIN ON -to flag[7]
-set_location_assignment PIN_38 -to shut_up
 set_instance_assignment -name VIRTUAL_PIN ON -to IR[0]
 set_instance_assignment -name VIRTUAL_PIN ON -to IR[1]
 set_instance_assignment -name VIRTUAL_PIN ON -to IR[2]
@@ -137,8 +174,6 @@ set_instance_assignment -name VIRTUAL_PIN ON -to IR[4]
 set_instance_assignment -name VIRTUAL_PIN ON -to IR[5]
 set_instance_assignment -name VIRTUAL_PIN ON -to IR[6]
 set_instance_assignment -name VIRTUAL_PIN ON -to IR[7]
-set_location_assignment PIN_43 -to rx
-set_location_assignment PIN_44 -to tx
 set_instance_assignment -name VIRTUAL_PIN ON -to T[7]
 set_instance_assignment -name VIRTUAL_PIN ON -to T[6]
 set_instance_assignment -name VIRTUAL_PIN ON -to T[5]
@@ -175,46 +210,4 @@ set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[3]
 set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[2]
 set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[1]
 set_instance_assignment -name VIRTUAL_PIN ON -to rom_data[0]
-set_global_assignment -name MIF_FILE start.mif
-set_global_assignment -name VHDL_FILE digit_led.vhd
-set_global_assignment -name VHDL_FILE matrix_keyboard.vhd
-set_global_assignment -name VECTOR_WAVEFORM_FILE register8_wave.vwf
-set_global_assignment -name VHDL_FILE add8.vhd
-set_global_assignment -name VHDL_FILE register8.vhd
-set_global_assignment -name VHDL_FILE pkg.vhd
-set_global_assignment -name VHDL_FILE ALU.vhd
-set_global_assignment -name VHDL_FILE register16.vhd
-set_global_assignment -name VHDL_FILE REGISTER_ARRAY.vhd
-set_global_assignment -name VECTOR_WAVEFORM_FILE register_array_wave.vwf
-set_global_assignment -name VHDL_FILE inc_dec_latch.vhd
-set_global_assignment -name VECTOR_WAVEFORM_FILE inc_dec_latch.vwf
-set_global_assignment -name VHDL_FILE data_bus_buffer.vhd
-set_global_assignment -name VECTOR_WAVEFORM_FILE data_bus_buffer_wave.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE alu_chip_wave.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE ALU.vwf
-set_global_assignment -name VHDL_FILE flag_ff.vhd
-set_global_assignment -name VECTOR_WAVEFORM_FILE flag_ff_wave.vwf
-set_global_assignment -name VHDL_FILE temp_reg.vhd
-set_global_assignment -name VHDL_FILE accumulator.vhd
-set_global_assignment -name VHDL_FILE beats.vhd
-set_global_assignment -name VECTOR_WAVEFORM_FILE beats_wave.vwf
-set_global_assignment -name VHDL_FILE timing_control.vhd
-set_global_assignment -name VHDL_FILE machine_cycle_encoding.vhd
-set_global_assignment -name VECTOR_WAVEFORM_FILE machine_cycle_encoding_wave.vwf
-set_global_assignment -name VECTOR_WAVEFORM_FILE CPU_wave.vwf
-set_global_assignment -name BDF_FILE CPU.bdf
-set_global_assignment -name VHDL_FILE bridge.vhd
-set_global_assignment -name VHDL_FILE startup.vhd
-set_global_assignment -name SIGNALTAP_FILE signal_tap_ii/stp2.stp
-set_global_assignment -name QIP_FILE pll.qip
-set_global_assignment -name VHDL_FILE uart/uart.vhd
-set_global_assignment -name VHDL_FILE uart/uart_receive.vhd
-set_global_assignment -name VHDL_FILE uart/uart_bps.vhd
-set_global_assignment -name VHDL_FILE uart/uart_send.vhd
-set_global_assignment -name VHDL_FILE ram_selecter.vhd
-set_global_assignment -name QIP_FILE ram.qip
-set_global_assignment -name HEX_FILE init.hex
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
