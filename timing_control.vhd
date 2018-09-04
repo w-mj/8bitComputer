@@ -142,7 +142,20 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= m2 and (t2 or t3);
 			nextT <= m2 and (t1 or t2 or t3);
 			RST <= m2 and t3;
-		when "00110110"=> null; -- 6 MVI M, data;
+		when "00110110"=> -- 6 MVI M, data;
+			nextM <= (m1 and t4) or ((m2 or m3) and t3);
+			nextT <= (m2 or m3 or m4) and (t1 or t2);
+			regarr_cs <= onn("1111", (m2 or m3 or m4) and (t1 or t2)) 
+						or onn("1101", m2 and t3) or onn("1100", m3 and t3)
+						or onn("1110", m4 and t3);
+			addrbuff_load <= (m2 or m3 or m4) and t1;
+			regarr_inc <= (m2 or m3 or m3) and t2;
+			databuff_load_data <= (m2 or m3 or m4) and t2;
+			databuff_put_inner <= (m2 or m3) and t3;
+			regarr_load <= (m2 or m3) and t3;
+			databuff_put_data <= m4 and t3;
+			RST <= m4 and t3;
+			
 		when "00000001"=> null; -- 7 LXI rp, data
 		when "00111010"=> null; -- 8 LDA addr;
 		when "00110010"=> null; -- 9 STA addr;
