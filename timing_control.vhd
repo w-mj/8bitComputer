@@ -343,10 +343,72 @@ process(IR, bM, bT, IR_input) begin
 			acc_load <= m4 and t4;
 			nextT <= ((m2 or m3 or m4) and (t1 or t2)) or (m4 and t4);
 			RST <= m4 and t4;
-		when "10100110" => null; -- 23 ana m
-		when "10101110" => null; -- 24 xra m
-		when "10110110" => null; -- 25 ora m
-		when "10111110" => null; -- 26 cmp m
+		when "10100110" => -- 23 ana m
+			nextM <= (m1 and t4) or (m2 and t3);
+			regarr_cs <= onn("1111", (m2 or m3) and (t1 or t2)) or 
+							 onn("1100", m2 and t3) or onn("1101", m3 and t3)or
+							 onn("1110", m4 and t1); 
+			addrbuff_load <= (m2 or m3 or m4) and t1;
+			regarr_put <= (m2 or m3 or m4) and t1;
+			regarr_inc <= (m2 or m3) or t2;
+			databuff_load_data <= (m2 or m3 or m4) and t2;
+			databuff_put_inner <= (m2 or m3 or m4) and t3;
+			tmp_load <= m4 and t3;
+			alu_s <= onn("0110", m4 and t4);
+			flag_load_alu <= m4 and t4;
+			alu_put <= m4 and t4;
+			acc_load <= m4 and t4;
+			nextT <= ((m2 or m3 or m4) and (t1 or t2)) or (m4 and t4);
+			RST <= m4 and t4;
+		when "10101110" => -- 24 xra m
+			nextM <= (m1 and t4) or (m2 and t3);
+			regarr_cs <= onn("1111", (m2 or m3) and (t1 or t2)) or 
+							 onn("1100", m2 and t3) or onn("1101", m3 and t3)or
+							 onn("1110", m4 and t1); 
+			addrbuff_load <= (m2 or m3 or m4) and t1;
+			regarr_put <= (m2 or m3 or m4) and t1;
+			regarr_inc <= (m2 or m3) or t2;
+			databuff_load_data <= (m2 or m3 or m4) and t2;
+			databuff_put_inner <= (m2 or m3 or m4) and t3;
+			tmp_load <= m4 and t3;
+			alu_s <= onn("0111", m4 and t4);
+			flag_load_alu <= m4 and t4;
+			alu_put <= m4 and t4;
+			acc_load <= m4 and t4;
+			nextT <= ((m2 or m3 or m4) and (t1 or t2)) or (m4 and t4);
+			RST <= m4 and t4;
+		when "10110110" => -- 25 ora m
+			nextM <= (m1 and t4) or (m2 and t3);
+			regarr_cs <= onn("1111", (m2 or m3) and (t1 or t2)) or 
+							 onn("1100", m2 and t3) or onn("1101", m3 and t3)or
+							 onn("1110", m4 and t1); 
+			addrbuff_load <= (m2 or m3 or m4) and t1;
+			regarr_put <= (m2 or m3 or m4) and t1;
+			regarr_inc <= (m2 or m3) or t2;
+			databuff_load_data <= (m2 or m3 or m4) and t2;
+			databuff_put_inner <= (m2 or m3 or m4) and t3;
+			tmp_load <= m4 and t3;
+			alu_s <= onn("1000", m4 and t4);
+			flag_load_alu <= m4 and t4;
+			alu_put <= m4 and t4;
+			acc_load <= m4 and t4;
+			nextT <= ((m2 or m3 or m4) and (t1 or t2)) or (m4 and t4);
+			RST <= m4 and t4;
+		when "10111110" => -- 26 cmp m
+			nextM <= (m1 and t4) or (m2 and t3);
+			regarr_cs <= onn("1111", (m2 or m3) and (t1 or t2)) or 
+							 onn("1100", m2 and t3) or onn("1101", m3 and t3)or
+							 onn("1110", m4 and t1); 
+			addrbuff_load <= (m2 or m3 or m4) and t1;
+			regarr_put <= (m2 or m3 or m4) and t1;
+			regarr_inc <= (m2 or m3) or t2;
+			databuff_load_data <= (m2 or m3 or m4) and t2;
+			databuff_put_inner <= (m2 or m3 or m4) and t3;
+			tmp_load <= m4 and t3;
+			alu_s <= onn("0100", m4 and t4);
+			flag_load_alu <= m4 and t4;
+			nextT <= ((m2 or m3 or m4) and (t1 or t2)) or (m4 and t4);
+			RST <= m4 and t4;
 		when "11000110" => -- 27 adi, data
 			nextM <= m1 and t4;
 			regarr_cs <= onn("1111", m2 and (t1 or t2));

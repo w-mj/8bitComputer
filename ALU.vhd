@@ -42,7 +42,7 @@ process (S) begin
 						  F_out(0) <= not adder_C_out; F_out(1) <= not adder_A_out;  -- A - T - CF
 		when "0110"=> adder_A_in <= A and T;  -- A and T
 		when "0111"=> adder_A_in <= A xor T;  -- A xor T
-		when "1000"=> adder_A_in <= A or T;
+		when "1000"=> adder_A_in <= A or T;  -- A or T
 		when "1001"=> null;  -- used to be cmp.
 		when "1010"=> F_out(0) <= A(7); adder_A_in <= A(6 downto 0) & A(7);  -- ROL
 		when "1011"=> F_out(0) <= A(0); adder_A_in <= A(0) & A(7 downto 1);  -- ROR
