@@ -161,8 +161,42 @@ process(IR, bM, bT, IR_input) begin
 			flag_load_alu <= m1 and t5;
 			regarr_load <= m1 and t5;
 			RST <= m1 and t5;
-		when "00110100" => null; -- 9 inr m
-		when "00110101" => null; -- 10 dcr m
+		when "00110100" => -- 9 inr m
+			nextM <= (m1 and t4) or (m2 and t6);
+			regarr_cs <= onn("1111", m2 and (t1 or t2 or t4 or t5)) 
+							or onn("1101", m2 and t3) or onn("1100", m2 and t6)
+							or onn("1110", m3 and t1);
+			regarr_put <= (m2 and (t1 or t4)) or (m3 and t1);
+			regarr_inc <= m2 and (t2 or t5);
+			addrbuff_load <= (m2 and (t1 or t4)) or (m3 and t1);
+			databuff_load_data <= (m2 and (t2 or t5)) or (m3 and t2);
+			databuff_put_inner <= (m2 and (t3 or t6)) or (m3 and t3);
+			regarr_load <= m2 and (t3 or t6);
+			temp_load <= m3 and t3;
+			alu_s <= onn("0000", m3 and t4);
+			alu_put <= m3 and t4;
+			databuff_load_inner <= m3 and t4;
+			databuff_put_data <= m3 and t5;
+			nextT <= (m2 and (t1 or t2 or t3 or t4 or t5)) or (m3 and (t1 or t2 or t3 or t4));
+			RST <= m3 and t5;
+		when "00110101" => -- 10 dcr m
+			nextM <= (m1 and t4) or (m2 and t6);
+			regarr_cs <= onn("1111", m2 and (t1 or t2 or t4 or t5)) 
+							or onn("1101", m2 and t3) or onn("1100", m2 and t6)
+							or onn("1110", m3 and t1);
+			regarr_put <= (m2 and (t1 or t4)) or (m3 and t1);
+			regarr_inc <= m2 and (t2 or t5);
+			addrbuff_load <= (m2 and (t1 or t4)) or (m3 and t1);
+			databuff_load_data <= (m2 and (t2 or t5)) or (m3 and t2);
+			databuff_put_inner <= (m2 and (t3 or t6)) or (m3 and t3);
+			regarr_load <= m2 and (t3 or t6);
+			temp_load <= m3 and t3;
+			alu_s <= onn("0001", m3 and t4);
+			alu_put <= m3 and t4;
+			databuff_load_inner <= m3 and t4;
+			databuff_put_data <= m3 and t5;
+			nextT <= (m2 and (t1 or t2 or t3 or t4 or t5)) or (m3 and (t1 or t2 or t3 or t4));
+			RST <= m3 and t5;
 		when "10000000" => -- 11 add r
 			regarr_cs <= onn("0"&sss, m1 and t4);
 			regarr_put <= m1 and t4;
@@ -308,7 +342,7 @@ process(IR, bM, bT, IR_input) begin
 			alu_put <= m4 and t4;
 			acc_load <= m4 and t4;
 			nextT <= ((m2 or m3 or m4) and (t1 or t2)) or (m4 and t4);
-	RST <= m4 and t4;
+			RST <= m4 and t4;
 		when "10100110" => null; -- 23 ana m
 		when "10101110" => null; -- 24 xra m
 		when "10110110" => null; -- 25 ora m
@@ -768,6 +802,7 @@ process(IR, bM, bT, IR_input) begin
 		when "11110011" => null; -- 110 di
 		when "00000000" => -- 111 nop
 			RST <= m1 and t4;
+		when others => null;
 	end case;
 	end if;
 end process;
