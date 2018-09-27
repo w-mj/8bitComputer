@@ -8,7 +8,7 @@
 //最新资料下载： http://pan.baidu.com/s/1jGpMIJc
 //公                司： 上海或与电子科技有限公司
 /////////////////////////////////////////////////////////////////////////////
-module vga_controller(
+module VGADriver(
 			input clk_25m,	//PLL输出25MHz时钟
 			input rst_n,	//复位信号，低电平有效
 			input pixel_r, pixel_g, pixel_b,
@@ -91,84 +91,6 @@ always @(posedge clk or negedge rst_n)
 		 end
 	else vga_valid <= 1'b0;
 	
-////-----------------------------------------------------------
-//	//显示色彩生产逻辑
-//reg vga_rdb;	//R色彩
-//reg vga_gdb;	//G色彩
-//reg vga_bdb;	//B色彩
-//
-//always @(posedge clk or negedge rst_n)
-//	if(!rst_n) begin
-//		vga_rdb <= 1'b0;
-//		vga_gdb <= 1'b0;
-//		vga_bdb <= 1'b0;
-//	end
-//	else if(xcnt == (VGA_HST+VGA_HBP)) begin	//显示第一行为绿色
-//		vga_rdb <= 1'b0;
-//		vga_gdb <= 1'b1;
-//		vga_bdb <= 1'b0;		
-//	end
-//	else if(xcnt == (VGA_HST+VGA_HBP+VGA_HVT-1'b1)) begin	//显示最后一行为绿色
-//		vga_rdb <= 1'b0;
-//		vga_gdb <= 1'b1;
-//		vga_bdb <= 1'b0;		
-//	end
-//	else if(ycnt == (VGA_VST+VGA_VBP)) begin	//显示第一列为绿色
-//		vga_rdb <= 1'b0;
-//		vga_gdb <= 1'b1;
-//		vga_bdb <= 1'b0;			
-//	end
-//	else if(ycnt == (VGA_VST+VGA_VBP+VGA_VVT-1'b1)) begin	//显示最后一列为绿色
-//		vga_rdb <= 1'b0;
-//		vga_gdb <= 1'b1;
-//		vga_bdb <= 1'b0;		
-//	end
-//	else if(xcnt <= (VGA_HST+VGA_HBP+VGA_CORBER)) begin		//显示第1个Color bar
-//		vga_rdb <= 1'b0;
-//		vga_gdb <= 1'b0;
-//		vga_bdb <= 1'b0;	
-//	end
-//	else if(xcnt <= (VGA_HST+VGA_HBP+VGA_CORBER+VGA_CORBER)) begin		//显示第2个Color bar
-//		vga_rdb <= 1'b0;
-//		vga_gdb <= 1'b0;
-//		vga_bdb <= 1'b1;
-//	end	
-//	else if(xcnt <= (VGA_HST+VGA_HBP+VGA_CORBER+VGA_CORBER+VGA_CORBER)) begin		//显示第3个Color bar
-//		vga_rdb <= 1'b0;
-//		vga_gdb <= 1'b1;
-//		vga_bdb <= 1'b0;
-//	end	
-//	else if(xcnt <= (VGA_HST+VGA_HBP+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER)) begin		//显示第4个Color bar
-//		vga_rdb <= 1'b0;
-//		vga_gdb <= 1'b1;
-//		vga_bdb <= 1'b1;
-//	end	
-//	else if(xcnt <= (VGA_HST+VGA_HBP+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER)) begin		//显示第5个Color bar
-//		vga_rdb <= 1'b1;
-//		vga_gdb <= 1'b0;
-//		vga_bdb <= 1'b0;	
-//	end	
-//	else if(xcnt <= (VGA_HST+VGA_HBP+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER)) begin		//显示第6个Color bar
-//		vga_rdb <= 1'b1;
-//		vga_gdb <= 1'b0;
-//		vga_bdb <= 1'b1;	
-//	end
-//	else if(xcnt <= (VGA_HST+VGA_HBP+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER)) begin		//显示第7个Color bar
-//		vga_rdb <= 1'b1;
-//		vga_gdb <= 1'b1;
-//		vga_bdb <= 1'b0;	
-//	end
-//	else if(xcnt <= (VGA_HST+VGA_HBP+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER+VGA_CORBER)) begin		//显示第8个Color bar
-//		vga_rdb <= 1'b1;
-//		vga_gdb <= 1'b1;
-//		vga_bdb <= 1'b1;	
-//	end
-//	else begin
-//		vga_rdb <= 1'b0;
-//		vga_gdb <= 1'b0;
-//		vga_bdb <= 1'b0;	
-//	end
-
 assign vga_r = vga_valid ? pixel_r:1'b0;
 assign vga_g = vga_valid ? pixel_g:1'b0;	
 assign vga_b = vga_valid ? pixel_b:1'b0;	

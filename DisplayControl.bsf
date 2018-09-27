@@ -1,0 +1,92 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 280 160)
+	(text "DisplayControl" (rect 5 0 62 12)(font "Arial" ))
+	(text "inst" (rect 8 128 20 140)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "row[11..0]" (rect 0 0 36 12)(font "Arial" ))
+		(text "row[11..0]" (rect 21 27 57 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "column[11..0]" (rect 0 0 50 12)(font "Arial" ))
+		(text "column[11..0]" (rect 21 43 71 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "dis_ram_data[15..0]" (rect 0 0 79 12)(font "Arial" ))
+		(text "dis_ram_data[15..0]" (rect 21 59 100 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "ASC_data[7..0]" (rect 0 0 63 12)(font "Arial" ))
+		(text "ASC_data[7..0]" (rect 21 75 84 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 264 32)
+		(output)
+		(text "dis_ram_addr[12..0]" (rect 0 0 80 12)(font "Arial" ))
+		(text "dis_ram_addr[12..0]" (rect 163 27 243 39)(font "Arial" ))
+		(line (pt 264 32)(pt 248 32)(line_width 3))
+	)
+	(port
+		(pt 264 48)
+		(output)
+		(text "ASC_addr[11..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "ASC_addr[11..0]" (rect 176 43 243 55)(font "Arial" ))
+		(line (pt 264 48)(pt 248 48)(line_width 3))
+	)
+	(port
+		(pt 264 64)
+		(output)
+		(text "r" (rect 0 0 3 12)(font "Arial" ))
+		(text "r" (rect 240 59 243 71)(font "Arial" ))
+		(line (pt 264 64)(pt 248 64)(line_width 1))
+	)
+	(port
+		(pt 264 80)
+		(output)
+		(text "g" (rect 0 0 4 12)(font "Arial" ))
+		(text "g" (rect 239 75 243 87)(font "Arial" ))
+		(line (pt 264 80)(pt 248 80)(line_width 1))
+	)
+	(port
+		(pt 264 96)
+		(output)
+		(text "b" (rect 0 0 4 12)(font "Arial" ))
+		(text "b" (rect 239 91 243 103)(font "Arial" ))
+		(line (pt 264 96)(pt 248 96)(line_width 1))
+	)
+	(drawing
+		(rectangle (rect 16 16 248 128)(line_width 1))
+	)
+)

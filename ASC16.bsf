@@ -21,13 +21,13 @@ refer to the applicable agreement for further details.
 (header "symbol" (version "1.2"))
 (symbol
 	(rect 0 0 216 128)
-	(text "display_characters" (rect 25 0 220 24)(font "Arial" (font_size 10)))
+	(text "ASC16" (rect 76 0 152 24)(font "Arial" (font_size 10)))
 	(text "inst" (rect 8 108 33 124)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "address[10..0]" (rect 0 0 118 19)(font "Arial" (font_size 8)))
-		(text "address[10..0]" (rect 4 13 103 31)(font "Arial" (font_size 8)))
+		(text "address[11..0]" (rect 0 0 116 19)(font "Arial" (font_size 8)))
+		(text "address[11..0]" (rect 4 13 103 31)(font "Arial" (font_size 8)))
 		(line (pt 0 32)(pt 88 32)(line_width 3))
 	)
 	(port
@@ -46,7 +46,7 @@ refer to the applicable agreement for further details.
 	)
 	(drawing
 		(text "8 bits" (rect 105 31 197 169)(font "Arial" )(vertical))
-		(text "2048 words" (rect 120 16 232 209)(font "Arial" )(vertical))
+		(text "4096 words" (rect 120 16 232 209)(font "Arial" )(vertical))
 		(text "Block type: AUTO" (rect 48 111 206 237)(font "Arial" ))
 		(line (pt 104 24)(pt 136 24))
 		(line (pt 136 24)(pt 136 96))
