@@ -24,14 +24,18 @@ signal X, Y: unsigned(11 downto 0);
 signal char: unsigned(7 downto 0);
 signal color: std_logic_vector(7 downto 0);
 signal X_offset: unsigned(2 downto 0);
+signal res_1: std_logic_vector(23 downto 0);
+signal res_2: std_logic_vector(15 downto 0);
 begin
 X <= unsigned(column);
 Y <= unsigned(row);
 char <= unsigned(dis_ram_data(7 downto 0));
 color <= dis_ram_data(15 downto 8);
 
-dis_ram_addr <= std_logic_vector((Y / 16) * 80 + (X / 8));
-ASC_addr <= std_logic_vector(char * 16 + Y MOD 16);
+res_1 <= std_logic_vector((Y / 16) * 80 + (X / 8));
+dis_ram_addr <= res_1(12 downto 0);
+res_2 <= std_logic_vector(char * 16 + Y MOD 16);
+ASC_addr <= res_2(11 downto 0);
 r <= color(6) when ASC_data(to_integer(X MOD 8)) = '1' else color(2);
 g <= color(5) when ASC_data(to_integer(X MOD 8)) = '1' else color(1);
 b <= color(4) when ASC_data(to_integer(X MOD 8)) = '1' else color(0);

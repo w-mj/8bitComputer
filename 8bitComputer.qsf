@@ -79,7 +79,7 @@ set_location_assignment PIN_120 -to ram_address[11]
 set_location_assignment PIN_115 -to ram_address[10]
 set_location_assignment PIN_121 -to ram_address[9]
 set_location_assignment PIN_124 -to ram_address[8]
-set_location_assignment PIN_127 -to ram_address[7]
+set_location_assignment PIN_112 -to ram_address[7]
 set_location_assignment PIN_113 -to ram_address[6]
 set_location_assignment PIN_100 -to ram_address[5]
 set_location_assignment PIN_99 -to ram_address[4]
@@ -248,7 +248,6 @@ set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_COUNTER_PIPELINE=
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ADVANCED_TRIGGER_ENTITY=basic,1," -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_TRIGGER_LEVEL_PIPELINE=1" -section_id auto_signaltap_0
 set_global_assignment -name SLD_NODE_PARAMETER_ASSIGNMENT "SLD_ENABLE_ADVANCED_TRIGGER=0" -section_id auto_signaltap_0
-set_global_assignment -name SLD_FILE db/stp2_auto_stripped.stp
 set_global_assignment -name VERILOG_FILE VGADriver.v
 set_global_assignment -name MIF_FILE start.mif
 set_global_assignment -name VHDL_FILE digit_led.vhd
@@ -286,4 +285,5 @@ set_global_assignment -name SIGNALTAP_FILE stp2.stp
 set_global_assignment -name QIP_FILE ASC16.qip
 set_global_assignment -name QIP_FILE DisplayRAM.qip
 set_global_assignment -name VHDL_FILE DisplayControl.vhd
+set_global_assignment -name SLD_FILE db/stp2_auto_stripped.stp
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
