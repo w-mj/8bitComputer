@@ -1,5 +1,0 @@
-LOOP:
-in f0
-out fc
-jmp LOOP
-
