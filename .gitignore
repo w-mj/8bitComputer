@@ -39,7 +39,7 @@
 # software binary files
 ### tbd
 
-/*
+Hardware/*
 !/*.gitignore
 ##
 !*.qpf
@@ -69,4 +69,4 @@
 
 # End of https://www.gitignore.io/api/alteraquartusii
 
-
+.qsys_edit/
