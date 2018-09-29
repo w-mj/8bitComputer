@@ -31,13 +31,13 @@ begin
 data <= data_t when put='1' else (others=>'Z');
 
 ram_csN <= address(15);
-ram_weN <= load or address(15);
-ram_oeN <= put or address(15);
+ram_weN <= load and not address(15);
+ram_oeN <= put and not address(15);
 ram_address <= address(14 downto 0);
 
 dis_ram_data <= data;
 dis_ram_addr <= address(13 downto 0);
-dis_ram_wen <= '0' when (address(15) = '1' and address(14) = '0' and load = '1') else '1';
+dis_ram_wen <= '1' when (address(15) = '1' and address(14) = '0' and load = '1') else '0';
 process (address, put, load) begin
 	set_digit <= '0';
 	ram_data <= (others=>'X');

@@ -37,7 +37,7 @@ refer to the applicable agreement for further details.
 )
 (pin
 	(input)
-	(rect 24 136 208 152)
+	(rect 64 32 248 48)
 	(text "INPUT" (rect 141 0 176 13)(font "Arial" (font_size 6)))
 	(text "address[13..0]" (rect 5 0 95 14)(font "Arial" ))
 	(pt 184 8)
@@ -53,7 +53,7 @@ refer to the applicable agreement for further details.
 )
 (pin
 	(input)
-	(rect 64 184 232 200)
+	(rect 96 120 264 136)
 	(text "INPUT" (rect 125 0 160 13)(font "Arial" (font_size 6)))
 	(text "wren" (rect 5 0 36 14)(font "Arial" ))
 	(pt 168 8)
@@ -183,21 +183,6 @@ refer to the applicable agreement for further details.
 	(rect 384 552 416 568)
 	(text "VCC" (rect 7 0 31 13)(font "Arial" (font_size 6)))
 	(text "inst" (rect 3 5 26 19)(font "Arial" )(invisible))
-	(port
-		(pt 16 16)
-		(output)
-		(text "1" (rect 19 7 27 22)(font "Courier New" (bold))(invisible))
-		(text "1" (rect 19 7 27 22)(font "Courier New" (bold))(invisible))
-		(line (pt 16 16)(pt 16 8))
-	)
-	(drawing
-		(line (pt 8 8)(pt 24 8))
-	)
-)
-(symbol
-	(rect 312 144 344 160)
-	(text "VCC" (rect 7 0 31 13)(font "Arial" (font_size 6)))
-	(text "inst1" (rect 3 5 34 22)(font "Intel Clear" )(invisible))
 	(port
 		(pt 16 16)
 		(output)
@@ -524,6 +509,63 @@ refer to the applicable agreement for further details.
 		(line (pt 0 0)(pt 0 0))
 	)
 )
+(symbol
+	(rect 264 112 328 160)
+	(text "AND2" (rect 1 0 32 13)(font "Arial" (font_size 6)))
+	(text "inst_dis_and2" (rect 3 37 93 51)(font "Arial" ))
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN1" (rect 2 7 26 22)(font "Courier New" (bold))(invisible))
+		(text "IN1" (rect 2 7 26 22)(font "Courier New" (bold))(invisible))
+		(line (pt 0 16)(pt 14 16))
+	)
+	(port
+		(pt 0 32)
+		(input)
+		(text "IN2" (rect 2 23 26 38)(font "Courier New" (bold))(invisible))
+		(text "IN2" (rect 2 23 26 38)(font "Courier New" (bold))(invisible))
+		(line (pt 0 32)(pt 14 32))
+	)
+	(port
+		(pt 64 24)
+		(output)
+		(text "OUT" (rect 48 15 72 30)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 48 15 72 30)(font "Courier New" (bold))(invisible))
+		(line (pt 42 24)(pt 64 24))
+	)
+	(drawing
+		(line (pt 14 12)(pt 30 12))
+		(line (pt 14 37)(pt 31 37))
+		(line (pt 14 12)(pt 14 37))
+		(arc (pt 31 37)(pt 30 12)(rect 18 12 43 37))
+	)
+)
+(symbol
+	(rect 176 144 224 176)
+	(text "NOT" (rect 1 0 25 13)(font "Arial" (font_size 6)))
+	(text "inst_display_not" (rect 3 21 109 35)(font "Arial" ))
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN" (rect 2 7 19 22)(font "Courier New" (bold))(invisible))
+		(text "IN" (rect 2 7 19 22)(font "Courier New" (bold))(invisible))
+		(line (pt 0 16)(pt 13 16))
+	)
+	(port
+		(pt 48 16)
+		(output)
+		(text "OUT" (rect 32 7 56 22)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 32 7 56 22)(font "Courier New" (bold))(invisible))
+		(line (pt 39 16)(pt 48 16))
+	)
+	(drawing
+		(line (pt 13 25)(pt 13 7))
+		(line (pt 13 7)(pt 31 16))
+		(line (pt 13 25)(pt 31 16))
+		(circle (rect 31 12 39 20))
+	)
+)
 (connector
 	(pt 456 616)
 	(pt 344 616)
@@ -608,14 +650,6 @@ refer to the applicable agreement for further details.
 	(pt 400 568)
 )
 (connector
-	(pt 328 160)
-	(pt 328 168)
-)
-(connector
-	(pt 328 168)
-	(pt 360 168)
-)
-(connector
 	(pt 368 440)
 	(pt 368 272)
 	(bus)
@@ -637,12 +671,6 @@ refer to the applicable agreement for further details.
 (connector
 	(pt 416 424)
 	(pt 384 424)
-	(bus)
-)
-(connector
-	(text "address[13..0]" (rect 208 128 298 145)(font "Intel Clear" ))
-	(pt 208 144)
-	(pt 240 144)
 	(bus)
 )
 (connector
@@ -681,10 +709,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 360 168)
-	(pt 360 136)
-)
-(connector
 	(pt 720 160)
 	(pt 688 160)
 	(bus)
@@ -719,10 +743,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 360 136)
-	(pt 432 136)
-)
-(connector
 	(pt 384 160)
 	(pt 432 160)
 	(bus)
@@ -730,5 +750,32 @@ refer to the applicable agreement for further details.
 (connector
 	(pt 320 184)
 	(pt 432 184)
+)
+(connector
+	(text "address[13..0]" (rect 248 24 338 41)(font "Intel Clear" ))
+	(pt 248 40)
+	(pt 280 40)
+	(bus)
+)
+(connector
+	(pt 328 136)
+	(pt 432 136)
+)
+(connector
+	(text "address[0]" (rect 114 144 181 161)(font "Intel Clear" ))
+	(pt 104 160)
+	(pt 176 160)
+)
+(connector
+	(pt 224 160)
+	(pt 240 160)
+)
+(connector
+	(pt 264 144)
+	(pt 240 144)
+)
+(connector
+	(pt 240 160)
+	(pt 240 144)
 )
 (junction (pt 320 352))
