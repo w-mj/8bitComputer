@@ -45,19 +45,19 @@ ENTITY DisplayRAM IS
 		clock		: IN STD_LOGIC  := '1';
 		data		: IN STD_LOGIC_VECTOR (7 DOWNTO 0);
 		rdaddress		: IN STD_LOGIC_VECTOR (12 DOWNTO 0);
-		wraddress		: IN STD_LOGIC_VECTOR (13 DOWNTO 0);
+		wraddress		: IN STD_LOGIC_VECTOR (12 DOWNTO 0);
 		wren		: IN STD_LOGIC  := '0';
-		q		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
+		q		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
 	);
 END DisplayRAM;
 
 
 ARCHITECTURE SYN OF displayram IS
 
-	SIGNAL sub_wire0	: STD_LOGIC_VECTOR (15 DOWNTO 0);
+	SIGNAL sub_wire0	: STD_LOGIC_VECTOR (7 DOWNTO 0);
 
 BEGIN
-	q    <= sub_wire0(15 DOWNTO 0);
+	q    <= sub_wire0(7 DOWNTO 0);
 
 	altsyncram_component : altsyncram
 	GENERIC MAP (
@@ -66,19 +66,21 @@ BEGIN
 		clock_enable_input_a => "BYPASS",
 		clock_enable_input_b => "BYPASS",
 		clock_enable_output_b => "BYPASS",
+		init_file => "../LOGO.mif",
+		init_file_layout => "PORT_A",
 		intended_device_family => "Cyclone IV E",
 		lpm_type => "altsyncram",
-		numwords_a => 9600,
-		numwords_b => 4800,
+		numwords_a => 8192,
+		numwords_b => 8192,
 		operation_mode => "DUAL_PORT",
 		outdata_aclr_b => "NONE",
 		outdata_reg_b => "UNREGISTERED",
 		power_up_uninitialized => "FALSE",
 		read_during_write_mode_mixed_ports => "DONT_CARE",
-		widthad_a => 14,
+		widthad_a => 13,
 		widthad_b => 13,
 		width_a => 8,
-		width_b => 16,
+		width_b => 8,
 		width_byteena_a => 1
 	)
 	PORT MAP (
@@ -104,7 +106,7 @@ END SYN;
 -- Retrieval info: PRIVATE: BYTE_ENABLE_A NUMERIC "0"
 -- Retrieval info: PRIVATE: BYTE_ENABLE_B NUMERIC "0"
 -- Retrieval info: PRIVATE: BYTE_SIZE NUMERIC "8"
--- Retrieval info: PRIVATE: BlankMemory NUMERIC "1"
+-- Retrieval info: PRIVATE: BlankMemory NUMERIC "0"
 -- Retrieval info: PRIVATE: CLOCK_ENABLE_INPUT_A NUMERIC "0"
 -- Retrieval info: PRIVATE: CLOCK_ENABLE_INPUT_B NUMERIC "0"
 -- Retrieval info: PRIVATE: CLOCK_ENABLE_OUTPUT_A NUMERIC "0"
@@ -121,15 +123,15 @@ END SYN;
 -- Retrieval info: PRIVATE: IMPLEMENT_IN_LES NUMERIC "0"
 -- Retrieval info: PRIVATE: INDATA_ACLR_B NUMERIC "0"
 -- Retrieval info: PRIVATE: INDATA_REG_B NUMERIC "0"
--- Retrieval info: PRIVATE: INIT_FILE_LAYOUT STRING "PORT_B"
+-- Retrieval info: PRIVATE: INIT_FILE_LAYOUT STRING "PORT_A"
 -- Retrieval info: PRIVATE: INIT_TO_SIM_X NUMERIC "0"
 -- Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Cyclone IV E"
 -- Retrieval info: PRIVATE: JTAG_ENABLED NUMERIC "0"
 -- Retrieval info: PRIVATE: JTAG_ID STRING "NONE"
 -- Retrieval info: PRIVATE: MAXIMUM_DEPTH NUMERIC "0"
--- Retrieval info: PRIVATE: MEMSIZE NUMERIC "76800"
+-- Retrieval info: PRIVATE: MEMSIZE NUMERIC "65536"
 -- Retrieval info: PRIVATE: MEM_IN_BITS NUMERIC "0"
--- Retrieval info: PRIVATE: MIFfilename STRING ""
+-- Retrieval info: PRIVATE: MIFfilename STRING "../LOGO.mif"
 -- Retrieval info: PRIVATE: OPERATION_MODE NUMERIC "2"
 -- Retrieval info: PRIVATE: OUTDATA_ACLR_B NUMERIC "0"
 -- Retrieval info: PRIVATE: OUTDATA_REG_B NUMERIC "0"
@@ -148,9 +150,9 @@ END SYN;
 -- Retrieval info: PRIVATE: UseDPRAM NUMERIC "1"
 -- Retrieval info: PRIVATE: VarWidth NUMERIC "1"
 -- Retrieval info: PRIVATE: WIDTH_READ_A NUMERIC "8"
--- Retrieval info: PRIVATE: WIDTH_READ_B NUMERIC "16"
+-- Retrieval info: PRIVATE: WIDTH_READ_B NUMERIC "8"
 -- Retrieval info: PRIVATE: WIDTH_WRITE_A NUMERIC "8"
--- Retrieval info: PRIVATE: WIDTH_WRITE_B NUMERIC "16"
+-- Retrieval info: PRIVATE: WIDTH_WRITE_B NUMERIC "8"
 -- Retrieval info: PRIVATE: WRADDR_ACLR_B NUMERIC "0"
 -- Retrieval info: PRIVATE: WRADDR_REG_B NUMERIC "0"
 -- Retrieval info: PRIVATE: WRCTRL_ACLR_B NUMERIC "0"
@@ -162,32 +164,34 @@ END SYN;
 -- Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_A STRING "BYPASS"
 -- Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_B STRING "BYPASS"
 -- Retrieval info: CONSTANT: CLOCK_ENABLE_OUTPUT_B STRING "BYPASS"
+-- Retrieval info: CONSTANT: INIT_FILE STRING "../LOGO.mif"
+-- Retrieval info: CONSTANT: INIT_FILE_LAYOUT STRING "PORT_A"
 -- Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone IV E"
 -- Retrieval info: CONSTANT: LPM_TYPE STRING "altsyncram"
--- Retrieval info: CONSTANT: NUMWORDS_A NUMERIC "9600"
--- Retrieval info: CONSTANT: NUMWORDS_B NUMERIC "4800"
+-- Retrieval info: CONSTANT: NUMWORDS_A NUMERIC "8192"
+-- Retrieval info: CONSTANT: NUMWORDS_B NUMERIC "8192"
 -- Retrieval info: CONSTANT: OPERATION_MODE STRING "DUAL_PORT"
 -- Retrieval info: CONSTANT: OUTDATA_ACLR_B STRING "NONE"
 -- Retrieval info: CONSTANT: OUTDATA_REG_B STRING "UNREGISTERED"
 -- Retrieval info: CONSTANT: POWER_UP_UNINITIALIZED STRING "FALSE"
 -- Retrieval info: CONSTANT: READ_DURING_WRITE_MODE_MIXED_PORTS STRING "DONT_CARE"
--- Retrieval info: CONSTANT: WIDTHAD_A NUMERIC "14"
+-- Retrieval info: CONSTANT: WIDTHAD_A NUMERIC "13"
 -- Retrieval info: CONSTANT: WIDTHAD_B NUMERIC "13"
 -- Retrieval info: CONSTANT: WIDTH_A NUMERIC "8"
--- Retrieval info: CONSTANT: WIDTH_B NUMERIC "16"
+-- Retrieval info: CONSTANT: WIDTH_B NUMERIC "8"
 -- Retrieval info: CONSTANT: WIDTH_BYTEENA_A NUMERIC "1"
 -- Retrieval info: USED_PORT: clock 0 0 0 0 INPUT VCC "clock"
 -- Retrieval info: USED_PORT: data 0 0 8 0 INPUT NODEFVAL "data[7..0]"
--- Retrieval info: USED_PORT: q 0 0 16 0 OUTPUT NODEFVAL "q[15..0]"
+-- Retrieval info: USED_PORT: q 0 0 8 0 OUTPUT NODEFVAL "q[7..0]"
 -- Retrieval info: USED_PORT: rdaddress 0 0 13 0 INPUT NODEFVAL "rdaddress[12..0]"
--- Retrieval info: USED_PORT: wraddress 0 0 14 0 INPUT NODEFVAL "wraddress[13..0]"
+-- Retrieval info: USED_PORT: wraddress 0 0 13 0 INPUT NODEFVAL "wraddress[12..0]"
 -- Retrieval info: USED_PORT: wren 0 0 0 0 INPUT GND "wren"
--- Retrieval info: CONNECT: @address_a 0 0 14 0 wraddress 0 0 14 0
+-- Retrieval info: CONNECT: @address_a 0 0 13 0 wraddress 0 0 13 0
 -- Retrieval info: CONNECT: @address_b 0 0 13 0 rdaddress 0 0 13 0
 -- Retrieval info: CONNECT: @clock0 0 0 0 0 clock 0 0 0 0
 -- Retrieval info: CONNECT: @data_a 0 0 8 0 data 0 0 8 0
 -- Retrieval info: CONNECT: @wren_a 0 0 0 0 wren 0 0 0 0
--- Retrieval info: CONNECT: q 0 0 16 0 @q_b 0 0 16 0
+-- Retrieval info: CONNECT: q 0 0 8 0 @q_b 0 0 8 0
 -- Retrieval info: GEN_FILE: TYPE_NORMAL DisplayRAM.vhd TRUE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL DisplayRAM.inc FALSE
 -- Retrieval info: GEN_FILE: TYPE_NORMAL DisplayRAM.cmp FALSE

@@ -25,9 +25,12 @@ def msam_line(s):
         arg2 = None
 
     if cmd == 'MVI':
-        if arg1 in reg_list:
+        if arg1 in reg_list:  # mvi r, d
             return '00' + reg_code[arg1] + '110', \
                    hex2bin(arg2)
+        else:  # mvi m, d
+            return "00110110", hex2bin(arg1)[2:],  hex2bin(arg1[:2]),  hex2bin(arg2)
+
     elif cmd == 'MOV':
         if arg1 in reg_list and arg2 in reg_list:
             return '01' + reg_code[arg1] + reg_code[arg2],

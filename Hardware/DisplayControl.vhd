@@ -10,7 +10,7 @@ entity DisplayControl is port (
 	row, column: in std_logic_vector(11 downto 0);
 	
 	dis_ram_addr: out std_logic_vector(12 downto 0);
-	dis_ram_data: in std_logic_vector(15 downto 0);
+	dis_ram_data: in std_logic_vector(7 downto 0);
 	
 	ASC_addr: out std_logic_vector(11 downto 0);
 	ASC_data: in std_logic_vector(7 downto 0);
@@ -29,14 +29,26 @@ signal res_2: std_logic_vector(15 downto 0);
 begin
 X <= unsigned(column);
 Y <= unsigned(row);
-char <= unsigned(dis_ram_data(7 downto 0));
-color <= dis_ram_data(15 downto 8);
+char <= unsigned(dis_ram_data);
 
-res_1 <= std_logic_vector((Y / 16) * 80 + (X / 8));
-dis_ram_addr <= res_1(12 downto 0);
-res_2 <= std_logic_vector(char * 16 + Y MOD 16);
+res_1 <= std_logic_vector((Y / 16) * 80 + (X / 8));  -- determin which char.
+dis_ram_addr <= res_1(12 downto 0); 
+res_2 <= std_logic_vector(char * 16 + Y MOD 16);  -- get line of the char.
 ASC_addr <= res_2(11 downto 0);
-r <= color(6) when ASC_data(to_integer(X MOD 8)) = '1' else color(2);
-g <= color(5) when ASC_data(to_integer(X MOD 8)) = '1' else color(1);
-b <= color(4) when ASC_data(to_integer(X MOD 8)) = '1' else color(0);
+process (ASC_data, X, Y)
+	variable X_o, Y_o: integer;
+begin
+	X_o := to_integer(8 - (X MOD 8));
+	Y_o := to_integer(Y MOD 16);
+--	if (X_o = 0 or X_o = 7 or Y_o = 0 or Y_o = 15) then
+--		r <= '1';
+--		g <= '0';
+--		b <= '0';
+--	else
+		r <= ASC_data(X_o);
+		g <= ASC_data(X_o);
+		b <= ASC_data(X_o);
+--	end if;
+end process;
+
 end;

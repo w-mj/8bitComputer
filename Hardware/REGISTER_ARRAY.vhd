@@ -58,15 +58,15 @@ process(register_select) begin
 				when "1000"=> address <= B_out & C_out;
 				when "1001"=> address <= D_out & E_out;
 				when "1010"=> address <= H_out & L_out;
-				when "0110"=> data <= PC_out(15 downto 8);
-				when "0111"=> data <= PC_out(7 downto 0);
+				when "0110"=> address <= H_out & L_out;
 				when "1011"=> address <= SP_out;
 				when "1100"=> data <= W_out;
 				when "1101"=> data <= Z_out;
 				when "1110"=> address <= W_out & Z_out;
 				when "1111"=> address <= PC_out;
+				when "0111"=> put_a <= '1'; -- accumulator.
 			end case;
-		when "010"=>  -- load data
+		when "010"=>  -- load data from bus.
 			case register_select is 
 				when "0000"=> B_EN <= '1';
 				when "0001"=> C_EN <= '1';
@@ -81,12 +81,6 @@ process(register_select) begin
 				when "1111"=> reg_in_buff_high <= H_out; reg_in_buff_low <= L_out; PC_EN <= '1';
 				when "1110"=> reg_in_buff_high <= W_out; reg_in_buff_low <= Z_out; PC_EN <= '1';
 				when "0111"=> load_a <= '1';
-				when "1000"=> reg_in_buff_high <= SP_out(15 downto 8); 
-								  reg_in_buff_low <= SP_out(7 downto 0);
-								  W_EN <= '1'; Z_EN <= '1';
-				when "1001"=> reg_in_buff_high <= PC_out(15 downto 8); 
-								  reg_in_buff_low <= PC_out(7 downto 0);
-								  W_EN <= '1'; Z_EN <= '1';
 				when others=> null;
 			end case;
 		when "001"=>  -- increse or decrese.
