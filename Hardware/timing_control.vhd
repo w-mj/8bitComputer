@@ -609,6 +609,7 @@ process(IR, bM, bT, IR_input) begin
 			addrbuff_load <= (m2 or m3) and t2;
 			databuff_load_data <= (m2 or m3) and t3;
 			databuff_put_inner <= (m2 or m3) and t4;
+			regarr_load <= (m2 or m3) and t4;
 			nextT <= (m2 or m3) and (t1 or t2 or t3);
 			RST <= m3 and t4;
 		when "11010001"=> null; -- 64 POP D

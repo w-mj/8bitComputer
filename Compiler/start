@@ -1,26 +1,20 @@
 ORG 0
+mvi 8004, 40
+mvi h, 7f
+mvi 8006, 41
+mvi l, ff
+mvi 8008, 42
+sphl
 mvi b, 41
-mov a, b
-out fc
-mov 8002, b
-mvi 8000, 42
-
-;mvi 8004, 40
-;mvi h, 7f
-;mvi 8006, 41
-;mvi l, ff
-;mvi 8008, 42
-;sphl
-;mvi b, 41
-;mvi c, 50
-;;push b
-;mvi 800a, 43
-;;mvi b, 01
-;;mvi c, 02
-;;pop b
-;mvi 800c, 44
-;mov 8000, b
-;mov 8002, c
+mvi c, 50
+push b
+mvi 800a, 43
+mvi b, 01
+mvi c, 02
+pop b
+mvi 800c, 44
+mov 8000, b
+mov 8002, c
 
 mvi a, 0
 out fc
@@ -52,7 +46,6 @@ hlt
 ORG 200
 mvi a, 77 ; 3e 77
 out fc ; d3 fc
-mvi 8006, 43
 hlt
 
 ORG 300
