@@ -4,6 +4,12 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.pkg.all;
 
+-- RAM: 0000~7FFF
+-- Display ram: 8000~BFFF
+-- Switch and Matrix: FFF0
+-- Digit: FFF8~FFFF
+-- Serial data: FFF1
+
 entity bridge is port(
 	address: in std_logic_vector(15 downto 0);
 	data: inout std_logic_vector(7 downto 0);
@@ -14,9 +20,11 @@ entity bridge is port(
 	digit_cs: out std_logic_vector(2 downto 0);
 	switch: in std_logic_vector(3 downto 0);
 	key_data: in std_logic_vector(3 downto 0);
-	CLK, put, load, key_flag: in std_logic;
+	put, load: in std_logic;
 	set_digit: out std_logic;
 	ram_data_in: in std_logic_vector(7 downto 0);
+	
+	serial_data_in: std_logic_vector(7 downto 0);
 	
 	dis_ram_data: out std_logic_vector(7 downto 0);
 	dis_ram_addr: out std_logic_vector(13 downto 0);
@@ -46,15 +54,17 @@ process (address, put, load) begin
 	if (put = '1') then
 		if (address(15) = '0') then 
 			data_t <= ram_data_in;
-		elsif (address(15 downto 8) = "11110000") then 
+		elsif (address = "1111111111110000") then 
 			data_t <= key_data & (not switch);
+		elsif (address = "1111111111110001") then 
+			data_t <= serial_data_in;
 		end if;
 	end if;
 	if (load = '1') then
 		if (address(15) = '0') then
 			ram_data <= data;
-		elsif (address(15 downto 11) = "11111") then
-			digit_cs <= address(10 downto 8);
+		elsif (address(15 downto 3) = "1111111111111") then
+			digit_cs <= address(2 downto 0);
 			set_digit <= '1';
 			digit_data <= data;
 		end if;

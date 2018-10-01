@@ -94,6 +94,24 @@ process(register_select) begin
 				when "1111"=> latch_input <= PC_out; PC_EN <= '1';
 				when others=> null;  -- can't exist
 			end case;
+		when "111"=> -- set 00 or ff
+			if inc='1' then reg_in_buff_high <= (others=>'1'); reg_in_buff_low <= (others=>'1'); 
+			else reg_in_buff_high <= (others=>'0'); reg_in_buff_low <= (others=>'0'); 
+			end if;
+			case register_select is 
+				when "0000"=> B_EN <= '1';
+				when "0001"=> C_EN <= '1';
+				when "0010"=> D_EN <= '1';
+				when "0011"=> E_EN <= '1';
+				when "0100"=> H_EN <= '1';
+				when "0101"=> L_EN <= '1';
+				when "1100"=> W_EN <= '1';
+				when "1101"=> Z_EN <= '1';
+				when "1011"=> SP_EN <= '1';
+				when "1111"=> PC_EN <= '1';
+				when "0111"=> load_a <= '1';
+				when others=> null;
+			end case;
 		when others=>null;
 	end case;
 		

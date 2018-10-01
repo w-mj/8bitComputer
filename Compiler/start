@@ -1,9 +1,8 @@
 ORG 0
-mvi 8002, 42
-mvi 8004, 41
-
 mvi a, 0
+mvi 8002, 42
 out fc
+mvi 8004, 41
 out fe
 mvi l, 0
 in f0
@@ -32,6 +31,7 @@ hlt
 ORG 200
 mvi a, 77 ; 3e 77
 out fc ; d3 fc
+mvi 8006, 43
 hlt
 
 ORG 300
