@@ -32,8 +32,12 @@ def msam_line(s):
             return "00110110", hex2bin(arg1)[2:],  hex2bin(arg1[:2]),  hex2bin(arg2)
 
     elif cmd == 'MOV':
-        if arg1 in reg_list and arg2 in reg_list:
+        if arg1 in reg_list and arg2 in reg_list: # mov r, r
             return '01' + reg_code[arg1] + reg_code[arg2],
+        elif arg1 in reg_list: # mov r, M
+            return '01' + reg_code[arg1] + '110', hex2bin(arg2[2:]), hex2bin(arg2[:2])
+        elif arg2 in reg_list: # mov M, r
+            return '01110' + reg_code[arg2],  hex2bin(arg1[2:]), hex2bin(arg1[:2])
     elif cmd == 'ADD':
         if arg1 in reg_list:
             return '10000' + reg_code[arg1],
@@ -99,10 +103,16 @@ def msam_line(s):
         return '00' + rp_code[arg1] + '1011',
     elif cmd == 'PCHL':
         return '11101001',
+    elif cmd == 'SPHL':
+        return '11111001',
     elif cmd == 'STAX':
         return '00' + rp_code[arg1] + '0010',
     elif cmd == 'LDAX':
         return '00' + rp_code[arg1] + '1010',
+    elif cmd == 'PUSH':
+        return '11' + rp_code[arg1] + '0101',
+    elif cmd == 'POP':
+        return '11' + rp_code[arg1] + '0001',
     elif cmd == 'NOP':
         return '00000000'
 

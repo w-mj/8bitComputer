@@ -225,7 +225,7 @@ refer to the applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 1800 -336 1816 -160)
+	(rect 1536 -360 1552 -184)
 	(text "OUTPUT" (rect 3 125 16 173)(font "Arial" (font_size 6))(vertical))
 	(text "shut_up" (rect 2 5 16 56)(font "Arial" )(vertical))
 	(pt 8 176)
@@ -239,7 +239,7 @@ refer to the applicable agreement for further details.
 		(line (pt 4 98)(pt 8 94))
 	)
 	(flipx_rotate90)
-	(annotation_block (location)(rect 1752 -488 1816 -464))
+	(annotation_block (location)(rect 1488 -512 1552 -488))
 )
 (pin
 	(output)
@@ -410,7 +410,7 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 1792 -104 1824 -72)
+	(rect 1528 -128 1560 -96)
 	(text "GND" (rect 8 16 33 29)(font "Arial" (font_size 6)))
 	(text "inst19" (rect 3 21 43 38)(font "Intel Clear" )(invisible))
 	(port
@@ -1338,10 +1338,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1808 -104)
-	(pt 1808 -160)
-)
-(connector
 	(pt 720 -584)
 	(pt 496 -584)
 )
@@ -1517,6 +1513,10 @@ refer to the applicable agreement for further details.
 (connector
 	(pt -32 -272)
 	(pt -32 -88)
+)
+(connector
+	(pt 1544 -128)
+	(pt 1544 -184)
 )
 (junction (pt 936 -512))
 (junction (pt 416 -656))

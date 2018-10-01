@@ -51,25 +51,15 @@ process(IR, bM, bT, IR_input) begin
 		when "01"=>
 			if(ddd /= "110") then IR(5 downto 3) <= "000"; end if;
 			if(sss /= "110") then IR(2 downto 0) <= "000"; end if;
-		when "11"=>
-			if (sss = "010" or sss = "100" or sss = "000" or sss = "111" or 
-				 IR_input(3 downto 0) = "0101" or IR_input(3 downto 0) = "0001" ) then 
-				IR(5 downto 3) <= "000";
-			end if;
 		when "10"=>
-			if ((ddd = "000" or ddd = "001" or ddd = "100" or ddd = "101" or
-				 ddd = "110" or ddd = "111" or ddd = "011" or ddd = "010") and sss /= "110") then 
-				 IR(2 downto 0) <= "000"; end if;
+			if(sss /= "110") then IR(2 downto 0) <= "000"; end if;
+		when "11"=>
+			if(sss = "111" or sss = "000" or sss = "100" or sss="010") then
+				IR(5 downto 3) <= "000"; 
+			end if;
 		when "00"=>
-			if ((sss = "100" or sss = "101" or sss = "110") and ddd /= "110") then 
-						IR(5 downto 3) <= "000";
-			elsif (IR_input(3 downto 0) = "0001" or
-					 IR_input(3 downto 0) = "1010" or
-					 IR_input(3 downto 0) = "0010" or
-					 IR_input(3 downto 0) = "0011" or
-					 IR_input(3 downto 0) = "1011" or
-					 IR_input(3 downto 0) = "1001") then
-						IR(5 downto 4) <= "00";
+			if (ddd /= "110" and (sss = "110" or sss = "100" or sss = "101")) then
+				IR(5 downto 3) <= "000";
 			end if;
 		end case;
 	RST<='0'; nextM<='0'; nextT<='0'; regarr_cs<="0000"; regarr_load<='0'; regarr_put<='0';
@@ -113,19 +103,19 @@ process(IR, bM, bT, IR_input) begin
 			nextT <= (m2 or m3 or m4) and (t1 or t2);
 			RST <= m4 and t3;
 		when "01110000"=> -- 3 MOV M, r
-			nextM <= (m1 and t4) or (m2 and t3);
-			regarr_cs <= onn("1111", (m2 or m3) and (t1 or t2)) or 
-							 onn("1100", m2 and t3) or onn("1101", m3 and t3)or
-							 onn("1110", m4 and t1) or 
-							 onn("0"&sss, m4 and t2);
-			addrbuff_load <= (m2 or m3 or m4) and t1;
-			regarr_put <= ((m2 or m3) and t1) or (m4 and (t1 or t2));
-			regarr_inc <= (m2 or m3) or t2;
+			nextM <= (m1 and t4) or ((m2 or m3) and t3);
+			nextT <= ((m2 or m3 or m4) and (t1 or t2));
+			regarr_cs <= onn("1111", (m2 or m3) and (t1 or t2)) or onn("0"&sss, m4 and t1)
+						or onn("1101", m2 and t3) or onn("1100", m3 and t3)
+						or onn("1110", m4 and t2);
+			regarr_put <= (m2 or m3 or m4) and t1;
+			addrbuff_load <= ((m2 or m3) and t1) or (m4 and t2);
+			regarr_inc <= (m2 or m3) and t2;
 			databuff_load_data <= (m2 or m3) and t2;
-			databuff_put_data <= m4 and t3;
-			databuff_load_inner <= m4 and t2;
+			databuff_load_inner <= m4 and t1;
 			databuff_put_inner <= (m2 or m3) and t3;
-			nextT <= (m2 or m3 or m4) and (t1 or t2);
+			regarr_load <= (m2 or m3) and t3;
+			databuff_put_data <= m4 and t3;
 			RST <= m4 and t3;
 		when "11111001"=> -- 4 SPHL;
 			regarr_cs <= onn("1011", m1 and t4);
@@ -150,7 +140,7 @@ process(IR, bM, bT, IR_input) begin
 						or onn("1110", m4 and t3);
 			regarr_put <= (m2 or m3 or m4) and t1;
 			addrbuff_load <= ((m2 or m3 or m4) and t1) or (m4 and t3);
-			regarr_inc <= (m2 or m3 or m3) and t2;
+			regarr_inc <= (m2 or m3 or m4) and t2;
 			databuff_load_data <= (m2 or m3 or m4) and t2;
 			databuff_put_inner <= (m2 or m3) and t3;
 			regarr_load <= (m2 or m3) and t3;
@@ -161,8 +151,8 @@ process(IR, bM, bT, IR_input) begin
 		when "00110010"=> null; -- 9 STA addr;
 		when "00101010"=> null; -- 10 LHLD addr;
 		when "00100010"=> null; -- 11 SHLD addr;
-		when "00001010"=> -- 12 LDAX rp
-			regarr_cs <= onn("10"&ddd(2 downto 1), m1 and t4);
+		when "00001010"=> -- 12 LDAX B
+			regarr_cs <= onn("1000", m1 and t4);
 			regarr_put <= m1 and t4;
 			addrbuff_load <= m1 and t4;
 			acc_load <= m1 and t6;
@@ -170,8 +160,26 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= m1 and t6;
 			nextT <= m1 and (t4 or t5);
 			RST <= m1 and t6;
-		when "00000010"=> -- 13 STAX rp; 
-			regarr_cs <= onn("10"&ddd(2 downto 1), m1 and t4);
+		when "00011010"=> -- 12 LDAX D
+			regarr_cs <= onn("1001", m1 and t4);
+			regarr_put <= m1 and t4;
+			addrbuff_load <= m1 and t4;
+			acc_load <= m1 and t6;
+			databuff_load_data <= m1 and t5;
+			databuff_put_inner <= m1 and t6;
+			nextT <= m1 and (t4 or t5);
+			RST <= m1 and t6;
+		when "00000010"=> -- 13 STAX B; 
+			regarr_cs <= onn("1000", m1 and t4);
+			regarr_put <= m1 and t4;
+			acc_put <= m1 and t4;
+			databuff_load_inner <= m1 and t4;
+			databuff_put_data <= m1 and t5;
+			addrbuff_load <= m1 and t4;
+			nextT <= m1 and t4;
+			RST <= m1 and t5;
+		when "00010010"=> -- 13 STAX D; 
+			regarr_cs <= onn("1001", m1 and t4);
 			regarr_put <= m1 and t4;
 			acc_put <= m1 and t4;
 			databuff_load_inner <= m1 and t4;
@@ -369,15 +377,42 @@ process(IR, bM, bT, IR_input) begin
 			regarr_load <= m1 and t5;
 			RST <= m1 and t5;
 		when "00110101"=> null; -- 30 DCR M
-		when "00000011"=> -- 31 INX rp
-			regarr_cs <= onn("10"&ddd(2 downto 1), m1 and t4);
+		when "00000011"=> -- 31 INX B
+			regarr_cs <= onn("1000", m1 and t4);
 			regarr_inc <= m1 and t4;
 			RST <= m1 and t4;
-		when "00001011"=> -- 32 DCX rp
-			regarr_cs <= onn("10"&ddd(2 downto 1), m1 and t4);
+		when "00010011"=> -- 31 INX D
+			regarr_cs <= onn("1001", m1 and t4);
+			regarr_inc <= m1 and t4;
+			RST <= m1 and t4;
+		when "00100011"=> -- 31 INX H
+			regarr_cs <= onn("1010", m1 and t4);
+			regarr_inc <= m1 and t4;
+			RST <= m1 and t4;
+		when "00110011"=> -- 31 INX SP
+			regarr_cs <= onn("1011", m1 and t4);
+			regarr_inc <= m1 and t4;
+			RST <= m1 and t4;
+		when "00001011"=> -- 32 DCX B
+			regarr_cs <= onn("1000", m1 and t4);
 			regarr_dec <= m1 and t4;
 			RST <= m1 and t4;
-		when "00001001"=> null; -- 33 DAD rp
+		when "00011011"=> -- 32 DCX D
+			regarr_cs <= onn("1001", m1 and t4);
+			regarr_dec <= m1 and t4;
+			RST <= m1 and t4;
+		when "00101011"=> -- 32 DCX H
+			regarr_cs <= onn("1010", m1 and t4);
+			regarr_dec <= m1 and t4;
+			RST <= m1 and t4;
+		when "00111011"=> -- 32 DCX SP
+			regarr_cs <= onn("1011", m1 and t4);
+			regarr_dec <= m1 and t4;
+			RST <= m1 and t4;
+		when "00001001"=> null; -- 33 DAD B
+		when "00011001"=> null; -- 33 DAD D
+		when "00101001"=> null; -- 33 DAD H
+		when "00111001"=> null; -- 33 DAD SP
 		when "00100111"=> null; -- 34 DAA
 		when "10100000"=> -- 35 ANA r
 			nextT <= m1 and t4;
@@ -519,7 +554,7 @@ process(IR, bM, bT, IR_input) begin
 			regarr_load <= ((m2 or m3) and t3) or (m3 and t4);
 			nextT <= (m2 and (t1 or t2)) or (m3 and (t1 or t2 or t3));
 			RST <= (m3 and t4) ;
-		when "11000010"=>  -- 55 J cond addr	nextM <= (m1 and t4) or (m2 and t3);
+		when "11000010"=>  -- 55 J cond addr
 			if	((ddd="000" and ZF='0') or (ddd="001" and ZF='1') or (ddd="010" and CF='0') or
 					 (ddd="011" and CF='1') or (ddd="100" and key_flag='0') or (ddd="101" and key_flag='1') or
 					 (ddd="110" and SF='0') or (ddd="111" and SF='1')) then
@@ -553,9 +588,31 @@ process(IR, bM, bT, IR_input) begin
 			regarr_cs <= onn("1111", m1 and t4);
 			regarr_load <= m1 and t4;
 			RST <= m1 and t4;
-		when "11000101"=> null; -- 62 PUSH rp
+		when "11000101"=> -- 62 PUSH B
+			nextM <= m1 and t4;
+			regarr_cs <= onn("0000", m2 and t1) or onn("0001", m2 and t4) or onn("1011", m2 and (t2 or t3 or t5 or t6));
+			regarr_put <= m2 and (t1 or t2 or t4);
+			databuff_load_inner <= m2 and (t1 or t4);
+			addrbuff_load <= m2 and (t2 or t5);
+			regarr_dec <= m2 and (t3 or t6);
+			databuff_put_data <= m2 and (t3 or t6);
+			nextT <= m2 and (t1 or t2 or t3 or t4 or t5);
+			RST <= m2 and t6;
+		when "11010101"=> null;-- 62 PUSH D
+		when "11100101"=> null;-- 62 PUSH H
 		when "11110101"=> null; -- 63 PUSH PSW
-		when "11000001"=> null; -- 64 POP rp
+		when "11000001"=> -- 64 POP B
+			nextM <= (m1 or m2) and t4;
+			regarr_cs <= onn("1011", m2 and (t1 or t2)) or onn("0001", m2 and t4) or onn("0000", m3 and t4);
+			regarr_inc <= (m2 or m3) and t1;
+			regarr_put <= (m2 or m3) and t2;
+			addrbuff_load <= (m2 or m3) and t2;
+			databuff_load_data <= (m2 or m3) and t3;
+			databuff_put_inner <= (m2 or m3) and t4;
+			nextT <= (m2 or m3) and (t1 or t2 or t3);
+			RST <= m3 and t4;
+		when "11010001"=> null; -- 64 POP D
+		when "11100001"=> null; -- 64 POP H
 		when "11110001"=> null; -- 65 POP PSW
 		when "11100011"=> null; -- 66 XTHL
 		when "11011011"=> -- 67 IN port
@@ -570,7 +627,6 @@ process(IR, bM, bT, IR_input) begin
 			regarr_load <= m2 and (t3 or t4);
 			acc_load <= m3 and t3;
 			RST <= m3 and t3;
-			
 		when "11010011"=> -- 68 OUT port
 			-- both argarr put and load equals 1 at m2 and t4, means set all 1 on selected register.
 			nextM <= (m1 or m2) and t4;
