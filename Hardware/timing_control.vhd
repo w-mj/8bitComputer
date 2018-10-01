@@ -24,7 +24,7 @@ entity timing_control is port(
 	acc_load, acc_put: out std_logic;
 	tmp_clr: out std_logic;
 	key_flag: in std_logic;
-	key_clr: out std_logic
+	key_clr, EI, DI: out std_logic
 );
 end timing_control;
 
@@ -32,14 +32,14 @@ architecture timing_control_arch of timing_control is
 signal IR: std_logic_vector(7 downto 0);
 signal t1, t2, t3, t4, t5, t6, t7: std_logic;
 signal m1, m2, m3, m4, m5, m6, m7: std_logic;
-signal CF, ZF, AF, PF, SF: std_logic;
+signal CF, ZF, AF, PF, SF, EF: std_logic;
 signal sss, ddd: std_logic_vector(2 downto 0);
 signal rp: std_logic_vector(1 downto 0);
 signal success: std_logic;
 begin
 t1 <= bT(0); t2 <= bT(1); t3 <= bT(2); t4 <= bT(3); t5 <= bT(4); t6 <= bT(5); t7 <= bT(6);
 m1 <= bM(0); m2 <= bM(1); m3 <= bM(2); m4 <= bM(3); m5 <= bM(4); m6 <= bM(5); m7 <= bM(6);
-CF <= flag_reg(0); AF <= flag_reg(1); PF<=flag_reg(2); ZF<=flag_reg(3); SF<=flag_reg(4);
+CF <= flag_reg(0); AF <= flag_reg(1); PF<=flag_reg(2); ZF<=flag_reg(3); SF<=flag_reg(4); EF<=flag_reg(7);
 ddd <= IR_input(5 downto 3);
 sss <= IR_input(2 downto 0);
 rp <= IR_input(5 downto 4);
@@ -77,7 +77,7 @@ process(IR, bM, bT, IR_input) begin
 	databuff_load_inner<='0'; databuff_put_data<='0'; databuff_put_inner<='0';
 	flag_load_bus<='0'; flag_put_bus<='0'; flag_load_alu<='0'; flag_STC<='0';
 	alu_s<="0000"; alu_put<='0'; tmp_load<='0'; tmp_put<='0'; acc_load<='0'; acc_put<='0';
-	success <= '0'; tmp_clr <= '0'; key_clr <= '0';
+	success <= '0'; tmp_clr <= '0'; key_clr <= '0'; EI <='0'; DI<='0';
 	
 	if ((m1 and (t1 or t2 or t3)) = '1') then 
 		regarr_cs <= onn("1111", m1 and (t1 or t2));
@@ -586,8 +586,12 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_data <= m3 and (t2 or t3);
 			acc_put <= m3 and t2;
 			RST <= m3 and t3;
-		when "11111011"=> null; -- 69 EI
-		when "11110011"=> null; -- 70 DI
+		when "11111011"=> -- 69 EI
+			EI <= '1';
+			RST <= m1 and t4;
+		when "11110011"=> -- 70 DI
+			DI <= '1';
+			RST <= m1 and t4;
 		when "01110110"=> null; -- 71 HLT
 		when "00000000"=> -- 72 NOP
 			RST <= m1 and t4;

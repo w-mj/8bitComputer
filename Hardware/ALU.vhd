@@ -10,7 +10,7 @@ port(
 	output: out std_logic_vector(7 downto 0);
 	S: in std_logic_vector(3 downto 0);
 	put: in std_logic;
-	F_in: in std_logic_vector(7 downto 0);  -- 0:C, A, P, Z, 4:S
+	F_in: in std_logic_vector(7 downto 0);  -- 0:C, A, P, Z, 4:S, 7:E
 	F_out: out std_logic_vector(7 downto 0) := "00000000"
 	);
 end ALU;

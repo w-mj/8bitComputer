@@ -8,7 +8,7 @@ entity flag_ff is port(
 	to_alu: out std_logic_vector(7 downto 0);
 	to_bus: inout std_logic_vector(7 downto 0);
 	load_bus, load_alu, CLK, put: in std_logic;
-	STC: in std_logic
+	STC, EI, DI: in std_logic
 	);
 end flag_ff;
 
@@ -27,6 +27,11 @@ process (load_bus, load_alu, CLK, STC) begin
 	end if;
 	if (STC = '1') then
 		data(0) <= '1';
+	end if;
+	if (EI = '1') then
+		data(7) <= '1';
+	elsif (DI = '1') then
+		data(7) <= '0';
 	end if;
 end process;
 end flag_ff_arch;

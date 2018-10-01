@@ -20,9 +20,9 @@ refer to the applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 224 160)
+	(rect 16 16 224 192)
 	(text "flag_ff" (rect 5 0 32 12)(font "Arial" ))
-	(text "inst" (rect 8 128 20 140)(font "Arial" ))
+	(text "inst" (rect 8 160 20 172)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -66,6 +66,20 @@ refer to the applicable agreement for further details.
 		(line (pt 0 112)(pt 16 112)(line_width 1))
 	)
 	(port
+		(pt 0 128)
+		(input)
+		(text "EI" (rect 0 0 9 12)(font "Arial" ))
+		(text "EI" (rect 21 123 30 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "DI" (rect 0 0 9 12)(font "Arial" ))
+		(text "DI" (rect 21 139 30 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 1))
+	)
+	(port
 		(pt 208 32)
 		(output)
 		(text "to_alu[7..0]" (rect 0 0 43 12)(font "Arial" ))
@@ -80,6 +94,6 @@ refer to the applicable agreement for further details.
 		(line (pt 208 48)(pt 192 48)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 192 128)(line_width 1))
+		(rectangle (rect 16 16 192 160)(line_width 1))
 	)
 )

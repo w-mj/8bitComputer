@@ -1,5 +1,6 @@
 ORG 0
 mvi a, 0
+mvi 8001, 45
 mvi 8002, 42
 out fc
 mvi 8004, 41
