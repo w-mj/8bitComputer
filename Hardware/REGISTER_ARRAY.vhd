@@ -10,7 +10,8 @@ entity REGISTER_ARRAY is port(
 	register_select: in std_logic_vector(3 downto 0);
 	load, put, inc, dec: in std_logic := '0';
 	load_a, put_a: out std_logic;
-	clr_pc: in std_logic
+	clr_pc: in std_logic;
+	nnn: in std_logic_vector(15 downto 0)
 	);
 end REGISTER_ARRAY;
 
@@ -74,13 +75,16 @@ process(register_select) begin
 				when "0011"=> E_EN <= '1';
 				when "0100"=> H_EN <= '1';
 				when "0101"=> L_EN <= '1';
+				when "0110"=> reg_in_buff_high<=nnn(15 downto 8); reg_in_buff_low<=nnn(7 downto 0); PC_EN<='1';
+				when "0111"=> load_a <= '1';
+				when "1000"=> reg_in_buff_high<=SP_out(15 downto 8); reg_in_buff_low<=SP_out(7 downto 0); W_EN<='1'; Z_EN<='1';
+				when "1001"=> reg_in_buff_high<=PC_out(15 downto 8); reg_in_buff_low<=PC_out(7 downto 0); W_EN<='1'; Z_EN<='1';
 				when "1100"=> W_EN <= '1';
 				when "1101"=> Z_EN <= '1';
 				when "1011"=> reg_in_buff_high <= H_out; reg_in_buff_low <= L_out; SP_EN <= '1';
 				when "1010"=> reg_in_buff_high <= W_out; reg_in_buff_low <= Z_out; SP_EN <= '1';
 				when "1111"=> reg_in_buff_high <= H_out; reg_in_buff_low <= L_out; PC_EN <= '1';
 				when "1110"=> reg_in_buff_high <= W_out; reg_in_buff_low <= Z_out; PC_EN <= '1';
-				when "0111"=> load_a <= '1';
 				when others=> null;
 			end case;
 		when "001"=>  -- increse or decrese.

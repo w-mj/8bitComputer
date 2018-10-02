@@ -73,6 +73,13 @@ refer to the applicable agreement for further details.
 		(line (pt 0 128)(pt 16 128)(line_width 1))
 	)
 	(port
+		(pt 0 144)
+		(input)
+		(text "nnn[15..0]" (rect 0 0 37 12)(font "Arial" ))
+		(text "nnn[15..0]" (rect 21 139 58 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
 		(pt 232 48)
 		(output)
 		(text "address[15..0]" (rect 0 0 55 12)(font "Arial" ))

@@ -8,8 +8,8 @@ rp_code = {'B': '00', 'D': '01', 'H': '10', 'SP': '11'}
 label_map = dict()
 
 
-def hex2bin(n):
-    return bin(int(n, 16))[2:].zfill(8)
+def hex2bin(n, fill=8):
+    return bin(int(n, 16))[2:].zfill(fill)
 
 def msam_line(s):
     global label_map
@@ -44,6 +44,9 @@ def msam_line(s):
     elif cmd == 'SUB':
         if arg1 in reg_list:
             return '10010' + reg_code[arg1],
+    elif cmd == 'XRA':
+        if arg1 in reg_list:
+            return '10101' + reg_code[arg1],
     elif cmd == 'OUT':
         return '11010011', \
                hex2bin(arg1)
@@ -73,8 +76,11 @@ def msam_line(s):
         elif cmd == 'JM':
             code = '11111010'
         if code is not None:
-            return code, \
-                   '--JMPH--'+arg1, '--JMPL--'+arg1
+            if arg1.isdigit():
+                return code, hex2bin(arg1[2:]), hex2bin(arg1[:2])
+            else:
+                return code, \
+                       '--JMPL--'+arg1, '--JMPH--'+arg1
     elif cmd == 'CMP':
         if arg1 in reg_list:
             return '10111' + reg_code[arg1],
@@ -113,6 +119,14 @@ def msam_line(s):
         return '11' + rp_code[arg1] + '0101',
     elif cmd == 'POP':
         return '11' + rp_code[arg1] + '0001',
+    elif cmd == 'RET':
+        return '11001001',
+    elif cmd == 'EI':
+        return '11111011',
+    elif cmd == 'DI':
+        return '11110011',
+    elif cmd == 'RST':
+        return '11' + hex2bin(arg1, 3) + '111',
     elif cmd == 'NOP':
         return '00000000'
 
@@ -152,6 +166,6 @@ if __name__ == '__main__':
             byte[0] = hex(label_map[byte[0][8:]])[2:].zfill(4)[:2]
         elif '--JMPL--' in byte[0]:
             byte[0] = hex(label_map[byte[0][8:]])[2:].zfill(4)[2:]
-        out_f.write('    ' + hex(byte[1])[2:].zfill(4) + ':' + byte[0] + ';\n')
+        out_f.write('    ' + hex(byte[1])[2:].zfill(4) + ':' + byte[0] + '; -- ' + byte[2] + '\n')
     out_f.write('END;')
     out_f.close()
