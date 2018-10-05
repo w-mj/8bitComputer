@@ -1,17 +1,17 @@
-mvi h, 7f
+nop
+mvi 8002, 42
+mvi h, 81
 mvi l, ff
 sphl
+EI
 
-mvi b, 80
-mvi c, 00
-mvi d, 80
-mvi e, 82
-LOOP:
-inr a
-stax b
-JMP LOOP
+START:
+in f1
+out fc
+mov 8000, a
+jmp START
+
 
 ORG 100
-mvi a, 41
-stax d
-ret
+mvi 8002, 43
+JMP START

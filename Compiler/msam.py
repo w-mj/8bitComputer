@@ -128,7 +128,7 @@ def msam_line(s):
     elif cmd == 'RST':
         return '11' + hex2bin(arg1, 3) + '111',
     elif cmd == 'NOP':
-        return '00000000'
+        return '00000000',
 
 
 
