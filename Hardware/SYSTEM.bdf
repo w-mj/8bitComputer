@@ -191,7 +191,7 @@ refer to the applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 56 -280 232 -264)
+	(rect 264 -136 440 -120)
 	(text "OUTPUT" (rect 1 0 49 13)(font "Arial" (font_size 6)))
 	(text "digit_h" (rect 90 0 133 14)(font "Arial" ))
 	(pt 0 8)
@@ -204,7 +204,7 @@ refer to the applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 304 -184 376 -96))
+	(annotation_block (location)(rect 512 -40 584 48))
 )
 (pin
 	(output)
@@ -625,49 +625,6 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 56 -152 216 -40)
-	(text "Serial" (rect 5 0 42 14)(font "Arial" ))
-	(text "inst2" (rect 8 96 39 113)(font "Intel Clear" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 17 14)(font "Arial" ))
-		(text "clk" (rect 21 27 38 41)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "rx" (rect 0 0 11 14)(font "Arial" ))
-		(text "rx" (rect 21 43 32 57)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "int_clr" (rect 0 0 40 14)(font "Arial" ))
-		(text "int_clr" (rect 21 59 61 73)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 160 32)
-		(output)
-		(text "data[7..0]" (rect 0 0 59 14)(font "Arial" ))
-		(text "data[7..0]" (rect 90 27 149 41)(font "Arial" ))
-		(line (pt 160 32)(pt 144 32)(line_width 3))
-	)
-	(port
-		(pt 160 48)
-		(output)
-		(text "data_ok" (rect 0 0 51 14)(font "Arial" ))
-		(text "data_ok" (rect 96 43 147 57)(font "Arial" ))
-		(line (pt 160 48)(pt 144 48))
-	)
-	(drawing
-		(rectangle (rect 16 16 144 96))
-	)
-)
-(symbol
 	(rect 16 -704 272 -464)
 	(text "bridge" (rect 5 0 46 14)(font "Arial" ))
 	(text "inst12" (rect 8 224 46 238)(font "Arial" ))
@@ -976,6 +933,78 @@ refer to the applicable agreement for further details.
 		(line (pt 375 96)(pt 319 96))
 		(line (pt 375 120)(pt 319 120))
 		(line (pt 375 144)(pt 319 144))
+	)
+)
+(symbol
+	(rect 64 -384 192 -272)
+	(text "Flipflop" (rect 5 0 52 14)(font "Arial" ))
+	(text "inst3" (rect 8 96 39 113)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 17 14)(font "Arial" ))
+		(text "clk" (rect 21 27 38 41)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "set1" (rect 0 0 27 14)(font "Arial" ))
+		(text "set1" (rect 21 43 48 57)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "set0" (rect 0 0 27 14)(font "Arial" ))
+		(text "set0" (rect 21 59 48 73)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 128 32)
+		(output)
+		(text "res" (rect 0 0 20 14)(font "Arial" ))
+		(text "res" (rect 91 27 111 41)(font "Arial" ))
+		(line (pt 128 32)(pt 112 32))
+	)
+	(drawing
+		(rectangle (rect 16 16 112 96))
+	)
+)
+(symbol
+	(rect 56 -152 208 -72)
+	(text "Serial" (rect 5 0 42 14)(font "Arial" ))
+	(text "inst2" (rect 8 64 38 78)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 17 14)(font "Arial" ))
+		(text "clk" (rect 21 27 38 41)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "rx" (rect 0 0 11 14)(font "Arial" ))
+		(text "rx" (rect 21 43 32 57)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 152 32)
+		(output)
+		(text "data[7..0]" (rect 0 0 59 14)(font "Arial" ))
+		(text "data[7..0]" (rect 82 27 131 41)(font "Arial" ))
+		(line (pt 152 32)(pt 136 32)(line_width 3))
+	)
+	(port
+		(pt 152 48)
+		(output)
+		(text "data_ok" (rect 0 0 51 14)(font "Arial" ))
+		(text "data_ok" (rect 88 43 131 57)(font "Arial" ))
+		(line (pt 152 48)(pt 136 48))
+	)
+	(drawing
+		(rectangle (rect 16 16 136 64))
 	)
 )
 (connector
@@ -1293,10 +1322,6 @@ refer to the applicable agreement for further details.
 	(pt 632 -216)
 )
 (connector
-	(pt 496 8)
-	(pt -448 8)
-)
-(connector
 	(pt 496 -584)
 	(pt 496 -216)
 )
@@ -1434,39 +1459,9 @@ refer to the applicable agreement for further details.
 	(pt -112 -888)
 )
 (connector
-	(pt 56 -88)
-	(pt -32 -88)
-)
-(connector
 	(pt 8 -248)
 	(pt 240 -248)
 	(bus)
-)
-(connector
-	(pt 240 -248)
-	(pt 240 -120)
-	(bus)
-)
-(connector
-	(pt 216 -120)
-	(pt 240 -120)
-	(bus)
-)
-(connector
-	(pt 216 -104)
-	(pt 264 -104)
-)
-(connector
-	(pt -320 -368)
-	(pt 264 -368)
-)
-(connector
-	(pt 264 -104)
-	(pt 264 -368)
-)
-(connector
-	(pt -320 -368)
-	(pt -320 -304)
 )
 (connector
 	(text "digit_data_out[7]" (rect 936 -528 1044 -511)(font "Intel Clear" ))
@@ -1474,20 +1469,86 @@ refer to the applicable agreement for further details.
 	(pt 1088 -512)
 )
 (connector
-	(pt -32 -272)
-	(pt -32 -88)
-)
-(connector
-	(pt -32 -400)
-	(pt -32 -272)
-)
-(connector
 	(pt -72 -272)
 	(pt -32 -272)
 )
 (connector
+	(pt -320 -408)
+	(pt -320 -304)
+)
+(connector
+	(pt -320 -408)
+	(pt 216 -408)
+)
+(connector
+	(pt 192 -352)
+	(pt 216 -352)
+)
+(connector
+	(pt 216 -352)
+	(pt 216 -408)
+)
+(connector
+	(pt 64 -336)
+	(pt 56 -336)
+)
+(connector
+	(pt 56 -336)
+	(pt 56 -264)
+)
+(connector
+	(pt 56 -264)
+	(pt 264 -264)
+)
+(connector
+	(pt 264 -264)
+	(pt 264 -128)
+)
+(connector
+	(pt 264 -128)
+	(pt 264 -104)
+)
+(connector
+	(pt 64 -320)
+	(pt -32 -320)
+)
+(connector
+	(pt -32 -400)
+	(pt -32 -320)
+)
+(connector
+	(pt -32 -320)
 	(pt -32 -272)
-	(pt 56 -272)
+)
+(connector
+	(pt 64 -352)
+	(pt 40 -352)
+)
+(connector
+	(pt 40 -352)
+	(pt 40 8)
+)
+(connector
+	(pt 496 8)
+	(pt 40 8)
+)
+(connector
+	(pt 40 8)
+	(pt -448 8)
+)
+(connector
+	(pt 208 -104)
+	(pt 264 -104)
+)
+(connector
+	(pt 240 -248)
+	(pt 240 -120)
+	(bus)
+)
+(connector
+	(pt 240 -120)
+	(pt 208 -120)
+	(bus)
 )
 (junction (pt 936 -512))
 (junction (pt 416 -656))
@@ -1496,4 +1557,6 @@ refer to the applicable agreement for further details.
 (junction (pt 496 -216))
 (junction (pt -928 32))
 (junction (pt -336 -456))
-(junction (pt -32 -272))
+(junction (pt 264 -128))
+(junction (pt -32 -320))
+(junction (pt 40 8))

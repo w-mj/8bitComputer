@@ -1,12 +1,13 @@
-mvi 8002, 42
-mvi h, 00
-mvi l, f0
-sphl
-call PRINT
-mvi 8000, 41
-hlt
-
-PRINT:
-mvi 8000, 43
-mvi 8004, 43
-ret
+mvi 8888, 41
+mvi b, 80
+mvi c, 00
+START:
+mvi fffc, 2
+mvi fffc, 1
+JNK START
+in f1
+stax b
+inx b
+inx b
+DI
+JMP START

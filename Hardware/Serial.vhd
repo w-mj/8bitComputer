@@ -5,8 +5,7 @@ entity Serial is port (
 	clk: in std_logic;
 	rx: in std_logic;
 	data: out std_logic_vector(7 downto 0);
-	data_ok: out std_logic := '0';
-	int_clr: in std_logic
+	data_ok: out std_logic := '0'
 	);
 end Serial;
 	
@@ -14,12 +13,11 @@ architecture Serial_arch of Serial is
 signal waiting: boolean := true;
 signal data_buff: std_logic_vector(7 downto 0) := "00000000"; 
 signal read_cnt: integer := 0;
-signal data_ok_t: std_logic := '0';
 begin
 data <= data_buff;
 process(clk) begin
 	if (clk'event and clk = '0') then
-		data_ok_t <= '0';
+		data_ok <= '0';
 		if (waiting = true) then 
 			if (rx = '0') then
 				waiting <= false;
@@ -29,16 +27,10 @@ process(clk) begin
 				data_buff(read_cnt) <= rx;
 				read_cnt <= read_cnt + 1;
 			else
-				data_ok_t <= not int_clr;
+				data_ok <= '1';
 				read_cnt <= 0;
 				waiting <= true;
 			end if;
-		end if;
-		if (int_clr = '1') then
-			data_ok <= '0';
-		elsif (data_ok_t = '1') then
-			data_ok <= '1';
-			data_ok_t <= '0';
 		end if;
 	end if;
 end process;

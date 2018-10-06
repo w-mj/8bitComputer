@@ -46,7 +46,7 @@ sss <= IR_input(2 downto 0);
 rp <= IR_input(5 downto 4);
 databuffclr_pc <= reset;
 CLR <= reset;
-key_clr <= in_interrupt;
+
 process(IR, bM, bT, IR_input) begin
 	IR <= IR_input;
 	case IR_input(7 downto 6) is
@@ -69,28 +69,27 @@ process(IR, bM, bT, IR_input) begin
 	databuff_load_inner<='0'; databuff_put_data<='0'; databuff_put_inner<='0';
 	flag_load_bus<='0'; flag_put_bus<='0'; flag_load_alu<='0'; flag_STC<='0';
 	alu_s<="0000"; alu_put<='0'; tmp_load<='0'; tmp_put<='0'; acc_load<='0'; acc_put<='0';
-	success <= '0'; tmp_clr <= '0'; EI <='0'; DI<='0';
+	success <= '0'; tmp_clr <= '0'; EI <='0'; DI<='0'; key_clr <= '0';
 	nnn <= "0000000000"&ddd&"000";
 	
 --	if ((EF and m1 and t1 and key_flag) = '1' or in_interrupt = '1') then
 --		if ((m3 and t2) /= '1') then
 --			in_interrupt <= '1';
---			nnn <= "0000000100000000";
---			nextM <= (m1 and t1) or (m2 and t6);
+--			nextM <= (m1 and t1) or (m2 or t6);
 --			regarr_cs <= onn("1001", m1 and t1) or
---							 onn("1100", m2 and t1) or onn("1101", m2 and t4) or 
---							 onn("1011", m2 and (t2 or t3 or t5 or t6)) or
+--							 onn("1100", m2 and t1) or onn("1101", m2 and t4) or onn("1011", m2 and (t2 or t3 or t5 or t6)) or
 --							 onn("0110", m3 and t1);
---			regarr_load <= (m1 and t1) or (m3 and t1);
+--			regarr_load <= (m1 or m3) and t1;
 --			regarr_put <= m2 and (t1 or t2 or t4 or t5);
 --			databuff_load_inner <= m2 and (t1 or t4);
 --			addrbuff_load <= m2 and (t2 or t5);
 --			regarr_dec <= m2 and (t3 or t6);
 --			databuff_put_data <= m2 and (t3 or t6);
 --			nextT <= (m2 and (t1 or t2 or t3 or t4 or t5)) or (m3 and t1);
+--			nnn <= "0000000100000000";
 --		else
---			RST <= '1';
 --			in_interrupt <= '0';
+--			RST <= '1';
 --		end if;
 --	else
 	if ((m1 and (t1 or t2 or t3)) = '1') then 
@@ -766,6 +765,7 @@ process(IR, bM, bT, IR_input) begin
 			RST <= m1 and t4;
 		when "11110011"=> -- 70 DI
 			DI <= '1';
+			key_clr <= '1';
 			RST <= m1 and t4;
 		when "01110110"=> null; -- 71 HLT
 		when "00000000"=> -- 72 NOP

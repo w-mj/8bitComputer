@@ -88,6 +88,8 @@ always @(posedge clk or negedge rst_n)
 		 vga_valid <= 1'b1;
 		 colum_r = (xcnt - (VGA_HST+VGA_HBP));
 		 row_r = (ycnt - (VGA_VST+VGA_VBP));
+		 if (row_r < 400) vga_valid <= 1'b1;
+		 else vga_valid <= 1'b0;
 		 end
 	else vga_valid <= 1'b0;
 	

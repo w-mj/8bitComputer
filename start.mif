@@ -3,30 +3,32 @@ DEPTH=16384;
 ADDRESS_RADIX=HEX;
 DATA_RADIX=HEX;
 CONTENT BEGIN
-    0000:36; -- mvi 8002, 42
-    0001:02; -- mvi 8002, 42
-    0002:80; -- mvi 8002, 42
-    0003:42; -- mvi 8002, 42
-    0004:26; -- mvi h, 00
-    0005:00; -- mvi h, 00
-    0006:2e; -- mvi l, f0
-    0007:f0; -- mvi l, f0
-    0008:f9; -- sphl
-    0009:cd; -- call PRINT
-    000a:11; -- call PRINT
-    000b:00; -- call PRINT
-    000c:36; -- mvi 8000, 41
-    000d:00; -- mvi 8000, 41
-    000e:80; -- mvi 8000, 41
-    000f:41; -- mvi 8000, 41
-    0010:76; -- hlt
-    0011:36; -- mvi 8000, 43
-    0012:00; -- mvi 8000, 43
-    0013:80; -- mvi 8000, 43
-    0014:43; -- mvi 8000, 43
-    0015:36; -- mvi 8004, 43
-    0016:04; -- mvi 8004, 43
-    0017:80; -- mvi 8004, 43
-    0018:43; -- mvi 8004, 43
-    0019:c9; -- ret
+    0000:36; -- mvi 8888, 41
+    0001:88; -- mvi 8888, 41
+    0002:88; -- mvi 8888, 41
+    0003:41; -- mvi 8888, 41
+    0004:06; -- mvi b, 80
+    0005:80; -- mvi b, 80
+    0006:0e; -- mvi c, 00
+    0007:00; -- mvi c, 00
+    0008:36; -- mvi fffc, 2
+    0009:fc; -- mvi fffc, 2
+    000a:ff; -- mvi fffc, 2
+    000b:02; -- mvi fffc, 2
+    000c:36; -- mvi fffc, 1
+    000d:fc; -- mvi fffc, 1
+    000e:ff; -- mvi fffc, 1
+    000f:01; -- mvi fffc, 1
+    0010:e2; -- JNK START
+    0011:08; -- JNK START
+    0012:00; -- JNK START
+    0013:db; -- in f1
+    0014:f1; -- in f1
+    0015:02; -- stax b
+    0016:03; -- inx b
+    0017:03; -- inx b
+    0018:f3; -- DI
+    0019:c3; -- JMP START
+    001a:08; -- JMP START
+    001b:00; -- JMP START
 END;

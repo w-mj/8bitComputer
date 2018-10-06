@@ -54,8 +54,8 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 256 32)
 		(output)
-		(text "dis_ram_addr[12..0]" (rect 0 0 80 12)(font "Arial" ))
-		(text "dis_ram_addr[12..0]" (rect 155 27 235 39)(font "Arial" ))
+		(text "dis_ram_addr[10..0]" (rect 0 0 80 12)(font "Arial" ))
+		(text "dis_ram_addr[10..0]" (rect 155 27 235 39)(font "Arial" ))
 		(line (pt 256 32)(pt 240 32)(line_width 3))
 	)
 	(port
