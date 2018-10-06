@@ -10,7 +10,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Compiler$msam.coverage" NAME="msam Coverage Results" MODIFIED="1538747090550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Compiler$msam.coverage" NAME="msam Coverage Results" MODIFIED="1538806088951" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/msam$msam.coverage" NAME="msam Coverage Results" MODIFIED="1531365079552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
@@ -18,8 +18,8 @@
       <file leaf-file-name="start" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/start">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+            <state relative-caret-position="120">
+              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -27,8 +27,8 @@
       <file leaf-file-name="msam.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/msam.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="130" column="26" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="26" />
+            <state relative-caret-position="1186">
+              <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -155,11 +155,11 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5052083" side_tool="true" visible="true" weight="0.32745314" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50572914" side_tool="true" weight="0.32745314" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49479166" weight="0.32745314" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49427083" visible="true" weight="0.32745314" />
       <window_info anchor="bottom" id="Terminal" order="11" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30052084" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -504,15 +504,15 @@
     <entry file="file://$PROJECT_DIR$/start.mif" />
     <entry file="file://$PROJECT_DIR$/msam.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="130" column="26" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="26" />
+        <state relative-caret-position="1186">
+          <caret line="57" column="29" selection-start-line="57" selection-start-column="29" selection-end-line="57" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/start">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+        <state relative-caret-position="120">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
         </state>
       </provider>
     </entry>

@@ -39,8 +39,9 @@ process (CLK) begin
 			when "010"=> dig3 <= digit_data(4 downto 0);
 			when "011"=> dig4 <= digit_data(4 downto 0);
 			when "100"=> dig1 <= "0"&digit_data(7 downto 4); dig2 <= "0"&digit_data(3 downto 0);
+			when "101"=> dig1 <= "0"&digit_data(7 downto 4); dig2 <= "0"&digit_data(3 downto 0);
 			when "110"=> dig3 <= "0"&digit_data(7 downto 4); dig4 <= "0"&digit_data(3 downto 0);
-			when others=> null;
+			when "111"=> dig3 <= "0"&digit_data(7 downto 4); dig4 <= "0"&digit_data(3 downto 0);
 		end case;
 	end if;
 end process;

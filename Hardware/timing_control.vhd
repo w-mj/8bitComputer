@@ -72,27 +72,27 @@ process(IR, bM, bT, IR_input) begin
 	success <= '0'; tmp_clr <= '0'; EI <='0'; DI<='0';
 	nnn <= "0000000000"&ddd&"000";
 	
-	if ((EF and m1 and t1 and key_flag) = '1' or in_interrupt = '1') then
-		if ((m3 and t2) /= '1') then
-			in_interrupt <= '1';
-			nnn <= "0000000100000000";
-			nextM <= (m1 and t1) or (m2 and t6);
-			regarr_cs <= onn("1001", m1 and t1) or
-							 onn("1100", m2 and t1) or onn("1101", m2 and t4) or 
-							 onn("1011", m2 and (t2 or t3 or t5 or t6)) or
-							 onn("0110", m3 and t1);
-			regarr_load <= (m1 and t1) or (m3 and t1);
-			regarr_put <= m2 and (t1 or t2 or t4 or t5);
-			databuff_load_inner <= m2 and (t1 or t4);
-			addrbuff_load <= m2 and (t2 or t5);
-			regarr_dec <= m2 and (t3 or t6);
-			databuff_put_data <= m2 and (t3 or t6);
-			nextT <= (m2 and (t1 or t2 or t3 or t4 or t5)) or (m3 and t1);
-		else
-			RST <= '1';
-			in_interrupt <= '0';
-		end if;
-	else
+--	if ((EF and m1 and t1 and key_flag) = '1' or in_interrupt = '1') then
+--		if ((m3 and t2) /= '1') then
+--			in_interrupt <= '1';
+--			nnn <= "0000000100000000";
+--			nextM <= (m1 and t1) or (m2 and t6);
+--			regarr_cs <= onn("1001", m1 and t1) or
+--							 onn("1100", m2 and t1) or onn("1101", m2 and t4) or 
+--							 onn("1011", m2 and (t2 or t3 or t5 or t6)) or
+--							 onn("0110", m3 and t1);
+--			regarr_load <= (m1 and t1) or (m3 and t1);
+--			regarr_put <= m2 and (t1 or t2 or t4 or t5);
+--			databuff_load_inner <= m2 and (t1 or t4);
+--			addrbuff_load <= m2 and (t2 or t5);
+--			regarr_dec <= m2 and (t3 or t6);
+--			databuff_put_data <= m2 and (t3 or t6);
+--			nextT <= (m2 and (t1 or t2 or t3 or t4 or t5)) or (m3 and t1);
+--		else
+--			RST <= '1';
+--			in_interrupt <= '0';
+--		end if;
+--	else
 	if ((m1 and (t1 or t2 or t3)) = '1') then 
 		regarr_cs <= onn("1111", m1 and (t1 or t2));
 		regarr_put <= m1 and t1;
@@ -577,7 +577,7 @@ process(IR, bM, bT, IR_input) begin
 			databuff_put_inner <= (m2 or m3) and t3;
 			regarr_load <= ((m2 or m3) and t3) or (m3 and t4);
 			nextT <= (m2 and (t1 or t2)) or (m3 and (t1 or t2 or t3));
-			RST <= (m3 and t4) ;
+			RST <= (m3 and t4);
 		when "11000010"=>  -- 55 J cond addr
 			if	((ddd="000" and ZF='0') or (ddd="001" and ZF='1') or (ddd="010" and CF='0') or
 					 (ddd="011" and CF='1') or (ddd="100" and key_flag='0') or (ddd="101" and key_flag='1') or
@@ -595,23 +595,25 @@ process(IR, bM, bT, IR_input) begin
 			nextT <= (m2 and (t1 or t2)) or (m3 and (t1 or t2 or (success and t3)));
 			RST <= (m3 and t4) or (m3 and t3 and (not success));
 		when "11001101"=> -- 56 CALL addr
-			nextM <= (m1 and t5) or ((m2 or m3 or m4 or m5) and t4);
-			regarr_cs <= onn("0110", m1 and t4) or
-							 onn("1011", (m2 or m3) and (t1 or t2)) or
-							 onn("1100", (m2 and t3) or (m5 and t4)) or onn("1101", (m3 and t3) or (m4 and t4)) or
-							 onn("1111", (m4 or m5) and (t1 or t2)) or
-							 onn("1110", m6 and t1);
-			regarr_load <= ((m1 or m6) and t1) or ((m4 or m5) and t4);
-			regarr_put <= ((m2 or m3 or m4 or m5) and t1) or ((m2 or m3) and t3);
-			regarr_dec <= (m2 or m3) and t2;
-			regarr_inc <= (m4 or m5) and t2;
-			addrbuff_load <= (m2 or m3) and t1;
-			databuff_load_inner <= (m2 or m3) and t3;
-			databuff_put_data <= (m2 or m3) and t4;
-			databuff_load_data <= (m4 or m5) and t3;
-			databuff_put_inner <= (m4 or m5) and t4;
-			nextT <= (m1 and t4) or ((m2 or m3 or m4 or m5) and (t1 or t2 or t3));
-			RST <= m6 and t1;
+			nextM <= (m1 and t6) or (m2 and t6) or (m3 and t3);
+			regarr_cs <= onn("1001", m1 and t4) or onn("1100", m1 and (t5 or t6)) or -- PC -> WZ
+							 onn("1100", m2 and t1) or onn("1101", m2 and t4) or onn("1011", m2 and (t2 or t3 or t5 or t6)) or  -- PUSH WZ
+							 onn("1111", (m3 or m4) and (t1 or t2)) or onn("1101", m3 and t3) -- JMP ADDR
+								or onn("1100", m4 and t3) or onn("1110", m4 and t4);
+			regarr_put <= (m2 and (t1 or t2 or t4 or t5)) or ((m4 or m3) and t1);
+			regarr_load <= (m1 and t4) or ((m3 or m4) and t3) or (m4 and t4);
+			databuff_load_inner <= m2 and (t1 or t4);
+			addrbuff_load <= (m2 and (t2 or t5)) or ((m3 or m4) and t1) or (m4 and t4);
+			regarr_dec <= m2 and (t3 or t6);
+			databuff_put_data <= m2 and (t3 or t6);
+			nextT <= (m1 and (t4 or t5)) or 
+						(m2 and (t1 or t2 or t3 or t4 or t5)) or 
+						(m3 and (t1 or t2)) or (m4 and (t1 or t2 or t3));
+			
+			regarr_inc <= (m1 and (t5 or t6)) or ((m3 or m4) and t2);
+			databuff_load_data <= (m4 or m3) and t2;
+			databuff_put_inner <= (m4 or m3) and t3;
+			RST <= m4 and t4;
 		when "11000100"=> null; -- 57 C cond addr
 		when "11001001"=> -- 58 RET
 			nextM <= (m1 or m2) and t4;
@@ -772,6 +774,6 @@ process(IR, bM, bT, IR_input) begin
 		when others=> null;
 	end case;
 	end if;
-	end if;
+	--end if;
 end process;
 end timing_control_arch;

@@ -1,17 +1,12 @@
-nop
 mvi 8002, 42
-mvi h, 81
-mvi l, ff
+mvi h, ff
+mvi l, fe
 sphl
-EI
 
-START:
-in f1
-out fc
-mov 8000, a
-jmp START
+CALL PRINT
+mvi 8004, 43
+hlt
 
-
-ORG 100
-mvi 8002, 43
-JMP START
+PRINT:
+mvi 8000, 41
+hlt

@@ -94,6 +94,7 @@ process(register_select) begin
 				when "1000"=> latch_input <= B_out & C_out; B_EN <= '1'; C_EN <= '1';
 				when "1001"=> latch_input <= D_out & E_out; D_EN <= '1'; E_EN <= '1';
 				when "1010"=> latch_input <= H_out & L_out; H_EN <= '1'; L_EN <= '1';
+				when "1100"=> latch_input <= W_out & Z_out; W_EN <= '1'; Z_EN <= '1';
 				when "1011"=> latch_input <= SP_out; SP_EN <= '1';
 				when "1111"=> latch_input <= PC_out; PC_EN <= '1';
 				when others=> null;  -- can't exist

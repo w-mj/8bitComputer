@@ -55,7 +55,7 @@ def msam_line(s):
                hex2bin(arg1)
     elif cmd == 'HLT':
         return '01110110',
-    elif cmd[0] == 'J':
+    elif cmd[0] == 'J' or cmd == 'CALL':
         code = None
         if cmd == 'JMP':
             code = '11000011'
@@ -75,6 +75,8 @@ def msam_line(s):
             code = '11110010'
         elif cmd == 'JM':
             code = '11111010'
+        elif cmd == 'CALL':
+            code = '11001101'
         if code is not None:
             if arg1.isdigit():
                 return code, hex2bin(arg1[2:]), hex2bin(arg1[:2])
