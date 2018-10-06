@@ -1,12 +1,12 @@
 mvi 8002, 42
-mvi h, ff
-mvi l, fe
+mvi h, 00
+mvi l, f0
 sphl
-
-CALL PRINT
-mvi 8004, 43
+call PRINT
+mvi 8000, 41
 hlt
 
 PRINT:
-mvi 8000, 41
-hlt
+mvi 8000, 43
+mvi 8004, 43
+ret

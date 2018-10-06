@@ -617,16 +617,15 @@ process(IR, bM, bT, IR_input) begin
 		when "11000100"=> null; -- 57 C cond addr
 		when "11001001"=> -- 58 RET
 			nextM <= (m1 or m2) and t4;
-			regarr_cs <= onn("1011", m2 and (t1 or t2)) or 
-							 onn("1101", m2 and t4) or onn("1100", m3 and t4) or
+			regarr_cs <= onn("1011", m2 and (t1 or t2)) or onn("1101", m2 and t4) or onn("1100", m3 and t4) or
 							 onn("1110", m3 and t5);
 			regarr_inc <= (m2 or m3) and t1;
 			regarr_put <= (m2 or m3) and t2;
 			addrbuff_load <= (m2 or m3) and t2;
 			databuff_load_data <= (m2 or m3) and t3;
 			databuff_put_inner <= (m2 or m3) and t4;
-			regarr_load <= (m2 and t4) or (m3 and (t4 or t5));
-			nextT <= ((m2 or m3) and (t1 or t2 or t3)) or (m3 and t5);
+			regarr_load <= ((m2 or m3) and t4) or (m3 and t5);
+			nextT <= ((m2 or m3) and (t1 or t2 or t3)) or (m3 and t4);
 			RST <= m3 and t5;
 		when "11000000"=> null; -- 59 R cond addr
 		when "11000111"=>  -- 60 RST n
